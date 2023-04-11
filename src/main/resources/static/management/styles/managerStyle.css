@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header */
+header {
+    height: 50vh;
+    background-image: url(../../assets/fondo.jpg);
+    background-position: 100% 62%;
+    background-size: cover;
+}
+
+.navbar-nav a {
+    border-bottom: 2px solid transparent;
+    position: relative;
+}
+
+.navbar a:before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: white;
+    transition: width 0.3s ease-out;
+    transform-origin: left;
+}
+
+.navbar a:hover:before {
+    width: 100%;
+    transition: width 0.3s ease-out;
+    transform-origin: right;
+}
+
+/*Main*/
+main {
+    background-color: rgb(220, 215, 215);
+    min-height: 40vh;
+}
+
+/*Tabla de datos*/
+table {
+    width: 100%;
+    border: solid 3px grey !important;
+    background-color: rgba(240, 248, 255, 0.61);
+}
+
+.getInTable {
+    width: 10rem !important;
+}
+
+.interactionCLient {
+    transition: 1s ease all;
+    width: 1.2rem;
+    cursor: pointer;
+}
+
+.interactionCLient:hover {
+    transform: scale(1.4);
+}  
+
+/* formualario */
+form {
+    height: 24rem;
+    background-color: rgba(240, 248, 255, 0.61);
+    border: 3px solid;
+    width: 95%;
+}
+
+form input {
+    width: 100%;
+    padding: 0 3rem;
+}
+
+.submitButton {
+    transition: ease 1s all;
+    background-color: antiquewhite;
+    color: black;
+    border: antiquewhite;
+}
+
+.submitButton:hover {
+    transform: scale(1.1);
+}
+
+/*pre*/
+pre {
+    height: 24rem;
+    background-color: rgba(240, 248, 255, 0.61);
+    border: 3px solid;
+}
+
+pre p {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/*clientWelcome*/
+.clientWelcome {
+    background-color: rgba(0, 0, 0, 0.789);
+    width: 14rem;
+}
+
+/*Footer*/
+.socialIcon {
+    width: 2rem;
+}
