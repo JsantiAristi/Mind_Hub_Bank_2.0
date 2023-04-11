@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeBanking | User</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/webStyles.css">
+    <link rel="shortcut icon" href="../../assets/banco.png" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+        <header class="d-flex flex-column justify-content-between">
+            <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+                <div class="container">
+                    <a class="navbar-brand" href="../../index.html">MinHub Banking</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active text-end" aria-current="page"
+                                    href="./manager.html">Manager</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="d-flex justify-content-center align-items-end clientWelcome rounded p-3 mb-2 ms-2">
+                <p class="text-white text-center mb-0 fs-4">Hello</p>
+                <h2 class="text-white text-center mb-0 ps-2">{{data.firstName}}!</h2>
+            </div>
+        </header>
+        <main>
+            <div id="carouselExample" class="carousel slide carousel-dark">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="container d-flex justify-content-center pt-5 pb-5">
+                            <div class="box d-flex flex-column justify-content-between">
+                                <span class="title">Accounts</span>
+                                <div class="d-flex flex-column justify-content-evenly accountsbox">
+                                    <template v-for="account of data.accounts">
+                                        <div>
+                                            <strong class="fs-4">{{account.number}}</strong>
+                                            <p>${{account.balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
+                                            <span>{{account.creationDate.slice(0,10)}}</span> <span>{{account.creationDate.slice(11 , 16)}}</span>
+                                        </div>
+                                    </template>  
+                                </div>                                                          
+                            </div>
+                        </div>
+                    </div>
+                    <template v-for="account of data.accounts">
+                        <div class="carousel-item">
+                            <div class="container d-flex justify-content-center pt-5 pb-5">
+                                <div class="box d-flex flex-column justify-content-between">
+                                    <span class="title">{{account.number}}</span>
+                                    <div class="accountsbox2 d-flex justify-content-between align-items-center rounded">
+                                        <div class="ms-4">
+                                            <strong class="fs-3 mb-0">{{data.firstName}} {{data.lastName}}</strong>
+                                            <p class="fs-4">${{account.balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
+                                            <span>{{account.creationDate.slice(0,10)}}</span> <span>{{account.creationDate.slice(11 , 16)}}</span>
+                                        </div>
+                                        <a :href="'./account.html?id=' + account.id"><img
+                                            src="../../assets/lupa.png" alt="" class="interactionCLient me-3"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </main>
+        <footer class="bg-dark d-flex justify-content-evenly align-items-center pt-3 pb-3">
+            <div class="d-flex">
+                <p class="text-white mb-0 pe-2">Santiago Aristizabal</p>
+                <p class="text-danger mb-0">Cohort 44</p>
+            </div>
+            <div class="bg-white p-1 rounded">
+                <a href="https://www.instagram.com/santi_aristi__/" target="_blank"><img
+                        src="../../assets/instagram.png" alt="" class="socialIcon me-1"></a>
+                <a href="https://github.com/JsantiAristi" target="_blank"><img src="../../assets/github (1).png" alt=""
+                        class="socialIcon"></a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- CDN bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/accounts.js"></script>
+</body>
+
+</html>
