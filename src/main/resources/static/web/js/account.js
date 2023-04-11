@@ -4,11 +4,11 @@ createApp({
     data(){
         return {
     // Inicializamos las variables
-        datos: [],
+        data: [],
         params: "",
         id: "",
         checked : "",
-        datosfiltrados : [],
+        filterData : [],
         selectInput: "Open this select menu",
         }
     },
@@ -21,9 +21,11 @@ createApp({
             this.id = this.params.get("id");
             axios.get('http://localhost:8080/api/accounts/' + this.id)
             .then(response => {
+                console.log(response);
                 console.log(response.data);
-                this.datos = response.data;
-                this.datosfiltrados = response.data.transactions;
+                this.data = response.data;
+                this.filterData = response.data.transactions;
+                console.log(this.yearMonthDay(this.data));
 
                 this.datos.transactions.sort((transaction1, transaction2) => {
                     return (transaction2.date.slice(0,4) + transaction2.date.slice(5,7) + transaction2.date.slice(8,10)) - (transaction1.date.slice(0,4) + transaction1.date.slice(5,7) + transaction1.date.slice(8,10));
@@ -33,26 +35,31 @@ createApp({
         },
         filtroCard(){
             if (this.checked == "ALL") {
-                this.datosfiltrados = this.datos.transactions;
+                this.filterData = this.data.transactions;
             } else {
-                this.datosfiltrados = this.datos.transactions.filter(cuenta => {
-                    return this.checked.includes(cuenta.type)
+                this.filterData = this.data.transactions.filter(account => {
+                    return this.checked.includes(account.type)
                 });
             }  
         },
         filtroDate(){
             if (this.selectInput == 1) {
-                this.datosfiltrados.sort((transaction1, transaction2) => {;
+                this.filterData.sort((transaction1, transaction2) => {;
                     return (transaction2.date.slice(0,4) + transaction2.date.slice(5,7) + transaction2.date.slice(8,10)) - (transaction1.date.slice(0,4) + transaction1.date.slice(5,7) + transaction1.date.slice(8,10));
                 })
             } else if(this.selectInput == 2){
-                this.datosfiltrados.sort((transaction1, transaction2) => {;
+                this.filterData.sort((transaction1, transaction2) => {;
                     return (transaction1.date.slice(0,4) + transaction1.date.slice(5,7) + transaction1.date.slice(8,10)) - (transaction2.date.slice(0,4) + transaction2.date.slice(5,7) + transaction2.date.slice(8,10));
                 })
             }
         },
         deleteClient(){
 
+        }
+    },
+    computed: {
+        yearMonthDay(filterData){
+            console.log(filterData);
         }
     },
 }).mount("#app")
