@@ -12,6 +12,7 @@ public class ClientController {
     @Autowired
     private ClientRespository clientRespository;
 
+    // Sevlets
     @RequestMapping("/api/clients")
     public List<ClientDTO> getClients() {
         return clientRespository.findAll()
@@ -24,7 +25,6 @@ public class ClientController {
     public ClientDTO getClient (@PathVariable Long id){
         return clientRespository.findById(id).map(client -> new ClientDTO(client)).orElse(null);
     }
-
 
 //    @PostMapping("/api/clients")
 //    public void setClients(@RequestBody Client client){

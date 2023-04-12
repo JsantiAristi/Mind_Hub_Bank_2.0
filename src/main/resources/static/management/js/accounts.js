@@ -4,7 +4,7 @@ createApp({
     data(){
         return {
     // Inicializamos las variables
-        datos: [],
+        data: [],
         params: "",
         id: "",
         }
@@ -18,7 +18,8 @@ createApp({
             this.id = this.params.get("id");
             axios.get('http://localhost:8080/api/clients/' + this.id)
             .then(response => {
-                this.datos = response.data
+                console.log(response.data);
+                this.data = response.data
             })
             .catch(error => console.log(error));
         },

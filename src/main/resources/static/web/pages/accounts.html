@@ -27,7 +27,7 @@
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
                                 <a class="nav-link active text-end" aria-current="page"
-                                    href="./manager.html">Manager</a>
+                                    href="../../index.html">Home</a>
                             </li>
                         </ul>
                     </div>
@@ -87,6 +87,61 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
+            <!---------------------------- Loans --------------------------------------------------------->
+            <template v-if="data.loans.length > 0">
+                <div id="carouselExample2" class="carousel slide carousel-dark">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="container d-flex justify-content-center pt-5 pb-5">
+                                <div class="box d-flex flex-column justify-content-between">
+                                    <span class="title">Loans</span>
+                                    <div class="d-flex flex-column justify-content-evenly accountsbox">
+                                        <template v-for="loan of data.loans">
+                                            <div>
+                                                <strong class="fs-4">{{loan.name}}</strong>
+                                                <p>${{loan.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
+                                                <span>Quotas: {{loan.payments}}</span>
+                                            </div>
+                                        </template>  
+                                    </div>                                                          
+                                </div>
+                            </div>
+                        </div>
+                        <template v-for="loan of data.loans">
+                            <div class="carousel-item">
+                                <div class="container d-flex justify-content-center pt-5 pb-5">
+                                    <div class="box d-flex flex-column justify-content-between">
+                                        <span class="title">{{loan.name}}</span>
+                                        <div class="accountsbox2 d-flex justify-content-between align-items-center rounded">
+                                            <div class="ms-4">
+                                                <strong class="fs-3 mb-0">{{data.firstName}} {{data.lastName}}</strong>
+                                                <p class="fs-4">${{loan.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
+                                                <span>Quotas: {{loan.payments}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample2"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample2"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </template>
+            <template v-else>
+                <div>
+                    <h3 class="text-center">Not loans found</h3>
+                </div>
+            </template>
+            
         </main>
         <footer class="bg-dark d-flex justify-content-evenly align-items-center pt-3 pb-3">
             <div class="d-flex">

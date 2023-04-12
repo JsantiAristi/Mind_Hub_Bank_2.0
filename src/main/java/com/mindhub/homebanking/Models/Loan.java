@@ -41,7 +41,6 @@ public class Loan {
     }
 
     // Método para obtener los Clientes
-    @JsonIgnore
     public List<Client> getClients() {
         return clientLoans.stream().map(clientLoan -> clientLoan.getClient()).collect(toList());
     }

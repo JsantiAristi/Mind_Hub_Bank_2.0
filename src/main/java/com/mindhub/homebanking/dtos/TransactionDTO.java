@@ -11,6 +11,7 @@ public class TransactionDTO {
     private String description;
     private LocalDateTime date;
 
+    // Constructores
     public TransactionDTO(Transaction transaction) {
         this.id = transaction.getId();
         this.type = transaction.getType();
@@ -19,22 +20,19 @@ public class TransactionDTO {
         this.date = transaction.getDate();
     }
 
+    // Getter
     public long getId() {
         return id;
     }
-
     public TransactionType getType() {
         return type;
     }
-
     public double getAmount() {
         return amount;
     }
-
     public String getDescription() {
         return description;
     }
-
     public LocalDateTime getDate() {
         return date;
     }

@@ -32,14 +32,14 @@
             </nav>
             <div class="d-flex justify-content-center align-items-end clientWelcome rounded p-3 mb-2 ms-2">
                 <p class="text-white text-center mb-0 fs-4">Hello</p>
-                <h2 class="text-white text-center mb-0 ps-2">{{datos.firstName}}!</h2>
+                <h2 class="text-white text-center mb-0 ps-2">{{data.firstName}}!</h2>
             </div>
         </header>
         <main>
-            <h1 class="text-center bg-header p-3 m-0">Client Account</h1>
+            <h1 class="text-center bg-header p-3 m-0">Client</h1>
             <div class="offset-1 col-10 table-responsive pb-5">
                 <table class="table caption-top align-middle table-hover rounded mb-0">
-                    <caption class="text-dark fs-4 fw-bold">Client info</caption>
+                    <caption class="text-dark fs-4 fw-bold">Accounts</caption>
                     <thead>
                         <tr>
                             <th class="text-center">Account Number</th>
@@ -50,7 +50,7 @@
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <template v-for="account of datos.accounts">
+                        <template v-for="account of data.accounts">
                             <tr>
                                 <td class="text-center">{{account.number}}</td>
                                 <template v-if="account.creationDate.slice(11,16) > '12:00'">
@@ -66,6 +66,31 @@
                             </tr>
                         </template>
                         
+                </table>
+            </div>
+            <!-- Loans -->
+            <div class="offset-1 col-10 table-responsive pb-5">
+                <table class="table caption-top align-middle table-hover rounded mb-0">
+                    <caption class="text-dark fs-4 fw-bold">Loans</caption>
+                    <thead>
+                        <tr>
+                            <th class="text-center">Loan name</th>
+                            <th class="text-center">Amount</th>
+                            <th class="text-center">Quotas</th>
+                            <th class="text-center getInTable">Get in</th>
+                            <th class="text-center">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <template v-for="loan of data.loans">
+                            <tr>
+                                <td class="text-center">{{loan.name}}</td>
+                                <td class="text-center">{{loan.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>    
+                                <td class="text-center">{{loan.payments}}</td>
+                                <td class="text-center getInTable"><a href="#"><img src="../../assets/lupa.png" alt="" class="interactionCLient"></a></td>
+                                <td class="text-center"><img src="../../assets/cesto.png" class="deleteClient interactionCLient" :alt="loan.id" @click="deleteClient"></td>
+                            </tr>
+                        </template>            
                 </table>
             </div>
         </main>
