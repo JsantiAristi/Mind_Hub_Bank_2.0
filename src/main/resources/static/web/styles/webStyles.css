@@ -118,7 +118,9 @@ main {
 
 .interactionCLient:hover {
     transform: scale(1.4);
-}  
+} 
+
+/* My chart */
 
 /*Transaction*/
 .CREDIT{

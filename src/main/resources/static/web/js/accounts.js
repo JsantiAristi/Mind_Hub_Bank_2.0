@@ -5,6 +5,7 @@ createApp({
         return {
             // Inicializamos las variables
             data: [],
+            loans: [],
             params: "",
             id: "",
         }
@@ -18,10 +19,14 @@ createApp({
             this.id = this.params.get("id");
             axios.get('http://localhost:8080/api/clients/' + this.id)
                 .then(response => {
-                    console.log(response.data);
                     this.data = response.data
+                    this.loans = this.data.loans
+                    console.log(this.loans);
+
+
+                    
                 })
                 .catch(error => console.log(error));
         },
     }
-}).mount("#app")
+}).mount("#app");

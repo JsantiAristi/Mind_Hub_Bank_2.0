@@ -26,8 +26,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a class="nav-link active text-end" aria-current="page"
-                                    href="../../index.html">Home</a>
+                                <a class="nav-link active text-end" aria-current="page" href="../../index.html">Home</a>
                             </li>
                         </ul>
                     </div>
@@ -45,15 +44,16 @@
                         <div class="container d-flex justify-content-center pt-5 pb-5">
                             <div class="box d-flex flex-column justify-content-between">
                                 <span class="title">Accounts</span>
-                                <div class="d-flex flex-column justify-content-evenly accountsbox">
-                                    <template v-for="account of data.accounts">
-                                        <div>
-                                            <strong class="fs-4">{{account.number}}</strong>
-                                            <p>${{account.balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
-                                            <span>{{account.creationDate.slice(0,10)}}</span> <span>{{account.creationDate.slice(11 , 16)}}</span>
-                                        </div>
-                                    </template>  
-                                </div>                                                          
+                                    <div class="d-flex flex-column justify-content-evenly accountsbox">
+                                        <template v-for="account of data.accounts">
+                                            <div>
+                                                <strong class="fs-4">{{account.number}}</strong>
+                                                <p>${{account.balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
+                                                <span>{{account.creationDate.slice(0,10)}}</span>
+                                                <span>{{account.creationDate.slice(11 , 16)}}</span>
+                                            </div>
+                                        </template>
+                                    </div>                            
                             </div>
                         </div>
                     </div>
@@ -65,11 +65,14 @@
                                     <div class="accountsbox2 d-flex justify-content-between align-items-center rounded">
                                         <div class="ms-4">
                                             <strong class="fs-3 mb-0">{{data.firstName}} {{data.lastName}}</strong>
-                                            <p class="fs-4">${{account.balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
-                                            <span>{{account.creationDate.slice(0,10)}}</span> <span>{{account.creationDate.slice(11 , 16)}}</span>
+                                            <p class="fs-4">
+                                                ${{account.balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+                                            </p>
+                                            <span>{{account.creationDate.slice(0,10)}}</span>
+                                            <span>{{account.creationDate.slice(11 , 16)}}</span>
                                         </div>
-                                        <a :href="'./account.html?id=' + account.id"><img
-                                            src="../../assets/lupa.png" alt="" class="interactionCLient me-3"></a>
+                                        <a :href="'./account.html?id=' + account.id"><img src="../../assets/lupa.png"
+                                                alt="" class="interactionCLient me-3"></a>
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +91,7 @@
                 </button>
             </div>
             <!---------------------------- Loans --------------------------------------------------------->
-            <template v-if="data.loans.length > 0">
+            <template v-if="loans.length">
                 <div id="carouselExample2" class="carousel slide carousel-dark">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -102,8 +105,8 @@
                                                 <p>${{loan.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
                                                 <span>Quotas: {{loan.payments}}</span>
                                             </div>
-                                        </template>  
-                                    </div>                                                          
+                                        </template>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -112,10 +115,13 @@
                                 <div class="container d-flex justify-content-center pt-5 pb-5">
                                     <div class="box d-flex flex-column justify-content-between">
                                         <span class="title">{{loan.name}}</span>
-                                        <div class="accountsbox2 d-flex justify-content-between align-items-center rounded">
+                                        <div
+                                            class="accountsbox2 d-flex justify-content-between align-items-center rounded">
                                             <div class="ms-4">
                                                 <strong class="fs-3 mb-0">{{data.firstName}} {{data.lastName}}</strong>
-                                                <p class="fs-4">${{loan.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
+                                                <p class="fs-4">
+                                                    ${{loan.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+                                                </p>
                                                 <span>Quotas: {{loan.payments}}</span>
                                             </div>
                                         </div>
@@ -141,7 +147,6 @@
                     <h3 class="text-center">Not loans found</h3>
                 </div>
             </template>
-            
         </main>
         <footer class="bg-dark d-flex justify-content-evenly align-items-center pt-3 pb-3">
             <div class="d-flex">

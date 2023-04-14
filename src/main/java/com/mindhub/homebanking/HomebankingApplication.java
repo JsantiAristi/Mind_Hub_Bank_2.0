@@ -6,6 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -18,13 +20,15 @@ public class HomebankingApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initData(ClientRespository clientRepository , AccountRepository accountRepository , TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository) {
+	public CommandLineRunner initData(ClientRespository clientRepository , AccountRepository accountRepository , TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
 		return (args) -> {
 			// save a couple of customers
 			Client client1 = new Client("Melba", "Morel" , "melba@mindhub.com");
 			clientRepository.save(client1);
 			Client client2 = new Client("Santiago" , "Aristizabal" , "jsanti@gmail.com");
 			clientRepository.save(client2);
+			Client client3 = new Client("Carlos" , "Hinestrosa" , "Carlos12@yahoo.com");
+			clientRepository.save(client3);
 
 			Account account1 = new Account("VIN001" , LocalDateTime.now() , 5000.00);
 			client1.addAccount(account1);
@@ -35,6 +39,9 @@ public class HomebankingApplication {
 			Account account3 = new Account("VIN003" , LocalDateTime.now().plusDays(2) , 6000.50);
 			client2.addAccount(account3);
 			accountRepository.save(account3);
+			Account account4 = new Account("VIN004", LocalDateTime.now() , 500.50);
+			client3.addAccount(account4);
+			accountRepository.save(account4);
 
 			Transaction transaction1 = new Transaction(TransactionType.DEBIT , 1000.00 , "Videogames" , LocalDateTime.now());
 			account1.addTransaction(transaction1);
@@ -81,6 +88,17 @@ public class HomebankingApplication {
 			client2.addClientLoan(clientLoan4);
 			loan3.addClientLoan(clientLoan4);
 			clientLoanRepository.save(clientLoan4);
+
+			Card card1 = new Card("Melba Morel" , CardType.DEBIT , CardColor.GOLD , "3752-250145-45632" , 456 , LocalDate.now() , LocalDate.now().plusYears(5));
+			client1.addCard(card1);
+			cardRepository.save(card1);
+			Card card2 = new Card("Melba Morel" , CardType.CREDIT , CardColor.TITANIUM , "3752-8771-4575-6392" , 788 , LocalDate.now() , LocalDate.now().plusYears(5));
+			client1.addCard(card2);
+			cardRepository.save(card2);
+			Card card3 = new Card("Santiago Aristizabal" , CardType.CREDIT , CardColor.SILVER , "3777-8561-8585-2291" , 421 , LocalDate.now() , LocalDate.now().plusYears(5));
+			client2.addCard(card3);
+			cardRepository.save(card3);
+
 		};
 	}
 }
