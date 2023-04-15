@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeBanking | User</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/webStyles.css">
+    <link rel="shortcut icon" href="../../assets/banco.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+</head>
+
+<body>
+    <div id="app">
+        <header class="d-flex flex-column justify-content-between">
+            <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+                <div class="container">
+                    <a class="navbar-brand" href="../../index.html"><img src="../../assets/logoBank-removebg-preview.png" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active text-end" aria-current="page"
+                                    :href="'./accounts.html?id=' + data.id ">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active text-end" aria-current="page" href="#">Cards</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="d-flex justify-content-center align-items-end clientWelcome rounded p-3 mb-2 ms-2">
+                <p class="text-white text-center mb-0 fs-4">Hello</p>
+                <h2 class="text-white text-center mb-0 ps-2">{{data.firstName}}!</h2>
+            </div>
+        </header>
+        <main>
+            <h1 class="text-center pt-5">Cards</h1>
+            <!-- <div class="container-fluid d-flex pt-3"> -->
+                <!--------------------------- Credit Cards --------------------------------------->
+                <!-- <template v-if="creditCards.length > 0">
+                    <div class="swiper mySwiper bodyCards col-12 col-md-6 d-flex flex-column align-items-center">
+                        <h3 class="text-center p-2 tituloCard rounded">Credit</h3>
+                        <div class="swiper-wrapper">
+                            <template v-for="card of creditCards">
+                                <div class="swiper-slide">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div class="card mb-5">
+                                            <div class="card-inner">
+                                                <div :class="card.color" class="card-front">
+                                                    <div class="card-bg"></div>
+                                                    <div class="card-glow"></div>
+                                                    <svg width="72" height="24" viewBox="0 0 72 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg" class="logo">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                            d="M52.3973 1.01093L51.5588 5.99054C49.0448 4.56717 43.3231 4.23041 43.3231 6.85138C43.3231 7.89285 44.6177 8.60913 46.178 9.47241C48.5444 10.7817 51.5221 12.4291 51.5221 16.062C51.5221 21.8665 45.4731 24 41.4645 24C37.4558 24 34.8325 22.6901 34.8325 22.6901L35.7065 17.4848C38.1115 19.4688 45.4001 20.032 45.4001 16.8863C45.4001 15.5645 43.9656 14.785 42.3019 13.8811C40.0061 12.6336 37.2742 11.1491 37.2742 7.67563C37.2742 1.30988 44.1978 0 47.1132 0C49.8102 0 52.3973 1.01093 52.3973 1.01093ZM66.6055 23.6006H72L67.2966 0.414276H62.5732C60.3923 0.414276 59.8612 2.14215 59.8612 2.14215L51.0996 23.6006H57.2234L58.4481 20.1566H65.9167L66.6055 23.6006ZM60.1406 15.399L63.2275 6.72235L64.9642 15.399H60.1406ZM14.7942 16.3622L20.3951 0.414917H26.7181L17.371 23.6012H11.2498L6.14551 3.45825C2.83215 1.41281 0 0.807495 0 0.807495L0.108643 0.414917H9.36816C11.9161 0.414917 12.1552 2.50314 12.1552 2.50314L14.1313 12.9281L14.132 12.9294L14.7942 16.3622ZM25.3376 23.6006H31.2126L34.8851 0.414917H29.0095L25.3376 23.6006Z"
+                                                            fill="white" />
+                                                    </svg>
+                                                    <div class="card-contactless">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="46" height="56">
+                                                            <path fill="none" stroke="#f9f9f9" stroke-width="6"
+                                                                stroke-linecap="round" d="m35,3a50,50 0 0,1 0,50M24,8.5a39,39 0 0,1 0,39M13.5,13.55a28.2,28.5
+                                                0 0,1 0,28.5M3,19a18,17 0 0,1 0,18" />
+                                                        </svg>
+                                                    </div>
+                                                    <div class="card-chip"></div>
+                                                    <div class="card-holder">{{card.cardholder}}</div>
+                                                    <div class="card-number">{{card.number}}</div>
+                                                    <div class="card-valid">
+                                                        {{card.thruDate.slice(8,10)}}/{{card.thruDate.slice(2,4)}}</div>
+                                                </div>
+                                                <div :class="card.color" class="card-back">
+                                                    <div class="card-signature fs-5">{{card.cardholder}}</div>
+                                                    <div class="card-seccode">{{card.cvv}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                        <div class="swiper-pagination pb-4"></div>
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="notFoundMessage col-12 col-md-6 d-flex flex-column align-items-center bodyCards">
+                        <h3 class="text-center p-2 tituloCard rounded">Credit</h3>
+                        <div class="notFoundMessage d-flex align-items-center">
+                            <h4 class="text-center fs-4">Not Credit cards found</h4>
+                        </div>    
+                    </div>          
+                </template> -->
+
+                <!-------------------------------------------- Debit ------------------------------------------>
+                <!-- <template v-if="debitCards.length > 0">
+                    <div class="swiper mySwiper bodyCards col-12 col-md-6">
+                        <h3 class="text-center p-2 tituloCard rounded">Debit</h3>
+                        <div class="swiper-wrapper">
+                            <template v-for="card of debitCards">
+                                <div class="swiper-slide">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div class="card mb-5">
+                                            <div class="card-inner">
+                                                <div :class="card.color" class="card-front">
+                                                    <div class="card-bg"></div>
+                                                    <div class="card-glow"></div>
+                                                    <svg width="72" height="24" viewBox="0 0 72 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg" class="logo">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                            d="M52.3973 1.01093L51.5588 5.99054C49.0448 4.56717 43.3231 4.23041 43.3231 6.85138C43.3231 7.89285 44.6177 8.60913 46.178 9.47241C48.5444 10.7817 51.5221 12.4291 51.5221 16.062C51.5221 21.8665 45.4731 24 41.4645 24C37.4558 24 34.8325 22.6901 34.8325 22.6901L35.7065 17.4848C38.1115 19.4688 45.4001 20.032 45.4001 16.8863C45.4001 15.5645 43.9656 14.785 42.3019 13.8811C40.0061 12.6336 37.2742 11.1491 37.2742 7.67563C37.2742 1.30988 44.1978 0 47.1132 0C49.8102 0 52.3973 1.01093 52.3973 1.01093ZM66.6055 23.6006H72L67.2966 0.414276H62.5732C60.3923 0.414276 59.8612 2.14215 59.8612 2.14215L51.0996 23.6006H57.2234L58.4481 20.1566H65.9167L66.6055 23.6006ZM60.1406 15.399L63.2275 6.72235L64.9642 15.399H60.1406ZM14.7942 16.3622L20.3951 0.414917H26.7181L17.371 23.6012H11.2498L6.14551 3.45825C2.83215 1.41281 0 0.807495 0 0.807495L0.108643 0.414917H9.36816C11.9161 0.414917 12.1552 2.50314 12.1552 2.50314L14.1313 12.9281L14.132 12.9294L14.7942 16.3622ZM25.3376 23.6006H31.2126L34.8851 0.414917H29.0095L25.3376 23.6006Z"
+                                                            fill="white" />
+                                                    </svg>
+                                                    <div class="card-contactless">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="46" height="56">
+                                                            <path fill="none" stroke="#f9f9f9" stroke-width="6"
+                                                                stroke-linecap="round" d="m35,3a50,50 0 0,1 0,50M24,8.5a39,39 0 0,1 0,39M13.5,13.55a28.2,28.5
+                                                0 0,1 0,28.5M3,19a18,17 0 0,1 0,18" />
+                                                        </svg>
+                                                    </div>
+                                                    <div class="card-chip"></div>
+                                                    <div class="card-holder">{{card.cardholder}}</div>
+                                                    <div class="card-number">{{card.number}}</div>
+                                                    <div class="card-valid">
+                                                        {{card.thruDate.slice(8,10)}}/{{card.thruDate.slice(2,4)}}</div>
+                                                </div>
+                                                <div :class="card.color" class="card-back">
+                                                    <div class="card-signature fs-5">{{card.cardholder}}</div>
+                                                    <div class="card-seccode">{{card.cvv}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                        <div class="swiper-pagination pb-4"></div>
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="notFoundMessage col-12 col-md-6 d-flex flex-column align-items-center bodyCards">
+                        <h3 class="text-center p-2 tituloCard rounded">Debit</h3>
+                        <div class="notFoundMessage d-flex align-items-center">
+                            <h4 class="text-center fs-4">Not Debit cards found</h4>
+                        </div>    
+                    </div>
+                </template>
+            </div> -->
+            <div class="container-fluid d-flex flex-wrap pt-5 pb-5">
+                <!----------------------------------- Credit card ---------------------------------------->
+                <div class="col-12 col-lg-6 d-flex flex-column align-items-center">
+                    <h3 class="text-center p-2 tituloCard rounded">Credit</h3>
+                    <div class="cardContainer d-flex justify-content-center pt-3">
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper bodyCards">
+                                <template v-if="creditCards.length > 0" v-for="card of creditCards">
+                                    <div class="swiper-slide d-flex justify-content-center align-items-center">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <div class="card mb-5">
+                                                <div class="card-inner">
+                                                    <div :class="card.color" class="card-front">
+                                                        <div class="card-bg"></div>
+                                                        <div class="card-glow"></div>
+                                                        <svg width="72" height="24" viewBox="0 0 72 24" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg" class="logo">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                d="M52.3973 1.01093L51.5588 5.99054C49.0448 4.56717 43.3231 4.23041 43.3231 6.85138C43.3231 7.89285 44.6177 8.60913 46.178 9.47241C48.5444 10.7817 51.5221 12.4291 51.5221 16.062C51.5221 21.8665 45.4731 24 41.4645 24C37.4558 24 34.8325 22.6901 34.8325 22.6901L35.7065 17.4848C38.1115 19.4688 45.4001 20.032 45.4001 16.8863C45.4001 15.5645 43.9656 14.785 42.3019 13.8811C40.0061 12.6336 37.2742 11.1491 37.2742 7.67563C37.2742 1.30988 44.1978 0 47.1132 0C49.8102 0 52.3973 1.01093 52.3973 1.01093ZM66.6055 23.6006H72L67.2966 0.414276H62.5732C60.3923 0.414276 59.8612 2.14215 59.8612 2.14215L51.0996 23.6006H57.2234L58.4481 20.1566H65.9167L66.6055 23.6006ZM60.1406 15.399L63.2275 6.72235L64.9642 15.399H60.1406ZM14.7942 16.3622L20.3951 0.414917H26.7181L17.371 23.6012H11.2498L6.14551 3.45825C2.83215 1.41281 0 0.807495 0 0.807495L0.108643 0.414917H9.36816C11.9161 0.414917 12.1552 2.50314 12.1552 2.50314L14.1313 12.9281L14.132 12.9294L14.7942 16.3622ZM25.3376 23.6006H31.2126L34.8851 0.414917H29.0095L25.3376 23.6006Z"
+                                                                fill="white" />
+                                                        </svg>
+                                                        <div class="card-contactless">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="46" height="56">
+                                                                <path fill="none" stroke="#f9f9f9" stroke-width="6"
+                                                                    stroke-linecap="round" d="m35,3a50,50 0 0,1 0,50M24,8.5a39,39 0 0,1 0,39M13.5,13.55a28.2,28.5
+                                                    0 0,1 0,28.5M3,19a18,17 0 0,1 0,18" />
+                                                            </svg>
+                                                        </div>
+                                                        <div class="card-chip"></div>
+                                                        <div class="card-holder">{{card.cardholder}}</div>
+                                                        <div class="card-number">{{card.number}}</div>
+                                                        <div class="card-valid">
+                                                            {{card.thruDate.slice(8,10)}}/{{card.thruDate.slice(2,4)}}</div>
+                                                    </div>
+                                                    <div :class="card.color" class="card-back">
+                                                        <div class="card-signature fs-5">{{card.cardholder}}</div>
+                                                        <div class="card-seccode">{{card.cvv}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <div class="swiper-slide d-flex justify-content-center align-items-center">
+                                        <h4 class="text-center">Credit card was not found</h4>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+                <!----------------------------------- Debit card ---------------------------------------->
+                <div class="col-12 col-lg-6 d-flex flex-column align-items-center pt-5 pt-lg-0">
+                    <h3 class="text-center p-2 tituloCard rounded">Debit</h3>
+                    <div class="cardContainer d-flex justify-content-center pt-3">
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper bodyCards">
+                                <template v-if="debitCards.length > 0" v-for="card of debitCards">
+                                    <div class="swiper-slide d-flex justify-content-center align-items-center">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <div class="card mb-5">
+                                                <div class="card-inner">
+                                                    <div :class="card.color" class="card-front">
+                                                        <div class="card-bg"></div>
+                                                        <div class="card-glow"></div>
+                                                        <svg width="72" height="24" viewBox="0 0 72 24" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg" class="logo">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                d="M52.3973 1.01093L51.5588 5.99054C49.0448 4.56717 43.3231 4.23041 43.3231 6.85138C43.3231 7.89285 44.6177 8.60913 46.178 9.47241C48.5444 10.7817 51.5221 12.4291 51.5221 16.062C51.5221 21.8665 45.4731 24 41.4645 24C37.4558 24 34.8325 22.6901 34.8325 22.6901L35.7065 17.4848C38.1115 19.4688 45.4001 20.032 45.4001 16.8863C45.4001 15.5645 43.9656 14.785 42.3019 13.8811C40.0061 12.6336 37.2742 11.1491 37.2742 7.67563C37.2742 1.30988 44.1978 0 47.1132 0C49.8102 0 52.3973 1.01093 52.3973 1.01093ZM66.6055 23.6006H72L67.2966 0.414276H62.5732C60.3923 0.414276 59.8612 2.14215 59.8612 2.14215L51.0996 23.6006H57.2234L58.4481 20.1566H65.9167L66.6055 23.6006ZM60.1406 15.399L63.2275 6.72235L64.9642 15.399H60.1406ZM14.7942 16.3622L20.3951 0.414917H26.7181L17.371 23.6012H11.2498L6.14551 3.45825C2.83215 1.41281 0 0.807495 0 0.807495L0.108643 0.414917H9.36816C11.9161 0.414917 12.1552 2.50314 12.1552 2.50314L14.1313 12.9281L14.132 12.9294L14.7942 16.3622ZM25.3376 23.6006H31.2126L34.8851 0.414917H29.0095L25.3376 23.6006Z"
+                                                                fill="white" />
+                                                        </svg>
+                                                        <div class="card-contactless">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="46" height="56">
+                                                                <path fill="none" stroke="#f9f9f9" stroke-width="6"
+                                                                    stroke-linecap="round" d="m35,3a50,50 0 0,1 0,50M24,8.5a39,39 0 0,1 0,39M13.5,13.55a28.2,28.5
+                                                    0 0,1 0,28.5M3,19a18,17 0 0,1 0,18" />
+                                                            </svg>
+                                                        </div>
+                                                        <div class="card-chip"></div>
+                                                        <div class="card-holder">{{card.cardholder}}</div>
+                                                        <div class="card-number">{{card.number}}</div>
+                                                        <div class="card-valid">
+                                                            {{card.thruDate.slice(8,10)}}/{{card.thruDate.slice(2,4)}}</div>
+                                                    </div>
+                                                    <div :class="card.color" class="card-back">
+                                                        <div class="card-signature fs-5">{{card.cardholder}}</div>
+                                                        <div class="card-seccode">{{card.cvv}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <div class="swiper-slide d-flex justify-content-center align-items-center">
+                                        <h4 class="text-center">Debit card was not found</h4>
+                                    </div>
+                                </template>
+                            </div> 
+                            <div class="swiper-pagination"></div>              
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-dark d-flex justify-content-evenly align-items-center pt-3 pb-3">
+            <div class="d-flex">
+                <p class="text-white mb-0 pe-2">Santiago Aristizabal</p>
+                <p class="text-danger mb-0">Cohort 44</p>
+            </div>
+            <div class="bg-white p-1 rounded">
+                <a href="https://www.instagram.com/santi_aristi__/" target="_blank"><img
+                        src="../../assets/instagram.png" alt="" class="socialIcon me-1"></a>
+                <a href="https://github.com/JsantiAristi" target="_blank"><img src="../../assets/github (1).png" alt=""
+                        class="socialIcon"></a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- CDN bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="../js/cards.js"></script>
+</body>
+
+</html>

@@ -5,6 +5,8 @@ createApp({
         return {
             // Inicializamos las variables
             data: [],
+            debitCards: [],
+            creditCards: [],
             loans: [],
             params: "",
             id: "",
@@ -20,14 +22,20 @@ createApp({
             axios.get('http://localhost:8080/api/clients/' + this.id)
                 .then(response => {
                     this.data = response.data
-                    this.loans = this.data.loans
-                    console.log(this.data);
-                    console.log(this.loans);
-
-
+                    this.debitCards = response.data.cards.filter(card => card.type == "DEBIT");
+                    this.creditCards = response.data.cards.filter(card => card.type == "CREDIT");
+                    console.log(this.debitCards);
+                    console.log(this.creditCards);
                     
                 })
                 .catch(error => console.log(error));
         },
     }
 }).mount("#app");
+
+var swiper = new Swiper(".mySwiper", {
+    pagination: {
+    el: ".swiper-pagination",
+    dynamicBullets: true,
+    },
+});

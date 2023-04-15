@@ -6,10 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
@@ -98,6 +96,9 @@ public class HomebankingApplication {
 			Card card3 = new Card("Santiago Aristizabal" , CardType.CREDIT , CardColor.SILVER , "3777-8561-8585-2291" , 421 , LocalDate.now() , LocalDate.now().plusYears(5));
 			client2.addCard(card3);
 			cardRepository.save(card3);
+			Card card4 = new Card("Santiago Aristizabal" , CardType.CREDIT , CardColor.TITANIUM , "3575-8761-8775-2291" , 563 , LocalDate.now() , LocalDate.now().plusYears(5));
+			client2.addCard(card4);
+			cardRepository.save(card4);
 
 		};
 	}
