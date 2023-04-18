@@ -18,6 +18,12 @@
         box-sizing: border-box;
     }
 
+    .cardWallet {
+        background-image: url(./assets/EleccionDeFrancoSiNoDaSigueElParaExplain.jpg) !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+    }
+
     /* Header */
     header {
         height: 50vh;
@@ -62,15 +68,9 @@
 
     /*Index*/
     h1 {
-        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-            "Lucida Sans", Arial, sans-serif;
-        font-size: 3rem !important;
-    }
-
-    h2 {
-        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-            "Lucida Sans", Arial, sans-serif;
-        font-size: 2rem !important;
+        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+        font-size: 4.5rem !important;
+        text-shadow: 3px 4px 5px rgba(156, 83, 37, 0.344);
     }
 
     .home {
@@ -82,11 +82,13 @@
         padding-left: 3rem;
         font-size: 5rem !important;
         font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+        text-shadow: 2px 3px 4px black;
     }
 
     .overlayhome small {
         font-size: 3rem !important;
         font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+        text-shadow: 2px 3px 4px black;
     }
 
     .home img {
@@ -333,8 +335,8 @@
 
     .cardWallet:hover {
         transform: translateY(-5px) scale(1.005) translateZ(0);
-        box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
-            0 24px 46px var(--box-shadow-color);
+        box-shadow: 0 14px 15px rgba(0, 0, 0, 0.11),
+            0 14px 15px var(--box-shadow-color);
     }
 
     .cardWallet:hover .overlayWallet {
@@ -405,6 +407,11 @@
         transition: transform 0.3s ease-out;
     }
 
+    /* Valores */
+    .valuesmassage{
+        background-color: #ffffff;
+    }
+
     /* Carrousel */
     .swiper-button-prev , .swiper-button-next {
         color: rgb(156, 83, 37);
@@ -466,12 +473,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active text-end" aria-current="page"
-                                href="./management/pages/manager.html">Manager</a>
+                            <a class="nav-link text-end" aria-current="page"
+                                href="./management/pages/manager.html">MANAGER</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active text-end" aria-current="page" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">User</a>
+                            <a class="nav-link text-end text-danger" aria-current="page" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">SIGN IN</a>
                         </li>
                     </ul>
                 </div>
@@ -495,8 +502,8 @@
                     <img src="./assets/mision-cumplida.png" alt="">
                 </div>
                 <div>
-                    <p class="text-center fw-bold m-0 pt-2 pe-5 ps-5"> MISION </p>
-                    <p class="text-center p-2 pe-5 ps-5">help people and businesses achieve their financial goals</p>
+                    <p class="text-center fw-bold m-0 pt-2 pe-5 ps-5"> MISSION </p>
+                    <p class="text-center p-2 pe-5 ps-5">Help people and businesses achieve their financial goals</p>
                 </div>
             </div>
             <div class="cardWallet wallet">

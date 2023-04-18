@@ -14,7 +14,7 @@
 
 <body>
     <div id="app">
-        <header class="d-flex flex-column justify-content-between">
+        <header class="d-flex flex-column justify-content-between header-2">
             <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
                 <div class="container">
                     <a class="navbar-brand" href="../../index.html"><img src="../../assets/logoBank-removebg-preview.png" alt=""></a>
@@ -26,43 +26,25 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a class="nav-link active text-end" aria-current="page" href="#">Home</a>
+                                <a class="nav-link active text-end" aria-current="page" href="#">My Accounts</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-end" aria-current="page" :href="'./cards.html?id=' + data.id">Cards</a>
+                                <a class="nav-link text-end" aria-current="page" :href="'./cards.html?id=' + data.id">My Cards</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
             <div class="d-flex justify-content-center align-items-end clientWelcome rounded p-3 mb-2 ms-2" style="--d: 0s">
-                <p class="text-white text-center mb-0 fs-4">Hello</p>
+                <p class="text-white text-center mb-0 fs-4">Welcome</p>
                 <h2 class="text-white text-center mb-0 ps-2">{{data.firstName}}!</h2>
             </div>
         </header>
-        <main>
-            <div id="carouselExample" class="carousel slide carousel-dark">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="container d-flex justify-content-center pt-5 pb-5">
-                            <div class="box d-flex flex-column justify-content-between">
-                                <span class="title">Accounts</span>
-                                    <div class="d-flex flex-column justify-content-evenly accountsbox">
-                                        <template v-for="account of data.accounts">
-                                            <div>
-                                                <strong class="fs-4">{{account.number}}</strong>
-                                                <p>${{account.balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
-                                                <span>{{account.creationDate.slice(0,10)}}</span>
-                                                <span>{{account.creationDate.slice(11 , 16)}}</span>
-                                            </div>
-                                        </template>
-                                    </div>                            
-                            </div>
-                        </div>
-                    </div>
-                    <template v-for="account of data.accounts">
-                        <div class="carousel-item">
-                            <div class="container d-flex justify-content-center pt-5 pb-5">
+        <main class="main-2">
+            <h2 class="pagetittles p-2 fs-1">Your Accounts</h2>
+            <div class="d-flex flex-wrap justify-content-center">
+                    <template v-for="account of data.accounts">      
+                            <div class="userContainer d-flex justify-content-center p-4">
                                 <div class="box d-flex flex-column justify-content-between">
                                     <span class="title">{{account.number}}</span>
                                     <div class="accountsbox2 d-flex justify-content-between align-items-center rounded">
@@ -71,51 +53,27 @@
                                             <p class="fs-4">
                                                 ${{account.balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
                                             </p>
-                                            <span>{{account.creationDate.slice(0,10)}}</span>
-                                            <span>{{account.creationDate.slice(11 , 16)}}</span>
+                                            <p class="fs-6">Creation Date:</p>
+                                            <span class="fs-6">{{account.creationDate.slice(0,10)}} at </span>
+                                            <span class="fs-6">{{account.creationDate.slice(11 , 16)}}</span>
                                         </div>
-                                        <a :href="'./account.html?id=' + account.id"><img src="../../assets/lupa.png"
-                                                alt="" class="interactionCLient me-3"></a>
+                                        <div class="me-2 d-flex flex-column align-items-center">
+                                            <p class="mb-2">Transactions</p>
+                                            <a :href="'./account.html?id=' + account.id"><img src="../../assets/lupa.png"
+                                                alt="" class="interactionCLient"></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </template>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
+
             <!---------------------------- Loans --------------------------------------------------------->
+            <h2 class="pagetittles p-2 mt-5 fs-1">Your Loans</h2>
             <template v-if="loans.length">
-                <div id="carouselExample2" class="carousel slide carousel-dark">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="container d-flex justify-content-center pt-5 pb-5">
-                                <div class="box d-flex flex-column justify-content-between">
-                                    <span class="title">Loans</span>
-                                    <div class="d-flex flex-column justify-content-evenly accountsbox">
-                                        <template v-for="loan of data.loans">
-                                            <div>
-                                                <strong class="fs-4">{{loan.name}}</strong>
-                                                <p>${{loan.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
-                                                <span>Quotas: {{loan.payments}}</span>
-                                            </div>
-                                        </template>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="d-flex flex-wrap justify-content-center">
                         <template v-for="loan of data.loans">
-                            <div class="carousel-item">
-                                <div class="container d-flex justify-content-center pt-5 pb-5">
+                                <div class="userContainer d-flex justify-content-center p-4">
                                     <div class="box d-flex flex-column justify-content-between">
                                         <span class="title">{{loan.name}}</span>
                                         <div
@@ -125,32 +83,20 @@
                                                 <p class="fs-4">
                                                     ${{loan.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
                                                 </p>
-                                                <span>Quotas: {{loan.payments}}</span>
+                                                <span class="fs-6">Quotas: {{loan.payments}}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         </template>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample2"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample2"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
             </template>
             <template v-else>
                 <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h2 class="text center">Loans</h2>
                     <h3 class="text-center pt-5 pb-5 mb-0 notFoundMessage2">Not loans found</h3>
                 </div>
             </template>
+            <h3 class="text-center pb-4 mb-0">See <a href="">ours loans</a> for your future.</h3>
             <!---------------------------------- Saludo Usuario ---------------------------------------->
             <div class="notification">
                 <p>Welcome back, {{data.firstName}} 😉</p>
