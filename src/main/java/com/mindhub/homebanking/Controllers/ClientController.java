@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
-
 import static java.util.stream.Collectors.toList;
 
 @RestController
@@ -14,7 +13,7 @@ public class ClientController {
     @Autowired
     private ClientRespository clientRespository;
 
-    // Sevlets
+    // Servlets
     @RequestMapping("/api/clients")
     public List<ClientDTO> getClients() {
         return clientRespository.findAll()

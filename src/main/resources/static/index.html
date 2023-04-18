@@ -405,6 +405,11 @@
         transition: transform 0.3s ease-out;
     }
 
+    /* Carrousel */
+    .swiper-button-prev , .swiper-button-next {
+        color: rgb(156, 83, 37);
+    }
+
 
     /*Footer*/
     .socialIcon {
@@ -436,13 +441,13 @@
             height: 70vh;
         }
 
-        .cardWallet{
+        .cardWallet {
             width: 100%;
         }
     }
 
     @media only screen and (max-width: 750px) {
-        .valuesmassage{
+        .valuesmassage {
             flex-wrap: wrap;
         }
     }
@@ -492,7 +497,7 @@
                 <div>
                     <p class="text-center fw-bold m-0 pt-2 pe-5 ps-5"> MISION </p>
                     <p class="text-center p-2 pe-5 ps-5">help people and businesses achieve their financial goals</p>
-                </div>         
+                </div>
             </div>
             <div class="cardWallet wallet">
                 <div class="overlayWallet"></div>
@@ -501,10 +506,11 @@
                 </div>
                 <div>
                     <p class="text-center fw-bold m-0 pt-2 pe-5 ps-5"> VISION </p>
-                    <p class="text-center mt-2 pe-5 ps-5"> Providing innovative financial solutions to customers while maintaining the highest levels of security and reliability.</p>
-                </div>     
+                    <p class="text-center mt-2 pe-5 ps-5"> Providing innovative financial solutions to customers while
+                        maintaining the highest levels of security and reliability.</p>
+                </div>
             </div>
-        </div>   
+        </div>
         <!----------------------------- CARDS SLIDERS --------------------------------->
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
@@ -581,6 +587,8 @@
                 </div>
             </div>
             <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
     </main>
     <footer class="bg-dark d-flex justify-content-evenly align-items-center pt-3 pb-3">

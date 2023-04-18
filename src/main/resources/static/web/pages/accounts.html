@@ -29,13 +29,13 @@
                                 <a class="nav-link active text-end" aria-current="page" href="#">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active text-end" aria-current="page" :href="'./cards.html?id=' + data.id">Cards</a>
+                                <a class="nav-link text-end" aria-current="page" :href="'./cards.html?id=' + data.id">Cards</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
-            <div class="d-flex justify-content-center align-items-end clientWelcome rounded p-3 mb-2 ms-2">
+            <div class="d-flex justify-content-center align-items-end clientWelcome rounded p-3 mb-2 ms-2" style="--d: 0s">
                 <p class="text-white text-center mb-0 fs-4">Hello</p>
                 <h2 class="text-white text-center mb-0 ps-2">{{data.firstName}}!</h2>
             </div>
@@ -151,6 +151,11 @@
                     <h3 class="text-center pt-5 pb-5 mb-0 notFoundMessage2">Not loans found</h3>
                 </div>
             </template>
+            <!---------------------------------- Saludo Usuario ---------------------------------------->
+            <div class="notification">
+                <p>Welcome back, {{data.firstName}} 😉</p>
+                <span class="notification-progress"></span>
+            </div>
         </main>
         <footer class="bg-dark d-flex justify-content-evenly align-items-center pt-3 pb-3">
             <div class="d-flex">

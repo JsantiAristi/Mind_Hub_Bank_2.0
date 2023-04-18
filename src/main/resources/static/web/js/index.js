@@ -7,11 +7,16 @@ createApp({
             passwordID: "",
         }
     },
-}).mount("#app")
+}).mount("#app");
 
-var swiper = new Swiper(".mySwiper", {
+const swiper = new Swiper(".mySwiper", {
     pagination: {
-    el: ".swiper-pagination",
-    dynamicBullets: true,
+        el: ".swiper-pagination",
+        dynamicBullets: true,
+        type: 'bullets',
+    },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
     },
 });

@@ -23,19 +23,16 @@ createApp({
                 .then(response => {
                     this.data = response.data
                     this.debitCards = response.data.cards.filter(card => card.type == "DEBIT");
-                    this.creditCards = response.data.cards.filter(card => card.type == "CREDIT");
-                    console.log(this.debitCards);
-                    console.log(this.creditCards);
-                    
+                    this.creditCards = response.data.cards.filter(card => card.type == "CREDIT");      
                 })
                 .catch(error => console.log(error));
         },
     }
 }).mount("#app");
 
-var swiper = new Swiper(".mySwiper", {
+const swiper = new Swiper(".swiper", {
     pagination: {
-    el: ".swiper-pagination",
-    dynamicBullets: true,
+        el: ".swiper-pagination",
+        type: "bullets",
     },
 });

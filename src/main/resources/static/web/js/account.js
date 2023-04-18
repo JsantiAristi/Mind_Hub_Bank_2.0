@@ -21,11 +21,8 @@ createApp({
             this.id = this.params.get("id");
             axios.get('http://localhost:8080/api/accounts/' + this.id)
             .then(response => {
-                console.log(response);
-                console.log(response.data);
                 this.data = response.data;
                 this.filterData = response.data.transactions;
-                console.log(this.yearMonthDay(this.data));
 
                 this.datos.transactions.sort((transaction1, transaction2) => {
                     return (transaction2.date.slice(0,4) + transaction2.date.slice(5,7) + transaction2.date.slice(8,10)) - (transaction1.date.slice(0,4) + transaction1.date.slice(5,7) + transaction1.date.slice(8,10));
@@ -55,11 +52,6 @@ createApp({
         },
         deleteClient(){
 
-        }
-    },
-    computed: {
-        yearMonthDay(filterData){
-            console.log(filterData);
         }
     },
 }).mount("#app")
