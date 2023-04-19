@@ -6,6 +6,8 @@ createApp({
             // Inicializamos las variables
             data: [],
             loans: [],
+            accounts : [],
+            totalBalance : 0,
             params: "",
             id: "",
         }
@@ -21,6 +23,15 @@ createApp({
                 .then(response => {
                     this.data = response.data
                     this.loans = this.data.loans
+                    this.accounts = this.data.accounts
+                    console.log(this.data);
+
+                    for (account of this.data.accounts){
+                        this.totalBalance += account.balance;
+                    }
+
+                    console.log(this.totalBalance);
+                    
                 })
                 .catch(error => console.log(error));
         },

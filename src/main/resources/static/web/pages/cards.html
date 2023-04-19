@@ -18,7 +18,10 @@
         <header class="d-flex flex-column justify-content-between">
             <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
                 <div class="container">
-                    <a class="navbar-brand" href="../../index.html"><img src="../../assets/logoBank-removebg-preview.png" alt=""></a>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <a href="../../index.html" class="me-1"><img src="../../assets/insignia-del-sheriff.png" alt=""></a>
+                        <a class="navbar-brand fs-4" href="../../index.html">MindHub Bank</a>
+                    </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +57,7 @@
                                 <template v-if="creditCards.length > 0" v-for="card of creditCards">
                                     <div class="swiper-slide d-flex justify-content-center align-items-center">
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <div class="card mb-5">
+                                            <div class="card1 mb-5">
                                                 <div class="card-inner">
                                                     <div :class="card.color" class="card-front">
                                                         <div class="card-bg"></div>
@@ -106,7 +109,7 @@
                                 <template v-if="debitCards.length > 0" v-for="card of debitCards">
                                     <div class="swiper-slide d-flex justify-content-center align-items-center">
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <div class="card mb-5">
+                                            <div class="card1 mb-5">
                                                 <div class="card-inner">
                                                     <div :class="card.color" class="card-front">
                                                         <div class="card-bg"></div>

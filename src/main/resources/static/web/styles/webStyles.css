@@ -20,7 +20,7 @@ header {
 }
 
 header img {
-    width: 9rem;
+    width: 2rem;
 }
 
 .navbar-nav a {
@@ -51,11 +51,6 @@ main {
     background-color: rgb(220, 215, 215);
     min-height: 50vh;
 }
-
-/* .main-2{
-    background-color: white;
-    min-height: 50vh;
-} */
 
 .pagetittles{
     border-bottom: 2px solid #7c601893;
@@ -204,7 +199,23 @@ main {
     }
 }
 
-/* My chart */
+/* Tarjeta de acccounts bienvenida */
+.card{
+    border: 1px solid snow;
+    box-shadow: 3px 3px 14px #ffbb763f;
+}
+
+
+.card-body , .card-footer{
+    background-color: rgb(220, 215, 215);
+}
+
+.card-body img{
+    width: 7rem;
+    height: 7rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
 
 /*                                                Transaction                                          */
 .CREDIT {
@@ -226,7 +237,7 @@ main {
     background-color: #7c60185b;
 }
 
-.card {
+.card1 {
     width: 290px;
     height: 190px;
     border-radius: 10px;
@@ -236,7 +247,7 @@ main {
 
 }
 
-.card:hover .card-inner {
+.card1:hover .card-inner {
     transform: rotateY(180deg);
 }
 
