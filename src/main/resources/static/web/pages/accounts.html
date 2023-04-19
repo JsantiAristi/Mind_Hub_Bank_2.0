@@ -47,17 +47,17 @@
                             <div class="userContainer d-flex justify-content-center p-4">
                                 <div class="box d-flex flex-column justify-content-between">
                                     <span class="title">{{account.number}}</span>
-                                    <div class="accountsbox2 d-flex justify-content-between align-items-center rounded">
-                                        <div class="ms-4">
-                                            <strong class="fs-3 mb-0">{{data.firstName}} {{data.lastName}}</strong>
+                                    <div class="accountsbox2 d-flex flex-column justify-content-between align-items-center rounded">
+                                        <div class="pt-2">
+                                            <strong class="fs-4 mb-0">Balance:</strong>
                                             <p class="fs-4">
                                                 ${{account.balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
                                             </p>
-                                            <p class="fs-6">Creation Date:</p>
+                                            <p class="fs-6 pt-2">Creation Date:</p>
                                             <span class="fs-6">{{account.creationDate.slice(0,10)}} at </span>
                                             <span class="fs-6">{{account.creationDate.slice(11 , 16)}}</span>
                                         </div>
-                                        <div class="me-2 d-flex flex-column align-items-center">
+                                        <div class="mb-4 d-flex flex-column align-items-center">
                                             <p class="mb-2">Transactions</p>
                                             <a :href="'./account.html?id=' + account.id"><img src="../../assets/lupa.png"
                                                 alt="" class="interactionCLient"></a>
@@ -78,8 +78,8 @@
                                         <span class="title">{{loan.name}}</span>
                                         <div
                                             class="accountsbox2 d-flex justify-content-between align-items-center rounded">
-                                            <div class="ms-4">
-                                                <strong class="fs-3 mb-0">{{data.firstName}} {{data.lastName}}</strong>
+                                            <div class="ms-2">
+                                                <strong class="fs-4 mb-0">Total amount:</strong>
                                                 <p class="fs-4">
                                                     ${{loan.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
                                                 </p>
@@ -105,7 +105,7 @@
         </main>
         <footer class="bg-dark d-flex justify-content-evenly align-items-center pt-3 pb-3">
             <div class="d-flex">
-                <p class="text-white mb-0 pe-2">Santiago Aristizabal</p>
+                <a class="link-opacity-50-hover link-success" href=""><p class="text-white mb-0 pe-2">Santiago Aristizabal</p></a>
                 <p class="text-danger mb-0">Cohort 44</p>
             </div>
             <div class="bg-white p-1 rounded">
