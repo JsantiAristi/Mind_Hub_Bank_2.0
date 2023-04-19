@@ -15,6 +15,7 @@ public class AccountDTO {
     private double balance;
     private Set<TransactionDTO> transactions;
 
+    // Constructores
     public AccountDTO(Account account) {
         this.id = account.getId();
         this.number = account.getNumber();
@@ -23,22 +24,19 @@ public class AccountDTO {
         this.transactions = account.getTransactions().stream().map(transaction -> new TransactionDTO(transaction)).collect(toSet());
     }
 
+    // Getter
     public long getId() {
         return id;
     }
-
     public String getNumber() {
         return number;
     }
-
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
-
     public double getBalance() {
         return balance;
     }
-
     public Set<TransactionDTO> getTransactions() {
         return transactions;
     }

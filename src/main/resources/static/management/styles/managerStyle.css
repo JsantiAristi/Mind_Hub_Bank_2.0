@@ -12,6 +12,10 @@ header {
     background-size: cover;
 }
 
+header img{
+    width: 2rem;
+}
+
 .navbar-nav a {
     border-bottom: 2px solid transparent;
     position: relative;

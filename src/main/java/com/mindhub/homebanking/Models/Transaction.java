@@ -18,6 +18,7 @@ public class Transaction {
     @JoinColumn(name="account")
     private Account account;
 
+    // Constructores
     public Transaction() {
     }
 
@@ -28,59 +29,40 @@ public class Transaction {
         this.date = date;
     }
 
+    // Getter
     public long getId() {
         return id;
     }
-
     public TransactionType getType() {
         return type;
     }
-
-    public void setType(TransactionType type) {
-        this.type = type;
-    }
-
     public double getAmount() {
         return amount;
     }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
     public String getDescription() {
         return description;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public LocalDateTime getDate() {
         return date;
     }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
     public Account getAccount() {
         return account;
     }
 
+    // Setter
+    public void setType(TransactionType type) {
+        this.type = type;
+    }
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
     public void setAccount(Account account) {
         this.account = account;
-    }
-
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "id=" + id +
-                ", type=" + type +
-                ", amount=" + amount +
-                ", description='" + description + '\'' +
-                ", date=" + date +
-                ", account=" + account +
-                '}';
     }
 }

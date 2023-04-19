@@ -4,7 +4,10 @@ createApp({
     data() {
         return {
             // Inicializamos las variables
-            datos: [],
+            data: [],
+            loans: [],
+            accounts : [],
+            totalBalance : 0,
             params: "",
             id: "",
         }
@@ -16,12 +19,21 @@ createApp({
         loadData() {
             this.params = new URLSearchParams(location.search);
             this.id = this.params.get("id");
-            console.log(this.id);
             axios.get('http://localhost:8080/api/clients/' + this.id)
                 .then(response => {
-                    this.datos = response.data
+                    this.data = response.data
+                    this.loans = this.data.loans
+                    this.accounts = this.data.accounts
+                    console.log(this.data);
+
+                    for (account of this.data.accounts){
+                        this.totalBalance += account.balance;
+                    }
+
+                    console.log(this.totalBalance);
+                    
                 })
                 .catch(error => console.log(error));
         },
     }
-}).mount("#app")
+}).mount("#app");

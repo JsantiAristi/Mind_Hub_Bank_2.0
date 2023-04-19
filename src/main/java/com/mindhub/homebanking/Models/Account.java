@@ -21,6 +21,7 @@ public class Account {
     @OneToMany(mappedBy="account", fetch=FetchType.EAGER)
     private Set<Transaction> transactions = new HashSet<>();
 
+    // Constructores
     public Account() {
     }
 
@@ -30,58 +31,41 @@ public class Account {
         this.balance = balance;
     }
 
+    // Método para añadir transacciones
     public void addTransaction(Transaction transaction){
         transaction.setAccount(this);
         transactions.add(transaction);
     }
 
+    // Getter
     public long getId() {
         return id;
     }
-
     public String getNumber() {
         return number;
     }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
-
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
-    }
-
     public double getBalance() {
         return balance;
     }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
     public Client getClient() {
         return client;
     }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
     public Set<Transaction> getTransactions() { return transactions; }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", number='" + number + '\'' +
-                ", creationDate=" + creationDate +
-                ", balance=" + balance +
-                ", client=" + client +
-                ", transactions=" + transactions +
-                '}';
+    // Setter
+    public void setNumber(String number) {
+        this.number = number;
+    }
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+    public void setClient(Client client) {
+        this.client = client;
     }
 }
