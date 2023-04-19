@@ -70,19 +70,19 @@ public class HomebankingApplication {
 			Loan loan3 = new Loan("Automotive" , 300000.00 , List.of(6, 12, 24, 36));
 			loanRepository.save(loan3);
 
-			ClientLoan clientLoan1 = new ClientLoan("Mortgage" , 400000.00 , 60);
+			ClientLoan clientLoan1 = new ClientLoan( 400000.00 , 60);
 			client1.addClientLoan(clientLoan1);
 			loan1.addClientLoan(clientLoan1);
 			clientLoanRepository.save(clientLoan1);
-			ClientLoan clientLoan2 = new ClientLoan("Personal" , 50000.00 , 12);
+			ClientLoan clientLoan2 = new ClientLoan( 50000.00 , 12);
 			client1.addClientLoan(clientLoan2);
 			loan2.addClientLoan(clientLoan2);
 			clientLoanRepository.save(clientLoan2);
-			ClientLoan clientLoan3 = new ClientLoan("Personal" , 100000.00 , 24);
+			ClientLoan clientLoan3 = new ClientLoan(100000.00 , 24);
 			client2.addClientLoan(clientLoan3);
 			loan2.addClientLoan(clientLoan3);
 			clientLoanRepository.save(clientLoan3);
-			ClientLoan clientLoan4 = new ClientLoan("Automotive" , 200000.00 , 36);
+			ClientLoan clientLoan4 = new ClientLoan( 200000.00 , 36);
 			client2.addClientLoan(clientLoan4);
 			loan3.addClientLoan(clientLoan4);
 			clientLoanRepository.save(clientLoan4);
