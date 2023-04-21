@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header img {
+    width: 2rem;
+}
+
+.navbar-nav a {
+    border-bottom: 2px solid transparent;
+    position: relative;
+}
+
+.navbar a:before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: white;
+    transition: width 0.3s ease-out;
+    transform-origin: left;
+}
+
+.navbar a:hover:before {
+    width: 100%;
+    transition: width 0.3s ease-out;
+    transform-origin: right;
+}
+
+/*Main*/
+main{
+    background-image: url(../../assets/pexels-chris-s-16160050.jpg);
+    background-size: cover;
+    background-position: 100% 12%;
+    min-height: 90vh;
+}
+
+h1{
+    text-shadow: 1px 2px 1px black;
+}
+
+/*glassmorphism*/
+.glassmorphism{
+    background: rgba( 255, 255, 255, 0.2 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 1.5px );
+    -webkit-backdrop-filter: blur( 1.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    height: 80vh;
+    width: 50vw;
+}
+
+form {
+    width: 90%;
+}
+
+.formRegister{
+    width: 90%;
+}
+
+.btn-register{
+    background-color: #b5844347;
+    border: 1px solid white;
+    color: white;
+}
+
+.btn-register:hover {
+    background-color: #966c37da;
+    border: 1px solid white;
+    color: white;
+}
+
+/*Footer*/
+.socialIcon {
+    width: 2rem;
+}
+
+@media only screen and (max-width: 700px) {
+    .glassmorphism{
+        width: 80vw;
+        height: 90vh;
+    }
+}

@@ -17,10 +17,10 @@ createApp({
     },
     methods: {
         loadData() {
-            this.params = new URLSearchParams(location.search);
-            this.id = this.params.get("id");
-            axios.get('http://localhost:8080/api/clients/' + this.id)
+            axios.get('http://localhost:8080/api/clients/current')
                 .then(response => {
+                    console.log(response.data);
+
                     this.data = response.data
                     this.loans = this.data.loans
                     this.accounts = this.data.accounts
@@ -35,5 +35,10 @@ createApp({
                 })
                 .catch(error => console.log(error));
         },
+        singOut() {
+            axios.post('/api/logout')
+            .then(response => window.location.href="/index.html")
+            .catch(error => console.log(error));
+        }
     }
 }).mount("#app");

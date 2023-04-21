@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeBanking | User</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/signup.css">
+    <link rel="shortcut icon" href="../../assets/banco.png" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+        <header class="d-flex flex-column justify-content-between">
+            <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+                <div class="container">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <img src="../../assets/insignia-del-sheriff.png" alt="" class="me-1">
+                        <p class="navbar-brand fs-4 mb-0">MindHub Bank</p>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link text-end" aria-current="page"
+                                    href="../../index.html">HOME</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main id="app">
+            <div class="d-flex justify-content-center align-items">
+                <div class="glassmorphism mt-5 mb-5 d-flex flex-column justify-content-center align-items-center">
+                    <h1 class="text-center text-white mt-3">Sign Up</h1>
+                    <form class="d-flex flex-column justify-content-center align-items-center" @submit.prevent="signUp">
+                        <div class="formRegister mb-3">
+                            <label for="firstName" class="form-label text-white fs-5">First Name *</label>
+                            <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" v-model="firstName" required>
+                        </div>
+                        <div class="mb-3 formRegister">
+                            <label for="secondName" class="form-label text-white fs-5">Second Name *</label>
+                            <input type="text" class="form-control" id="secondName" aria-describedby="emailHelp" v-model="secondName" required>
+                        </div>
+                        <div class="mb-3 formRegister">
+                            <label for="emailAdress" class="form-label text-white fs-5">Email address *</label>
+                            <input type="email" class="form-control" id="emailAdress" aria-describedby="emailHelp" v-model="emailAdress" required>
+                            <div id="emailHelp" class="form-text text-white">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3 formRegister">
+                            <label for="password" class="form-label text-white fs-5">Password *</label>
+                            <input type="password" class="form-control" id="password" v-model="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-register mb-3 fs-4">Register 👩‍🌾</button>
+                    </form>
+                </div>
+            </div>           
+        </main>
+        <footer class="bg-dark d-flex justify-content-evenly align-items-center pt-3 pb-3">
+            <div class="d-flex">
+                <a class="link-opacity-50-hover link-success"
+                    href="https://www.linkedin.com/in/santiago-aristizabal-restrepo-a17015221/">
+                    <p class="text-white mb-0 pe-2">Santiago Aristizabal</p>
+                </a>
+                <p class="text-danger mb-0">Cohort 44</p>
+            </div>
+            <div class="bg-white p-1 rounded">
+                <a href="https://www.instagram.com/santi_aristi__/" target="_blank"><img
+                        src="../../assets/instagram.png" alt="" class="socialIcon me-1"></a>
+                <a href="https://github.com/JsantiAristi" target="_blank"><img src="../../assets/github (1).png" alt=""
+                        class="socialIcon"></a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- CDN bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/signUp.js"></script>
+</body>
+
+</html>

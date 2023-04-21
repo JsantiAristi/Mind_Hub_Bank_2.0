@@ -200,7 +200,7 @@
     }
 
     .modal-body {
-            height: 70vh;
+            height: 25rem;
         }
 
     .modal-header {
@@ -459,8 +459,8 @@
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container">
                 <div class="d-flex align-items-center justify-content-center">
-                    <a href="#" class="me-1"><img src="./assets/insignia-del-sheriff.png" alt=""></a>
-                    <a class="navbar-brand fs-4" href="#">MindHub Bank</a>
+                    <img src="./assets/insignia-del-sheriff.png" alt="" class="me-1">
+                    <p class="navbar-brand fs-4 mb-0">MindHub Bank</p>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -637,10 +637,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body rounded d-flex align-items-center flex-column">
-                    <form class="form">
+                    <form class="form" @submit.prevent="signIn">
                         <p class="form-title">Sign in to your account</p>
                         <div class="input-container">
-                            <input placeholder="First Name" type="text">
+                            <input placeholder="Email Adress" type="text" name="emailAdress" v-model="emailAdress" required>
                             <span>
                                 <svg stroke="currentColor" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -651,7 +651,7 @@
                             </span>
                         </div>
                         <div class="input-container">
-                            <input placeholder="Enter password" type="password" v-model="passwordID" required>
+                            <input placeholder="Enter password" type="password" name="password" v-model="password" required>
                             <span>
                                 <svg stroke="currentColor" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -663,14 +663,10 @@
                                 </svg>
                             </span>
                         </div>
-                        <a class="text-white" :href="'./web/pages/accounts.html?id=' + passwordID">
-                            <button class="submit" type="button">
-                                Sign in
-                            </button>
-                        </a>
+                        <button class="btn btn-info text-white" type="submit">Sign in</button>
                         <p class="signup-link">
                             No account?
-                            <a href="">Sign up</a>
+                            <a href="./web/pages/signup.html">Sign up</a>
                         </p>
                     </form>
                 </div>
@@ -683,6 +679,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./web/js/index.js"></script>
 </body>
 
