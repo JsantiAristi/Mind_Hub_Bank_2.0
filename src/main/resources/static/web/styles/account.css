@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header */
+header {
+    height: 50vh;
+    background-image: url(../../assets/fondo.jpg);
+    background-position: 100% 62%;
+    background-size: cover;
+}
+
+.header-2 {
+    height: 50vh;
+    background-image: url(../../assets/fondo.jpg);
+    background-position: 100% 80%;
+    background-size: cover;
+}
+
+header img {
+    width: 2rem;
+}
+
+.navbar-nav a {
+    border-bottom: 2px solid transparent;
+    position: relative;
+}
+
+.navbar a:before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: white;
+    transition: width 0.3s ease-out;
+    transform-origin: left;
+}
+
+.navbar a:hover:before {
+    width: 100%;
+    transition: width 0.3s ease-out;
+    transform-origin: right;
+}
+
+/*Main*/
+main {
+    background-color: rgb(220, 215, 215);
+    min-height: 50vh;
+}
+
+.pagetittles{
+    border-bottom: 2px solid #7c601893;
+    max-width: fit-content;
+    margin: auto;
+}
+
+/*Transaction color*/
+.CREDIT {
+    color: green;
+}
+
+.DEBIT {
+    color: red;
+}
+
+/*Footer*/
+.socialIcon {
+    width: 2rem;
+}
+
+@media only screen and (max-width: 520px) {
+    .inputsTransactions {
+        flex-direction: column !important;
+        margin: 1rem;
+    }
+}

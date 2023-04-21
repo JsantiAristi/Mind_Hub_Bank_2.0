@@ -1,0 +1,438 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header */
+header {
+    height: 50vh;
+    background-image: url(../../assets/fondo.jpg);
+    background-position: 100% 62%;
+    background-size: cover;
+}
+
+header img {
+    width: 2rem;
+}
+
+.navbar-nav a {
+    border-bottom: 2px solid transparent;
+    position: relative;
+    cursor: pointer;
+}
+
+.navbar a:before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: white;
+    transition: width 0.3s ease-out;
+    transform-origin: left;
+}
+
+.navbar a:hover:before {
+    width: 100%;
+    transition: width 0.3s ease-out;
+    transform-origin: right;
+}
+
+/*Main*/
+main {
+    min-height: 40vh;
+}
+
+/*Index*/
+h1 {
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    font-size: 4.5rem !important;
+    text-shadow: 3px 4px 5px rgba(156, 83, 37, 0.344);
+}
+
+.home {
+    background-color: rgba(156, 83, 37, 0.344);
+}
+
+.overlayhome h2 {
+    width: 100%;
+    padding-left: 3rem;
+    font-size: 5rem !important;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    text-shadow: 2px 3px 4px black;
+}
+
+.overlayhome small {
+    font-size: 3rem !important;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    text-shadow: 2px 3px 4px black;
+}
+
+.home img {
+    width: 80%;
+    height: 25rem;
+    object-fit: cover;
+    position: relative;
+}
+
+.carouselimg {
+    height: 40rem;
+    width: 100%;
+    object-fit: cover;
+}
+
+.overlayhome {
+    left: 0;
+    padding-left: 4%;
+    position: absolute;
+}
+
+.form {
+    background-color: #fff;
+    display: block;
+    padding: 1rem;
+    max-width: 100%;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.form-title {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    text-align: center;
+    color: #000;
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-container input,
+.form button {
+    outline: none;
+    border: 1px solid #e5e7eb;
+    margin: 8px 0;
+}
+
+.input-container input {
+    background-color: #fff;
+    padding: 1rem;
+    padding-right: 3rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    width: 250px;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.input-container span {
+    display: grid;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    place-content: center;
+}
+
+.input-container span svg {
+    color: #9ca3af;
+    width: 1rem;
+    height: 1rem;
+}
+
+.submit {
+    display: block;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    background-color: #4f46e5;
+    color: #ffffff;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    width: 100%;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+}
+
+.signup-link {
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    text-align: center;
+}
+
+.signup-link a {
+    text-decoration: underline;
+}
+
+.modal-body,
+.modal-header,
+.modal-footer {
+    background-color: rgb(220, 215, 215);
+}
+
+.modal-body {
+        height: 25rem;
+    }
+
+.modal-header {
+    border-bottom: none !important;
+}
+
+/* ScrollTrigger */
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card1 {
+    width: 320px;
+    border-radius: 25px;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.29);
+}
+
+.slide-content {
+    margin: 0 40px;
+}
+
+.image-content {
+    position: relative;
+    row-gap: 5px;
+    padding: 25px 0;
+}
+
+.image-content,
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 14px;
+}
+
+.overlayScroll {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(156, 83, 37, 0.344);
+    border-radius: 25px 25px 0 25px;
+}
+
+.overlayScroll::before,
+.overlayScroll::after {
+    content: " ";
+    position: absolute;
+    right: 0;
+    bottom: -40px;
+    height: 40px;
+    width: 70px;
+    background-color: rgba(156, 83, 37, 0.344);
+}
+
+.overlayScroll::after {
+    border-radius: 0 25px 0 0;
+    background-color: #fff;
+}
+
+.card-image {
+    position: relative;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.card-image .card-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid rgba(156, 83, 37, 0.344);
+}
+
+.name {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+}
+
+.description {
+    font-size: 14px;
+    color: #707070;
+    text-align: center;
+}
+
+/*MIssion and Vission*/
+.wallet {
+    --bg-color: rgba(156, 83, 37, 0.344);
+    --bg-color-light: rgba(156, 83, 37, 0.137);
+    --text-color-hover: black;
+    --box-shadow-color: rgba(156, 83, 37, 0.344);
+}
+
+.cardWallet {
+    width: 50%;
+    height: 350px;
+    margin: 10px 15px;
+    border-top-right-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.375);
+    border-radius: 5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease-out;
+    text-decoration: none;
+    background-image: url(./assets/EleccionDeFrancoSiNoDaSigueElParaExplain.jpg) !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+
+.cardWallet:hover {
+    transform: translateY(-5px) scale(1.005) translateZ(0);
+    box-shadow: 0 14px 15px rgba(0, 0, 0, 0.11),
+        0 14px 15px var(--box-shadow-color);
+}
+
+.cardWallet:hover .overlayWallet {
+    transform: scale(4) translateZ(0);
+}
+
+.cardWallet:hover .circle {
+    border-color: var(--bg-color-light);
+    background: var(--bg-color);
+}
+
+.cardWallet:hover .circle:after {
+    background: var(--bg-color-light);
+}
+
+.cardWallet:hover p {
+    color: var(--text-color-hover);
+}
+
+.cardWallet p {
+    font-size: 17px;
+    color: #4c5656;
+    z-index: 1000;
+    transition: color 0.3s ease-out;
+}
+
+.circle {
+    width: 131px;
+    height: 131px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease-out;
+}
+
+.circle:after {
+    content: "";
+    width: 118px;
+    height: 118px;
+    display: block;
+    position: absolute;
+    background: var(--bg-color);
+    border-radius: 50%;
+    top: 7px;
+    left: 7px;
+    transition: opacity 0.3s ease-out;
+}
+
+.circle img {
+    width: 5rem;
+    z-index: 10000;
+    transform: translateZ(0);
+}
+
+.overlayWallet {
+    position: absolute;
+    height: 118px;
+    border-radius: 50%;
+    background: var(--bg-color);
+    top: 70px;
+    left: 50px;
+    z-index: 0;
+    transition: transform 0.3s ease-out;
+}
+
+.valuesmassage{
+    background-color: #ffffff;
+}
+
+/* Carrousel */
+.swiper-button-prev , .swiper-button-next {
+    color: rgb(156, 83, 37);
+}
+
+
+/*Footer*/
+.socialIcon {
+    width: 2rem;
+}
+
+@media only screen and (max-width: 600px) {
+    html {
+        width: 100%;
+    }
+
+    .home img {
+        width: 100%;
+    }
+
+    .overlayhome {
+        width: 100%;
+    }
+
+    .overlayhome h2 {
+        font-size: 3rem !important;
+    }
+
+    .overlayhome small {
+        font-size: 2rem !important;
+    }
+
+    .cardWallet {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .valuesmassage {
+        flex-wrap: wrap;
+    }
+}

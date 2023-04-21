@@ -22,10 +22,10 @@ public class WebAuthorization {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/api/login").permitAll()
-                .antMatchers( HttpMethod.POST, "/index.html" , "/web/pages/signup.html").permitAll()
+                .antMatchers( HttpMethod.POST, "/index.html" , "/web/pages/signup.html" , "/h2-console").permitAll()
                 .antMatchers("/api/logout").hasAuthority("USER")
                 .antMatchers( HttpMethod.POST , "/web/pages/accounts.html" , "/web/pages/account.html" , "/web/pages/cards.html").hasAuthority("USER")
-                .antMatchers("/management/**" , "/rest/**" , "/h2-console").hasAuthority("ADMIN");
+                .antMatchers("/management/**" , "/rest/**").hasAuthority("ADMIN");
         http.formLogin()
                 .usernameParameter("emailAdress")
                 .passwordParameter("password")
