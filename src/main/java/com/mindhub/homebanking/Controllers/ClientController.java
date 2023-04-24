@@ -1,7 +1,9 @@
 package com.mindhub.homebanking.Controllers;
 
+import com.mindhub.homebanking.Models.Account;
 import com.mindhub.homebanking.Models.Client;
 import com.mindhub.homebanking.dtos.ClientDTO;
+import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import static java.util.stream.Collectors.toList;
 
@@ -16,6 +20,8 @@ import static java.util.stream.Collectors.toList;
 public class ClientController {
     @Autowired
     private ClientRespository clientRespository;
+    @Autowired
+    private AccountRepository accountRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -40,7 +46,12 @@ public class ClientController {
            if (clientRespository.findByEmailAddress(emailAdress) != null) {
                return new ResponseEntity<>("Name already in use", HttpStatus.FORBIDDEN);
            }
-           clientRespository.save(new Client(firstName, lastName, emailAdress, passwordEncoder.encode(password)));
+
+           Client newClient = new Client(firstName, lastName, emailAdress, passwordEncoder.encode(password));
+           clientRespository.save(newClient);
+           Account newAccount = new Account("VIN001" , LocalDateTime.now() , 0.00);
+           newClient.addAccount(newAccount);
+           accountRepository.save(newAccount);
            return new ResponseEntity<>(HttpStatus.CREATED);
        }
 }

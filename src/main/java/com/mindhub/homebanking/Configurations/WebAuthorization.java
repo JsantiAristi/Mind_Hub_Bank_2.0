@@ -8,9 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,16 +18,14 @@ public class WebAuthorization {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/api/login").permitAll()
-                .antMatchers( HttpMethod.POST, "/index.html" , "/web/pages/signup.html" , "/h2-console").permitAll()
-                .antMatchers("/api/logout").hasAuthority("USER")
-                .antMatchers( HttpMethod.POST , "/web/pages/accounts.html" , "/web/pages/account.html" , "/web/pages/cards.html").hasAuthority("USER")
-                .antMatchers("/management/**" , "/rest/**").hasAuthority("ADMIN");
+                .antMatchers( HttpMethod.POST, "/api/login" , "/api/logout").permitAll()
+                .antMatchers( HttpMethod.POST, "/index.html" , "/web/pages/signup.html").permitAll()
+                .antMatchers( HttpMethod.POST , "/web/pages/accounts.html" , "/web/pages/account.html" , "/web/pages/cards.html").hasAnyAuthority("USER","ADMIN")
+                .antMatchers("/management/**" , "/rest/**" , "/h2-console").hasAuthority("ADMIN");
         http.formLogin()
                 .usernameParameter("emailAdress")
                 .passwordParameter("password")
                 .loginPage("/api/login");
-        // Añadir método para eliminar la cookie
         http.logout().logoutUrl("/api/logout").deleteCookies( "JSESSIONID" );
 
         // turn off checking for CSRF tokens
