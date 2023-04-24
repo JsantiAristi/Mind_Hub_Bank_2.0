@@ -11,19 +11,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
+
 import static java.util.stream.Collectors.toList;
 
 @RestController
 public class ClientController {
+
     @Autowired
     private ClientRespository clientRespository;
     @Autowired
     private AccountRepository accountRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
 
     // Servlets
     @RequestMapping("/api/clients")
@@ -47,11 +50,19 @@ public class ClientController {
                return new ResponseEntity<>("Name already in use", HttpStatus.FORBIDDEN);
            }
 
-           Client newClient = new Client(firstName, lastName, emailAdress, passwordEncoder.encode(password));
-           clientRespository.save(newClient);
-           Account newAccount = new Account("VIN001" , LocalDateTime.now() , 0.00);
-           newClient.addAccount(newAccount);
-           accountRepository.save(newAccount);
-           return new ResponseEntity<>(HttpStatus.CREATED);
+           Random random = new Random();
+            int min = 100000;
+            int max = 999999;
+            int number = random.nextInt((max - min) + 1) + min;
+
+            if (accountRepository.findByNumber("VIN" + number) == null) {
+                Client newClient = new Client(firstName, lastName, emailAdress, passwordEncoder.encode(password));
+                clientRespository.save(newClient);
+                Account newAccount = new Account("VIN" + number , LocalDateTime.now() , 0.00);
+                newClient.addAccount(newAccount);
+                accountRepository.save(newAccount);
+            }
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
        }
 }

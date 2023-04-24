@@ -311,7 +311,7 @@ h1 {
     box-shadow: 0 14px 26px rgba(0, 0, 0, 0.04);
     transition: all 0.3s ease-out;
     text-decoration: none;
-    background-image: url(./assets/EleccionDeFrancoSiNoDaSigueElParaExplain.jpg) !important;
+    background-image: url(../../assets/EleccionDeFrancoSiNoDaSigueElParaExplain.jpg) !important;
     background-size: cover !important;
     background-repeat: no-repeat !important;
 }
@@ -397,6 +397,17 @@ h1 {
 /* Carrousel */
 .swiper-button-prev , .swiper-button-next {
     color: rgb(156, 83, 37);
+}
+
+/* Scroll */
+body::-webkit-scrollbar {
+    width: 10px;
+    background: rgb(220, 215, 215);
+}
+body::-webkit-scrollbar-thumb {
+    background: rgb(78, 73, 73);
+    border-radius: 10px;
+    border-right: 2px solid #161a1e;
 }
 
 

@@ -344,6 +344,17 @@ main {
     height: 18rem;
 }
 
+/* Scroll */
+body::-webkit-scrollbar {
+    width: 10px;
+    background: rgb(220, 215, 215);
+}
+body::-webkit-scrollbar-thumb {
+    background: rgb(78, 73, 73);
+    border-radius: 10px;
+    border-right: 2px solid #161a1e;
+}
+
 /*Footer*/
 .socialIcon {
     width: 2rem;

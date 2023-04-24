@@ -10,11 +10,16 @@ createApp({
     },
     methods: {
         signIn(){
-            console.log(this.emailAdress);
-            console.log(this.password);
             axios.post('/api/login',`emailAdress=${this.emailAdress}&password=${this.password}`)
             .then(response => window.location.href="/web/pages/accounts.html")
-            .catch(error => console.log(error))         
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Wrong password',
+                    confirmButtonColor: "#7c601893",
+                })
+                console.log(error);
+            })         
                 }
             },
         }).mount("#app");

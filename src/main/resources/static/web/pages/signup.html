@@ -44,11 +44,11 @@
                     <form class="d-flex flex-column justify-content-center align-items-center" @submit.prevent="signUp">
                         <div class="formRegister mb-3">
                             <label for="firstName" class="form-label text-white fs-5">First Name *</label>
-                            <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" v-model="firstName" required>
+                            <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" v-model="firstName" required pattern="^[a-zA-Z]+$">
                         </div>
                         <div class="mb-3 formRegister">
                             <label for="secondName" class="form-label text-white fs-5">Second Name *</label>
-                            <input type="text" class="form-control" id="secondName" aria-describedby="emailHelp" v-model="secondName" required>
+                            <input type="text" class="form-control" id="secondName" aria-describedby="emailHelp" v-model="secondName" required pattern="^[a-zA-Z]+$">
                         </div>
                         <div class="mb-3 formRegister">
                             <label for="emailAdress" class="form-label text-white fs-5">Email address *</label>
@@ -62,7 +62,8 @@
                         <button type="submit" class="btn btn-register mb-3 fs-4">Register 👩‍🌾</button>
                     </form>
                 </div>
-            </div>           
+            </div>  
+            {{mayus}}         
         </main>
         <footer class="bg-dark d-flex justify-content-evenly align-items-center pt-3 pb-3">
             <div class="d-flex">
@@ -85,6 +86,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../js/signUp.js"></script>
