@@ -9,7 +9,6 @@ createApp({
             creditCards: [],
             loans: [],
             params: "",
-            id: "",
         }
     },
     created() {
@@ -17,15 +16,36 @@ createApp({
     },
     methods: {
         loadData() {
-            this.params = new URLSearchParams(location.search);
-            this.id = this.params.get("id");
-            axios.get('http://localhost:8080/api/clients/' + this.id)
+            axios.get('http://localhost:8080/api/clients/current')
                 .then(response => {
                     this.data = response.data
                     this.debitCards = response.data.cards.filter(card => card.type == "DEBIT");
                     this.creditCards = response.data.cards.filter(card => card.type == "CREDIT");      
                 })
                 .catch(error => console.log(error));
+        },
+        singOut() {
+            Swal.fire({
+                title: 'Are you sure that you want to log out?',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Sure',
+                confirmButtonColor: "#7c601893",
+                preConfirm: () => {
+                    return axios.post('/api/logout')
+                        .then(response => {
+                            window.location.href="/index.html"
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(
+                                `Request failed: ${error}`
+                            )
+                        })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            })
         },
     }
 }).mount("#app");

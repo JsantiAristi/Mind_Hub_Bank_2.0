@@ -1,0 +1,244 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header */
+header {
+    height: 50vh;
+    background-image: url(../../assets/fondo.jpg);
+    background-position: 100% 62%;
+    background-size: cover;
+}
+
+.header-2 {
+    height: 50vh;
+    background-image: url(../../assets/fondo.jpg);
+    background-position: 100% 80%;
+    background-size: cover;
+}
+
+header img {
+    width: 2rem;
+}
+
+.navbar-nav a {
+    border-bottom: 2px solid transparent;
+    position: relative;
+}
+
+.navbar a:before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: white;
+    transition: width 0.3s ease-out;
+    transform-origin: left;
+}
+
+.navbar a:hover:before {
+    width: 100%;
+    transition: width 0.3s ease-out;
+    transform-origin: right;
+}
+
+/*Main*/
+main {
+    background-color: rgb(220, 215, 215);
+    min-height: 50vh;
+}
+
+.pagetittles{
+    border-bottom: 2px solid #7c601893;
+    max-width: fit-content;
+    margin: auto;
+}
+
+/*clientWelcome*/
+.clientWelcome {
+    background-color: rgba(0, 0, 0, 0.789);
+    width: 18rem;
+}
+
+.clientWelcome{
+    display: block;
+    opacity: 0;
+    animation: reveal 1s forwards var(--d);
+}
+
+@keyframes reveal {
+    from {transform: translateY(20px);}
+    to { 
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/*User*/
+.userContainer {
+    /* position: relative; */
+    font-family: sans-serif;
+}
+
+.userContainer .box {
+    width: 20em;
+    height: 25em;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.074);
+    border: 1.5px solid rgba(255, 255, 255, 0.521);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-radius: .7rem;
+    transition: all ease .3s;
+}
+
+.userContainer .box .accountsbox {
+    height: 25rem;
+}
+
+.userContainer .box .accountsbox2 {
+    height: 18rem;
+    background-color: rgba(172, 140, 97, 0.13);
+}
+
+.userContainer .box .title {
+    font-size: 2.5rem;
+    font-weight: 500;
+    letter-spacing: .1em
+}
+
+.userContainer .box div strong {
+    display: block;
+    margin-bottom: .5rem;
+}
+
+.userContainer .box div p {
+    margin: 0;
+    font-size: .9em;
+    font-weight: 300;
+    letter-spacing: .1em;
+}
+
+.userContainer .box div span {
+    font-size: .7rem;
+    font-weight: 300;
+}
+
+.userContainer .box div span:nth-child(3) {
+    font-weight: 500;
+    margin-right: .2rem;
+}
+
+.userContainer .box:hover {
+    box-shadow: 0px 0px 25px 1px #ffbb763f;
+    border: 1px solid rgba(255, 255, 255, 0.454);
+}
+
+.interactionCLient {
+    width: 2rem;
+    cursor: pointer;
+}
+
+.interactionCLient:hover {
+    transform: scale(1.4);
+}
+
+.notFoundMessage2{
+    height: 20vh;
+}
+
+/*                                               Notification                                         */
+.notification{
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    width: max-content;
+    padding: 20px 15px;
+    border-radius: 4px;
+    background-color: #141619;
+    color: #f6f5f9;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(30px);
+    opacity: 0;
+    visibility: hidden;
+    animation: fade-in 2s linear forwards;
+}
+
+.notification-progress{
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    width: calc(100% - 10%);
+    height: 3px;
+    transform: scaleX(0);
+    transform-origin: left;
+    background-image: linear-gradient(to right, #539bdb , #3250bf);
+    border-radius: inherit;
+    animation: load 1s 0.25s linear forwards;
+}
+
+@keyframes fade-in {
+    5% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY();
+    }
+    90%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes load {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+/* Tarjeta de acccounts bienvenida */
+.card{
+    border: 1px solid snow;
+    box-shadow: 3px 3px 14px #ffbb763f;
+}
+
+
+.card-body , .card-footer{
+    background-color: rgb(220, 215, 215);
+}
+
+.card-body img{
+    width: 7rem;
+    height: 7rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.notFoundMessage{
+    height: 17rem;
+}
+
+/* Scroll */
+body::-webkit-scrollbar {
+    width: 10px;
+    background: rgb(220, 215, 215);
+}
+body::-webkit-scrollbar-thumb {
+    background: rgb(78, 73, 73);
+    border-radius: 10px;
+    border-right: 2px solid #161a1e;
+}
+
+/*Footer*/
+.socialIcon {
+    width: 2rem;
+}
+
+@media only screen and (max-width: 520px) {
+    .userContainer .box{
+        width: 17em;
+    }
+}

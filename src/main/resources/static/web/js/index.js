@@ -4,13 +4,28 @@ createApp({
     data() {
         return {
             // Inicializamos las variables
-            passwordID: "",
+            emailAdress: "",
+            password: "",
         }
     },
-}).mount("#app");
-
+    methods: {
+        signIn(){
+            axios.post('/api/login',`emailAdress=${this.emailAdress}&password=${this.password}`)
+            .then(response => window.location.href="/web/pages/accounts.html")
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Wrong password',
+                    confirmButtonColor: "#7c601893",
+                })
+                console.log(error);
+            })         
+                }
+            },
+        }).mount("#app");
+                    
 const mq = window.matchMedia("(max-width: 700px)")
-
+        
 function pantallaPequena(mq){
     if (mq.matches) {
         const swiper = new Swiper(".mySwiper", {

@@ -5,7 +5,6 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
-
 import static java.util.stream.Collectors.toList;
 
 @Entity
@@ -17,6 +16,7 @@ public class Client {
     private String firstName;
     private String lastName;
     private String emailAddress;
+    private String password;
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
     private Set<Account> accounts = new HashSet<>();
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
@@ -28,10 +28,11 @@ public class Client {
     public Client() {
     }
 
-    public Client(String firstName, String lastName, String emailAddress) {
+    public Client(String firstName, String lastName, String emailAddress , String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
+        this.password = password;
     }
 
     // Método para añadir las cuentas
@@ -73,6 +74,7 @@ public class Client {
     }
     public Set<ClientLoan> getClientLoans() {return clientLoans;}
     public Set<Card> getCards() {return cards;}
+    public String getPassword() {return password;}
 
     // Setter
     public void setFirstName(String firstName) {
@@ -84,4 +86,5 @@ public class Client {
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
+    public void setPassword(String password) {this.password = password;}
 }
