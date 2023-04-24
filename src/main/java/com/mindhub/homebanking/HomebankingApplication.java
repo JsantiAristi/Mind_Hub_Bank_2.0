@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 
 @SpringBootApplication
 public class HomebankingApplication {
@@ -31,16 +32,16 @@ public class HomebankingApplication {
 			Client client3 = new Client("Carlos" , "Hinestrosa" , "Carlos12@yahoo.com" , passwordEncoder.encode("carlongas"));
 			clientRepository.save(client3);
 
-			Account account1 = new Account("VIN001" , LocalDateTime.now() , 5000.00);
+			Account account1 = new Account(Account.aleatoryNumber(), LocalDateTime.now() , 5000.00);
 			client1.addAccount(account1);
 			accountRepository.save(account1);
-			Account account2 = new Account("VIN002" , LocalDateTime.now().plusDays(1) , 7500.00);
+			Account account2 = new Account(Account.aleatoryNumber(), LocalDateTime.now().plusDays(1) , 7500.00);
 			client1.addAccount(account2);
 			accountRepository.save(account2);
-			Account account3 = new Account("VIN003" , LocalDateTime.now().plusDays(2) , 6000.50);
+			Account account3 = new Account(Account.aleatoryNumber(), LocalDateTime.now().plusDays(2) , 6000.50);
 			client2.addAccount(account3);
 			accountRepository.save(account3);
-			Account account4 = new Account("VIN004", LocalDateTime.now() , 500.50);
+			Account account4 = new Account(Account.aleatoryNumber(), LocalDateTime.now() , 500.50);
 			client3.addAccount(account4);
 			accountRepository.save(account4);
 

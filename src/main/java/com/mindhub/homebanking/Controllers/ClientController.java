@@ -47,21 +47,19 @@ public class ClientController {
                return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
            }
            if (clientRespository.findByEmailAddress(emailAdress) != null) {
-               return new ResponseEntity<>("Name already in use", HttpStatus.FORBIDDEN);
+               return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
            }
 
-           Random random = new Random();
-            int min = 100000;
-            int max = 999999;
-            int number = random.nextInt((max - min) + 1) + min;
+           String randomNumber;
+           do {
+               randomNumber = Account.aleatoryNumber();
+           } while(accountRepository.findByNumber(randomNumber) != null);
 
-            if (accountRepository.findByNumber("VIN" + number) == null) {
-                Client newClient = new Client(firstName, lastName, emailAdress, passwordEncoder.encode(password));
-                clientRespository.save(newClient);
-                Account newAccount = new Account("VIN" + number , LocalDateTime.now() , 0.00);
-                newClient.addAccount(newAccount);
-                accountRepository.save(newAccount);
-            }
+           Client newClient = new Client(firstName, lastName, emailAdress, passwordEncoder.encode(password));
+           clientRespository.save(newClient);
+           Account newAccount = new Account(randomNumber, LocalDateTime.now(), 0.00);
+           newClient.addAccount(newAccount);
+           accountRepository.save(newAccount);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
        }

@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 @Entity
@@ -35,6 +36,14 @@ public class Account {
     public void addTransaction(Transaction transaction){
         transaction.setAccount(this);
         transactions.add(transaction);
+    }
+
+    // Método generar número aleatorio
+    public static String aleatoryNumber(){
+        Random random = new Random();
+        int min = 100000;
+        int max = 999999;
+        return ("VIN-" + random.nextInt(max + min));
     }
 
     // Getter
