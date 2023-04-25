@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Random;
 
 @Entity
 public class Card {
@@ -34,6 +35,23 @@ public class Card {
         this.cvv = cvv;
         this.fromDate = fromDate;
         this.thruDate = thruDate;
+    }
+
+    // Método generar número aleatorio para las tarjetas
+    public static String aleatoryNumberCards(){
+        String numberCard = "";
+        for (int i = 0; i < 4; i++) {
+            int min = 1000;
+            int max = 9999;
+            numberCard += (int) (Math.random() * max + min) + "-";
+        }
+        return numberCard;
+    }
+
+    public static int aleatoryNumberCvv(){
+            int min = 100;
+            int max = 999;
+        return (int) (Math.random() * max + min);
     }
 
     // Getter

@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header img {
+    width: 2rem;
+}
+
+.navbar-nav a {
+    border-bottom: 2px solid transparent;
+    position: relative;
+}
+
+.navbar a:before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: white;
+    transition: width 0.3s ease-out;
+    transform-origin: left;
+}
+
+.navbar a:hover:before {
+    width: 100%;
+    transition: width 0.3s ease-out;
+    transform-origin: right;
+}
+
+/*Main*/
+main{
+    min-height: 82vh;
+    background-color: antiquewhite;
+}
+
+.createCardsDiv{
+    height: 82vh;
+    object-fit: cover;
+}
+
+/*form*/
+.glassmorphism{
+    background: rgba(255, 255, 255, 0.63);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 1.5px );
+    -webkit-backdrop-filter: blur( 1.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 100%;
+    height: 70vh;
+}
+
+.btn-register{
+    background-color: #b58443b2;
+    border: 1px solid white;
+    color: white;
+}
+
+.btn-register:hover {
+    background-color: #966c37da;
+    border: 1px solid white;
+    color: white;
+}
+
+select{
+    width: 100% !important;
+}
+
+
+/*Footer*/
+.socialIcon {
+    width: 2rem;
+    height: 5vh;
+}
+
+/* Scroll */
+body::-webkit-scrollbar {
+    width: 10px;
+    background: rgb(5, 5, 5);
+}
+body::-webkit-scrollbar-thumb {
+    background: rgb(202, 189, 189);
+    border-radius: 10px;
+    border-right: 2px solid #161a1e;
+}

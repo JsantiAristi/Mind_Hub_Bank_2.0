@@ -20,8 +20,9 @@ public class WebAuthorization {
         http.authorizeRequests()
                 .antMatchers( HttpMethod.POST, "/api/login" , "/api/logout").permitAll()
                 .antMatchers("/index.html" , "/web/pages/signup.html").permitAll()
-                .antMatchers("/web/pages/accounts.html" , "/web/pages/account.html" , "/web/pages/cards.html").hasAnyAuthority("USER","ADMIN")
-                .antMatchers("/management/**" , "/rest/**" , "/h2-console").hasAuthority("ADMIN");
+                .antMatchers("/web/pages/accounts.html" , "/web/pages/account.html" , "/web/pages/cards.html" , "/web/pages/create-cards.html").hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers( HttpMethod.POST,"/api/clients/current/accounts" , "/api/clients/current/cards").hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers("/management/**" , "/rest/**" , "/h2-console" , "/api/clients" , "/api/clients/" , "/api/clients/current/accounts" , "/api/clients/current/accounts/").hasAuthority("ADMIN");
         http.formLogin()
                 .usernameParameter("emailAdress")
                 .passwordParameter("password")
@@ -33,7 +34,7 @@ public class WebAuthorization {
         // disabling frameOptions so h2-console can be accessed
         http.headers().frameOptions().disable();
         // if user is not authenticated, just send an authentication failure response
-        http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
+        http.exceptionHandling().authenticationEntryPoint((request , response , authenticate) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED));
        // if login is successful, just clear the flags asking for authentication
         http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));
        // if login fails, just send an authentication failure response

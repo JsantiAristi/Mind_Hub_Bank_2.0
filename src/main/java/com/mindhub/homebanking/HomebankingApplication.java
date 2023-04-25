@@ -91,16 +91,16 @@ public class HomebankingApplication {
 			loan3.addClientLoan(clientLoan4);
 			clientLoanRepository.save(clientLoan4);
 
-			Card card1 = new Card(CardType.DEBIT , CardColor.GOLD , "3752-250145-45632" , 456 , LocalDate.now() , LocalDate.now().plusYears(5));
+			Card card1 = new Card(CardType.DEBIT , CardColor.GOLD , Card.aleatoryNumberCards() , Card.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
 			client1.addCard(card1);
 			cardRepository.save(card1);
-			Card card2 = new Card(CardType.CREDIT , CardColor.TITANIUM , "3752-8771-4575-6392" , 788 , LocalDate.now() , LocalDate.now().plusYears(5));
+			Card card2 = new Card(CardType.CREDIT , CardColor.TITANIUM , Card.aleatoryNumberCards() , Card.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
 			client1.addCard(card2);
 			cardRepository.save(card2);
-			Card card3 = new Card(CardType.CREDIT , CardColor.SILVER , "3777-8561-8585-2291" , 421 , LocalDate.now() , LocalDate.now().plusYears(5));
+			Card card3 = new Card(CardType.CREDIT , CardColor.SILVER , Card.aleatoryNumberCards() , Card.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
 			client2.addCard(card3);
 			cardRepository.save(card3);
-			Card card4 = new Card(CardType.CREDIT , CardColor.TITANIUM , "3575-8761-8775-2291" , 563 , LocalDate.now() , LocalDate.now().plusYears(5));
+			Card card4 = new Card(CardType.CREDIT , CardColor.TITANIUM , Card.aleatoryNumberCards() , Card.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
 			client2.addCard(card4);
 			cardRepository.save(card4);
 		};

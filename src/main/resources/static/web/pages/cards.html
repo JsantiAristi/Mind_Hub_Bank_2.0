@@ -76,7 +76,7 @@
                                                         </div>
                                                         <div class="card-chip"></div>
                                                         <div class="card-holder">{{card.cardholder}}</div>
-                                                        <div class="card-number">{{card.number}}</div>
+                                                        <div class="card-number">{{card.number.slice(0,19)}}</div>
                                                         <div class="card-valid">
                                                             {{card.thruDate.slice(5,7)}}/{{card.thruDate.slice(2,4)}}</div>
                                                     </div>
@@ -128,7 +128,7 @@
                                                         </div>
                                                         <div class="card-chip"></div>
                                                         <div class="card-holder">{{card.cardholder}}</div>
-                                                        <div class="card-number">{{card.number}}</div>
+                                                        <div class="card-number">{{card.number.slice(0,19)}}</div>
                                                         <div class="card-valid">
                                                             {{card.thruDate.slice(5,7)}}/{{card.thruDate.slice(2,4)}}</div>
                                                     </div>
@@ -152,7 +152,7 @@
                     </div>
                 </div>
             </div>
-            <h3 class="text-center pb-4 mb-0">Do you want to see <a href="" class="link-opacity-75-hover">ours cards</a>?</h3>
+            <h3 class="text-center pb-4 mb-0">Add a new <a href="./create-cards.html" class="link-opacity-75-hover">card</a></h3>
         </main>
         <footer class="bg-dark d-flex justify-content-evenly align-items-center pt-3 pb-3">
             <div class="d-flex">
