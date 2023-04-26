@@ -4,7 +4,7 @@ createApp({
     data() {
         return {
             // Inicializamos las variables
-            selectInput: "Open this select menu",
+            selectInput: "",
             checked : "",
         }
     },

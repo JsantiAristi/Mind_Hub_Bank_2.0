@@ -39,10 +39,6 @@ public class CardController {
             return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
         }
 
-//        if ( clientRespository.findByEmailAddress(authentication.getName()).getCards() <= 2 ) {
-//
-//        }
-
         String randomNumberCard;
         int numeroCvv;
         do {
@@ -52,6 +48,14 @@ public class CardController {
         do {
             numeroCvv = Card.aleatoryNumberCvv();
         } while(cardRepository.findByCvv(numeroCvv) != null);
+
+        Client client = clientRespository.findByEmailAddress(authentication.getName());
+
+        for (Card card : client.getCards()) {
+            if (card.getType().equals(CardType.valueOf(type)) && card.getColor().equals(CardColor.valueOf(color))) {
+                return new ResponseEntity<>("You already have this color and type of card", HttpStatus.FORBIDDEN);
+            }
+        }
 
         Card newCard = new Card(CardType.valueOf(type), CardColor.valueOf(color), randomNumberCard , numeroCvv , LocalDate.now() , LocalDate.now().plusYears(5));
         clientRespository.findByEmailAddress(authentication.getName()).addCard(newCard);

@@ -42,7 +42,7 @@ public class Account {
     public static String aleatoryNumber(){
         Random random = new Random();
         int min = 100000;
-        int max = 999999;
+        int max = 899999;
         return ("VIN-" + random.nextInt(max + min));
     }
 

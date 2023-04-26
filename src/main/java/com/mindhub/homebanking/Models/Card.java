@@ -1,11 +1,8 @@
 package com.mindhub.homebanking.Models;
 
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Random;
 
 @Entity
 public class Card {
@@ -42,7 +39,7 @@ public class Card {
         String numberCard = "";
         for (int i = 0; i < 4; i++) {
             int min = 1000;
-            int max = 9999;
+            int max = 8999;
             numberCard += (int) (Math.random() * max + min) + "-";
         }
         return numberCard;
@@ -50,7 +47,7 @@ public class Card {
 
     public static int aleatoryNumberCvv(){
             int min = 100;
-            int max = 999;
+            int max = 899;
         return (int) (Math.random() * max + min);
     }
 
