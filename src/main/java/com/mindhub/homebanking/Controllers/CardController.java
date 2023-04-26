@@ -28,7 +28,7 @@ public class CardController {
     private ClientRespository clientRespository;
 
     @RequestMapping("/api/clients/current/cards")
-    public List<CardDTO> getAccounts (Authentication authentication) {
+    public List<CardDTO> getCards (Authentication authentication) {
         return new ClientDTO(clientRespository.findByEmailAddress(authentication.getName())).getCards().stream().collect(toList());
     }
 

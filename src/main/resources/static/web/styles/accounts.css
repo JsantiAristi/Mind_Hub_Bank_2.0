@@ -80,7 +80,6 @@ main {
 
 /*User*/
 .userContainer {
-    /* position: relative; */
     font-family: sans-serif;
 }
 
@@ -151,7 +150,7 @@ main {
     height: 20vh;
 }
 
-/*                                               Notification                                         */
+/*               Notification         */
 .notification{
     position: absolute;
     bottom: 50px;
@@ -227,7 +226,16 @@ main {
 }
 
 .createAccountTextSpan:hover{
-    color: rgb(136, 16, 16) !important;
+    color: rgb(86, 160, 78) !important;
+    text-decoration: underline;
+}
+
+.card-footer img{
+    cursor: pointer;
+}
+
+.card-footer img:hover{
+    scale: 1.1 1.1;
 }
 
 /* Modal */

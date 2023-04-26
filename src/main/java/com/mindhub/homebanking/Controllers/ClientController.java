@@ -43,7 +43,7 @@ public class ClientController {
        public ResponseEntity<Object> register(
                @RequestParam String firstName, @RequestParam String lastName,
                @RequestParam String emailAdress, @RequestParam String password) {
-           if ( firstName.isEmpty() || lastName.isEmpty() || emailAdress.isEmpty() || password.isEmpty()) {
+           if ( firstName.isBlank() || lastName.isBlank() || emailAdress.isBlank() || password.isBlank()) {
                return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
            }
            if (clientRespository.findByEmailAddress(emailAdress) != null) {
