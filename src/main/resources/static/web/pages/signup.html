@@ -29,8 +29,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a class="nav-link text-end" aria-current="page"
-                                    href="../../index.html">HOME</a>
+                                <a class="nav-link text-end" aria-current="page" href="../../index.html">HOME</a>
                             </li>
                         </ul>
                     </div>
@@ -38,22 +37,25 @@
             </nav>
         </header>
         <main id="app">
+            {{mayus}}
             <div class="d-flex justify-content-center align-items">
                 <div class="glassmorphism mt-5 mb-5 d-flex flex-column justify-content-center align-items-center">
                     <h1 class="text-center text-white mt-3">Sign Up</h1>
                     <form class="d-flex flex-column justify-content-center align-items-center" @submit.prevent="signUp">
                         <div class="formRegister mb-3">
                             <label for="firstName" class="form-label text-white fs-5">First Name *</label>
-                            <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" v-model="firstName" required pattern="^[a-zA-Z]+$">
+                            <input type="text" class="form-control" id="firstName" v-model="firstName" required pattern="^[a-zA-Z]+$" minlength="0">
                         </div>
                         <div class="mb-3 formRegister">
                             <label for="secondName" class="form-label text-white fs-5">Second Name *</label>
-                            <input type="text" class="form-control" id="secondName" aria-describedby="emailHelp" v-model="secondName" required pattern="^[a-zA-Z]+$">
+                            <input type="text" class="form-control" id="secondName" v-model="secondName" required pattern="^[a-zA-Z]+$">
                         </div>
                         <div class="mb-3 formRegister">
                             <label for="emailAdress" class="form-label text-white fs-5">Email address *</label>
-                            <input type="email" class="form-control" id="emailAdress" aria-describedby="emailHelp" v-model="emailAdress" required>
-                            <div id="emailHelp" class="form-text text-white">We'll never share your email with anyone else.</div>
+                            <input type="email" class="form-control" id="emailAdress" aria-describedby="emailHelp"
+                                v-model="emailAdress" required>
+                            <div id="emailHelp" class="form-text text-white">We'll never share your email with anyone
+                                else.</div>
                         </div>
                         <div class="mb-3 formRegister">
                             <label for="password" class="form-label text-white fs-5">Password *</label>
@@ -62,8 +64,75 @@
                         <button type="submit" class="btn btn-register mb-3 fs-4">Register 👩‍🌾</button>
                     </form>
                 </div>
-            </div>  
-            {{mayus}}         
+            </div>
+            <!-- /* Modal */       -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Privacy Policy</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                At MindHub Bank, we understand that the privacy and security of your personal information
+                                are of utmost importance. We are committed to protecting the privacy of our customers
+                                and ensuring the confidentiality of their information. This Privacy Policy outlines the
+                                types of information we collect, how we use it, and how we protect it. <br>
+                                <br>
+                                Collection of Information <br>
+                                <br>
+                                We may collect personal information about you, including but not limited to your name,
+                                address, social security number, phone number, email address, account numbers, and
+                                financial information, when you apply for a product or service or interact with us
+                                through our website or other channels. We may also collect information about your
+                                transactions with us, such as account balances, payment history, and account activity. <br>
+                                <br>
+                                Use of Information <br>
+                                <br>
+                                We use the information we collect to provide you with our products and services, to
+                                communicate with you about your accounts, and to comply with legal and regulatory
+                                requirements. We may also use your information to improve our products and services, and
+                                to offer you additional products and services that we believe may be of interest to you. <br>
+                                <br>
+                                Sharing of Information
+                                <br>
+                                We do not sell your personal information to third parties. However, we may share your
+                                information with our affiliates, service providers, and regulatory authorities as
+                                necessary to provide you with our products and services or to comply with legal and
+                                regulatory requirements.
+                                <br>
+                                Security of Information <br>
+                                <br>
+                                We have implemented physical, technical, and administrative safeguards to protect your
+                                personal information from unauthorized access, use, and disclosure. We regularly review
+                                and up date our security measures to ensure the protection of your information. <br>
+                                <br>
+                                Your Rights <br>
+                                <br>
+                                You have the right to access and correct your personal information, and to request that
+                                we delete your information in certain circumstances. You may also opt-out of receiving
+                                marketing communications from us at any time. <br>
+                                <br>
+                                Changes to this Policy
+                                <br>
+                                We may update this Privacy Policy from time to time. The most current version of the
+                                policy will always be available on our website. We encourage you to review the policy
+                                periodically to stay informed about our privacy practices. <br>
+                                <br>
+                                Contact Us
+                                <br>
+                                If you have any questions or concerns about our privacy practices, please contact us at
+                                274-584-59. <br>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
         <footer class="bg-dark d-flex justify-content-evenly align-items-center pt-3 pb-3">
             <div class="d-flex">

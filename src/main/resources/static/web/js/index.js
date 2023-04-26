@@ -11,7 +11,14 @@ createApp({
     methods: {
         signIn(){
             axios.post('/api/login',`emailAdress=${this.emailAdress}&password=${this.password}`)
-            .then(response => window.location.href="/web/pages/accounts.html")
+            .then(response => {
+                Swal.fire({
+                    icon: 'success',
+                    text: 'You enter in your account succesfully',
+                    showConfirmButton: false,
+                    timer: 2000,
+                }).then( () => window.location.href="/web/pages/accounts.html")
+            })
             .catch(error => {
                 Swal.fire({
                     icon: 'error',

@@ -16,11 +16,12 @@ createApp({
     },
     methods: {
         loadData() {
-            axios.get('http://localhost:8080/api/clients/current')
+            axios.get('http://localhost:8080/api/clients/current/cards')
                 .then(response => {
                     this.data = response.data
-                    this.debitCards = response.data.cards.filter(card => card.type == "DEBIT");
-                    this.creditCards = response.data.cards.filter(card => card.type == "CREDIT");      
+                    console.log(this.data);
+                    this.debitCards = response.data.filter(card => card.type == "DEBIT");
+                    this.creditCards = response.data.filter(card => card.type == "CREDIT");      
                 })
                 .catch(error => console.log(error));
         },

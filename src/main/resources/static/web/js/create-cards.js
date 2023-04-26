@@ -1,36 +1,14 @@
-const { createApp } = Vue;
+const { createApp } = Vue
 
 createApp({
     data() {
         return {
             // Inicializamos las variables
-            data: [],
-            loans: [],
-            accounts: [],
-            totalBalance: 0,
-            params: "",
-            id: "",
+            selectInput: "",
+            checked : "",
         }
     },
-    created() {
-        this.loadData()
-    },
     methods: {
-        loadData() {
-            axios.get('http://localhost:8080/api/clients/current')
-                .then(response => {
-                    console.log(response.data);
-
-                    this.data = response.data
-                    this.loans = this.data.loans
-                    this.accounts = this.data.accounts
-
-                    for (account of this.data.accounts) {
-                        this.totalBalance += account.balance;
-                    }
-                })
-                .catch(error => console.log(error));
-        },
         singOut() {
             Swal.fire({
                 title: 'Are you sure that you want to log out?',
@@ -54,30 +32,37 @@ createApp({
                 allowOutsideClick: () => !Swal.isLoading()
             })
         },
-        createAccount(){
+        createCard() {
             Swal.fire({
-                title: 'When you create an account, you accept our privacy policy',
-                text: 'Remember that you only can manage three accounts',
-                inputAttributes: {
-                    autocapitalize: 'off'
-                },
+                title: 'When you create a card you agree to our policy, you want to create a new card?',
+                inputAttributes: {autocapitalize: 'off'},
                 showCancelButton: true,
                 confirmButtonText: 'Sure',
                 confirmButtonColor: "#7c601893",
                 footer: '<p data-bs-toggle="modal" data-bs-target="#exampleModal">See our Privacy Policy</p>',
                 preConfirm: () => {
-                    return axios.post('/api/clients/current/accounts')
-                        .then(response => window.location.href="/web/pages/accounts.html")
+                    return axios.post('/api/clients/current/cards', `type=${this.checked}&color=${this.selectInput}`)
+                        .then(response =>
+                            Swal.fire({
+                                icon: 'success',
+                                text: 'Card created',
+                                confirmButtonColor: "#7c601893",
+                                timer: 2000,
+                            })
+                            .then(response => window.location.href = "/web/pages/cards.html")
+                            .catch(error => console.log(error)))
                         .catch(error => {
                             Swal.fire({
                                 icon: 'error',
                                 text: error.response.data,
                                 confirmButtonColor: "#7c601893",
                             })
+                            console.log(error);
                         })
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             })
-        },
-    }
+            .catch(error => {console.log(error)})
+        }
+    },
 }).mount("#app");
