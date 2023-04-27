@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import static java.util.stream.Collectors.toList;
 
@@ -35,8 +33,11 @@ public class CardController {
     @PostMapping("/api/clients/current/cards")
     public ResponseEntity<Object> addCard (
             Authentication authentication , @RequestParam String type, @RequestParam String color){
-        if ( type.isEmpty() || color.isEmpty()) {
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        if ( type.isEmpty() ) {
+            return new ResponseEntity<>("Type is required", HttpStatus.FORBIDDEN);
+        }
+        if ( color.isEmpty() ) {
+            return new ResponseEntity<>("Color is required", HttpStatus.FORBIDDEN);
         }
 
         String randomNumberCard;

@@ -13,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Random;
 
 import static java.util.stream.Collectors.toList;
 
@@ -43,23 +42,36 @@ public class ClientController {
        public ResponseEntity<Object> register(
                @RequestParam String firstName, @RequestParam String lastName,
                @RequestParam String emailAdress, @RequestParam String password) {
-           if ( firstName.isBlank() || lastName.isBlank() || emailAdress.isBlank() || password.isBlank()) {
-               return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+//         FirstName parameter
+           if ( firstName.isBlank() || !firstName.matches("^[a-zA-Z]*$") ) {
+               return new ResponseEntity<>("Please enter a valid firstName. Only letters are allowed.", HttpStatus.FORBIDDEN);
            }
+//        LastName parameter
+           if ( lastName.isBlank() || !lastName.matches("^[a-zA-Z]*$") ) {
+               return new ResponseEntity<>("Please enter a valid lastName. Only letters are allowed.", HttpStatus.FORBIDDEN);
+           }
+//        emailAdress parameter
+           if ( emailAdress.isBlank() || !emailAdress.contains("@") ) {
+               return new ResponseEntity<>("Please enter a valid email address.", HttpStatus.FORBIDDEN);
+           }
+//        Password parameter
+           if ( password.isBlank()) {
+                return new ResponseEntity<>("Password required", HttpStatus.FORBIDDEN);}
+//        Email in use in our DB
            if (clientRespository.findByEmailAddress(emailAdress) != null) {
-               return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
-           }
+               return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);}
+//         Email Parameter contain the @
+//         Create de new client and a new account
+                String randomNumber;
+                do {
+                    randomNumber = Account.aleatoryNumber();
+                } while (accountRepository.findByNumber(randomNumber) != null);
 
-           String randomNumber;
-           do {
-               randomNumber = Account.aleatoryNumber();
-           } while(accountRepository.findByNumber(randomNumber) != null);
-
-           Client newClient = new Client(firstName, lastName, emailAdress, passwordEncoder.encode(password));
-           clientRespository.save(newClient);
-           Account newAccount = new Account(randomNumber, LocalDateTime.now(), 0.00);
-           newClient.addAccount(newAccount);
-           accountRepository.save(newAccount);
+                Client newClient = new Client(firstName, lastName, emailAdress, passwordEncoder.encode(password));
+                clientRespository.save(newClient);
+                Account newAccount = new Account(randomNumber, LocalDateTime.now(), 0.00);
+                newClient.addAccount(newAccount);
+                accountRepository.save(newAccount);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
        }

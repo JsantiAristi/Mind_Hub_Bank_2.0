@@ -19,10 +19,11 @@ public class WebAuthorization {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers( HttpMethod.POST, "/api/login" , "/api/logout" , "/api/clients").permitAll()
-                .antMatchers("/index.html" , "/web/pages/signup.html").permitAll()
-                .antMatchers("/web/pages/accounts.html" , "/web/pages/account.html" , "/web/pages/cards.html" , "/web/pages/create-cards.html").hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers("/index.html" , "/web/styles/index.css" , "/web/js/index.js" , "/web/pages/signup.html" , "/web/styles/signup.css" , "/web/js/signUp.js" , "/assets/**").permitAll()
+                .antMatchers("/web/**" , "/api/clients/current/**").hasAnyAuthority("CLIENT","ADMIN")
                 .antMatchers( HttpMethod.POST,"/api/clients/current/accounts" , "/api/clients/current/cards").hasAnyAuthority("CLIENT","ADMIN")
-                .antMatchers("/management/**" , "/rest/**" , "/h2-console" , "/api/clients" , "/api/clients/").hasAuthority("ADMIN");
+                .antMatchers("/management/**" , "/rest/**" , "/h2-console" , "/api/clients" , "/api/clients/").hasAuthority("ADMIN")
+                .anyRequest().denyAll();
         http.formLogin()
                 .usernameParameter("emailAdress")
                 .passwordParameter("password")
