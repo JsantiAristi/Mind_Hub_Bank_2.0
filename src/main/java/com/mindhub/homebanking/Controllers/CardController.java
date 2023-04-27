@@ -54,7 +54,7 @@ public class CardController {
 
         for (Card card : client.getCards()) {
             if (card.getType().equals(CardType.valueOf(type.toUpperCase())) && card.getColor().equals(CardColor.valueOf(color.toUpperCase()))) {
-                return new ResponseEntity<>("You already have this color and type of card", HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>("You already have a " + type.toLowerCase() + " " + color.toLowerCase() + " card", HttpStatus.FORBIDDEN);
             }
         }
 
