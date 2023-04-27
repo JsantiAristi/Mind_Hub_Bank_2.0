@@ -5,14 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HomeBanking | User</title>
+    <title>HomeBanking | Create Cards</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/create-cards.css">
     <link rel="shortcut icon" href="../../assets/banco.png" type="image/x-icon">
 </head>
 
-<body>
+<body class="hidden">
+    <div class="center" id="onload">
+        <div class="lds-circle"><div></div></div>
+    </div>
     <div id="app">
         <header class="d-flex flex-column justify-content-between header-2">
             <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
@@ -99,6 +102,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="../js/create-cards.js"></script>
 </body>
 
