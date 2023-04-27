@@ -13,7 +13,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 </head>
 
-<body>
+<body class="hidden">
+    <div class="center" id="onload">
+        <div class="lds-circle"><div></div></div>
+    </div>
     <div id="app">
         <header class="d-flex flex-column justify-content-between">
             <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
@@ -179,6 +182,7 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="../js/cards.js"></script>
 </body>
 

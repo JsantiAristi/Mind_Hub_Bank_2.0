@@ -57,3 +57,8 @@ const swiper = new Swiper(".swiper", {
         type: "bullets",
     },
 });
+
+window.onload = function(){
+    $('#onload').fadeOut();
+    $('body').removeClass("hidden");
+}

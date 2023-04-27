@@ -53,12 +53,12 @@ public class CardController {
         Client client = clientRespository.findByEmailAddress(authentication.getName());
 
         for (Card card : client.getCards()) {
-            if (card.getType().equals(CardType.valueOf(type)) && card.getColor().equals(CardColor.valueOf(color))) {
+            if (card.getType().equals(CardType.valueOf(type.toUpperCase())) && card.getColor().equals(CardColor.valueOf(color.toUpperCase()))) {
                 return new ResponseEntity<>("You already have this color and type of card", HttpStatus.FORBIDDEN);
             }
         }
 
-        Card newCard = new Card(CardType.valueOf(type), CardColor.valueOf(color), randomNumberCard , numeroCvv , LocalDate.now() , LocalDate.now().plusYears(5));
+        Card newCard = new Card(CardType.valueOf(type.toUpperCase()), CardColor.valueOf(color.toUpperCase()), randomNumberCard , numeroCvv , LocalDate.now() , LocalDate.now().plusYears(5));
         clientRespository.findByEmailAddress(authentication.getName()).addCard(newCard);
         cardRepository.save(newCard);
 
