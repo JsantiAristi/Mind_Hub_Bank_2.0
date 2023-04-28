@@ -29,6 +29,11 @@ public class Transaction {
         this.date = date;
     }
 
+    //Método para hacer un String
+    public static String stringToAccount(String initialAccount){
+        return "Transaction of " + initialAccount;
+    }
+
     // Getter
     public long getId() {
         return id;

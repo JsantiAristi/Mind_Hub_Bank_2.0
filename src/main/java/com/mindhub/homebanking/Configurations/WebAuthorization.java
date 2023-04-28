@@ -21,7 +21,7 @@ public class WebAuthorization {
                 .antMatchers( HttpMethod.POST, "/api/login" , "/api/logout" , "/api/clients").permitAll()
                 .antMatchers("/index.html" , "/web/styles/index.css" , "/web/js/index.js" , "/web/pages/signup.html" , "/web/styles/signup.css" , "/web/js/signUp.js" , "/assets/**").permitAll()
                 .antMatchers("/web/**" , "/api/clients/current/**").hasAnyAuthority("CLIENT","ADMIN")
-                .antMatchers( HttpMethod.POST,"/api/clients/current/accounts" , "/api/clients/current/cards").hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers( HttpMethod.POST,"/api/clients/current/accounts" , "/api/clients/current/cards" , "/api/clients/current/transactions").hasAnyAuthority("CLIENT","ADMIN")
                 .antMatchers("/management/**" , "/rest/**" , "/h2-console" , "/api/clients" , "/api/clients/").hasAuthority("ADMIN")
                 .anyRequest().denyAll();
         http.formLogin()
@@ -35,11 +35,11 @@ public class WebAuthorization {
         // disabling frameOptions so h2-console can be accessed
         http.headers().frameOptions().disable();
         // if user is not authenticated, just send an authentication failure response
-        http.exceptionHandling().authenticationEntryPoint((request , response , authenticate) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED));
+        http.exceptionHandling().authenticationEntryPoint((request , response , exclusion ) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED));
        // if login is successful, just clear the flags asking for authentication
-        http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));
+        http.formLogin().successHandler((req, res, authenticate) -> clearAuthenticationAttributes(req));
        // if login fails, just send an authentication failure response
-        http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_BAD_REQUEST));
+        http.formLogin().failureHandler((req, res, exclusion ) -> res.sendError(HttpServletResponse.SC_BAD_REQUEST));
        // if logout is successful, just send a success response
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
 

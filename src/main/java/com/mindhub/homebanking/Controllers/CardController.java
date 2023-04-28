@@ -52,6 +52,10 @@ public class CardController {
 
         Client client = clientRespository.findByEmailAddress(authentication.getName());
 
+        if (client == null){
+            return new ResponseEntity<>("You can´t create a card, because you are not a client", HttpStatus.FORBIDDEN);
+        };
+
         for (Card card : client.getCards()) {
             if (card.getType().equals(CardType.valueOf(type.toUpperCase())) && card.getColor().equals(CardColor.valueOf(color.toUpperCase()))) {
                 return new ResponseEntity<>("You already have a " + type.toLowerCase() + " " + color.toLowerCase() + " card", HttpStatus.FORBIDDEN);

@@ -1,6 +1,7 @@
 package com.mindhub.homebanking.Controllers;
 
 import com.mindhub.homebanking.Models.Account;
+import com.mindhub.homebanking.Models.Client;
 import com.mindhub.homebanking.dtos.AccountDTO;
 import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.repositories.AccountRepository;
@@ -34,12 +35,19 @@ public class AccountController {
 
     @PostMapping("/api/clients/current/accounts")
     public ResponseEntity<Object> newAccount (Authentication authentication) {
+
+        Client client = clientRespository.findByEmailAddress(authentication.getName());
+
+        if (client == null){
+            return new ResponseEntity<>("You can´t create an account, because you are not a client", HttpStatus.FORBIDDEN);
+        };
+
         String randomNumber;
         do {
             randomNumber = Account.aleatoryNumber();
         } while(accountRepository.findByNumber(randomNumber) != null);
 
-        if (clientRespository.findByEmailAddress(authentication.getName()).getAccounts().size() <= 2){
+        if (client.getAccounts().size() <= 2){
             Account newAccount = new Account(randomNumber, LocalDateTime.now(), 0.00);
             clientRespository.findByEmailAddress(authentication.getName()).addAccount(newAccount);
             accountRepository.save(newAccount);

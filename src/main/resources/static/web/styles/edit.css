@@ -53,6 +53,8 @@
     }
 }
 
+/* Header */
+
 header img {
     width: 2rem;
 }
@@ -83,46 +85,30 @@ header img {
 /*Main*/
 main{
     min-height: 82vh;
-    background-color: antiquewhite;
+    background-color: rgb(220, 215, 215);
 }
 
-.createCardsDiv{
-    height: 82.3vh;
-    object-fit: cover;
-}
 
-/*form*/
+/*glassmorphism*/
 .glassmorphism{
-    background: rgba(255, 255, 255, 0.63);
+    background: rgba( 245, 166, 35, 0.2 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 1.5px );
-    -webkit-backdrop-filter: blur( 1.5px );
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 80%;
+}
+
+form{
     width: 100%;
-    height: 70vh;
 }
 
-.btn-register{
-    background-color: #b58443b2;
-    border: 1px solid white;
-    color: white;
+.glassmorphism form input{
+    width: 80%;
 }
-
-.btn-register:hover {
-    background-color: #966c37da;
-    border: 1px solid white;
-    color: white;
-}
-
-select{
-    width: 100% !important;
-}
-
 
 /*Footer*/
 footer{
-    height: 9vh;
+    height: 10vh;
 }
 
 .socialIcon {

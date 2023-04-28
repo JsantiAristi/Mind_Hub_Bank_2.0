@@ -4,8 +4,10 @@ createApp({
     data() {
         return {
             // Inicializamos las variables
-            selectInput: "",
-            checked : "",
+            destinateAccount: "",
+            account : "",
+            amount : "",
+            description : "",
         }
     },
     methods: {
@@ -32,7 +34,44 @@ createApp({
                 allowOutsideClick: () => !Swal.isLoading()
             })
         },
+        createTransactions(){
+            Swal.fire({
+                title: 'Are you sure that you want to transfer this amount to this account',
+                inputAttributes: {autocapitalize: 'off'},
+                showCancelButton: true,
+                confirmButtonText: 'Sure',
+                confirmButtonColor: "#7c601893",
+                preConfirm: () => {
+                    return axios.post('/api/clients/current/transactions', `amount=${this.amount}&description=${this.description}&initialAccount=${this.account}&destinateAccount=${this.destinateAccount}`)
+                        .then(response =>
+                            Swal.fire({
+                                icon: 'success',
+                                text: 'Transaction succesfully',
+                                showConfirmButton: false,
+                                timer: 2000,
+                            })
+                            .then( () => window.location.href="/web/pages/accounts.html")
+                            .catch(error => console.log(error)))
+                        .catch(error => {
+                            Swal.fire({
+                                icon: 'error',
+                                text: error.response.data,
+                                confirmButtonColor: "#7c601893",
+                            })
+                        })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            })
+            .catch(error => {console.log(error)})
+        },
     },
+    computed: {
+        upperCase(){
+            this.account = this.account.toUpperCase();
+            this.destinateAccount = this.destinateAccount.toUpperCase();
+        }
+        
+    }
 }).mount("#app");
 
 window.onload = function(){
