@@ -67,7 +67,7 @@ public class ClientController {
                     randomNumber = Account.aleatoryNumber();
                 } while (accountRepository.findByNumber(randomNumber) != null);
 
-                Client newClient = new Client(firstName, lastName, emailAdress, passwordEncoder.encode(password));
+                Client newClient = new Client(firstName, lastName, emailAdress, "../../assets/chico.png" , passwordEncoder.encode(password));
                 clientRespository.save(newClient);
                 Account newAccount = new Account(randomNumber, LocalDateTime.now(), 0.00);
                 newClient.addAccount(newAccount);

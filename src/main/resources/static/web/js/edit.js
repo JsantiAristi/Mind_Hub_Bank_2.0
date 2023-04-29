@@ -5,6 +5,12 @@ createApp({
         return {
             // Inicializamos las variables
             data: [],
+            largeScreenSize: 768,
+            screenWidth: 0,
+            checked: [],
+            firstName : "",
+            lastName : "",
+            email: "",
         }
     },
     created() {
@@ -42,6 +48,21 @@ createApp({
                 allowOutsideClick: () => !Swal.isLoading()
             })
         },
+        handleResize() {
+            this.screenWidth = window.innerWidth;
+        }
+    },
+    computed: {
+        showElement() {
+            return this.screenWidth >= this.largeScreenSize;
+        }
+    },
+    mounted() {
+        this.screenWidth = window.innerWidth;
+        window.addEventListener('resize', this.handleResize);
+    },
+    destroyed() {
+        window.removeEventListener('resize', this.handleResize);
     },
 }).mount("#app");
 

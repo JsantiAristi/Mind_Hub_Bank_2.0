@@ -24,11 +24,11 @@ public class HomebankingApplication {
 	@Bean
 	public CommandLineRunner initData(ClientRespository clientRepository , AccountRepository accountRepository , TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
 		return (args) -> {
-			Client client1 = new Client("Melba", "Morel" , "melba@mindhub.com" , passwordEncoder.encode("melba"));
+			Client client1 = new Client("Melba", "Morel" , "melba@mindhub.com" , "../../assets/chico.png" , passwordEncoder.encode("melba"));
 			clientRepository.save(client1);
-			Client client2 = new Client("Santiago" , "Aristizabal" , "jsanti@gmail.com" , passwordEncoder.encode("santi123"));
+			Client client2 = new Client("Santiago" , "Aristizabal" , "jsanti@gmail.com" , "../../assets/chico.png" , passwordEncoder.encode("santi123"));
 			clientRepository.save(client2);
-			Client client3 = new Client("Carlos" , "Hinestrosa" , "Carlos12@yahoo.com" , passwordEncoder.encode("carlongas"));
+			Client client3 = new Client("Carlos" , "Hinestrosa" , "Carlos12@yahoo.com" , "../../assets/chico.png" ,passwordEncoder.encode("carlongas"));
 			clientRepository.save(client3);
 
 			Account account1 = new Account("VIN-001", LocalDateTime.now() , 5000.00);

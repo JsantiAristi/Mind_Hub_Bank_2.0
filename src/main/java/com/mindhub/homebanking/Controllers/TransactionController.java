@@ -76,8 +76,8 @@ public class TransactionController {
         destinateAccountAuthenticated.addTransaction(newTransaction2);
         transactionRepository.save(newTransaction2);
 //      Restar o sumar valores a los balances.
-        accountRepository.findByNumber(initialAccount.toUpperCase()).setBalance( accountAuthenticated.getBalance() - amount );
-        accountRepository.findByNumber(destinateAccount.toUpperCase()).setBalance( destinateAccountAuthenticated.getBalance() + amount );
+        accountAuthenticated.setBalance( accountAuthenticated.getBalance() - amount );
+        destinateAccountAuthenticated.setBalance( destinateAccountAuthenticated.getBalance() + amount );
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     };

@@ -8,9 +8,22 @@ createApp({
             account : "",
             amount : "",
             description : "",
+            data: [],
         }
     },
+    created() {
+        this.loadData()
+    },
     methods: {
+        loadData() {
+            axios.get('http://localhost:8080/api/clients/current')
+                .then(response => {
+                    this.data = response.data
+                    console.log(this.data);
+
+                })
+                .catch(error => console.log(error));
+        },
         singOut() {
             Swal.fire({
                 title: 'Are you sure that you want to log out?',
