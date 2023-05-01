@@ -7,7 +7,7 @@ createApp({
             data: [],
             largeScreenSize: 768,
             screenWidth: 0,
-            checked: [],
+            checked: "",
             firstName : "",
             lastName : "",
             email: "",
@@ -43,6 +43,40 @@ createApp({
                             Swal.showValidationMessage(
                                 `Request failed: ${error}`
                             )
+                        })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            })
+        },
+        changeInfo(){
+            if(this.firstName.length == 0){ this.firstName = this.data.firstName }
+            if(this.lastName.length == 0){ this.lastName = this.data.lastName }
+            if(this.email.length == 0){ this.email = this.data.emailAddress }
+            if(this.checked.length == 0){ this.checked = this.data.image }
+            Swal.fire({
+                title: 'Are you sure that you want to change the information',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Sure',
+                confirmButtonColor: "#7c601893",
+                preConfirm: () => {
+                    return axios.put('/api/clients/current' , 
+                    {
+                        "firstName": this.firstName,
+                        "lastName": this.lastName,
+                        "emailAddress": this.email,
+                        "image": this.checked
+                    })
+                        .then(response => {
+                            window.location.href="/web/pages/accounts.html"
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(
+                                `Request failed: ${error}`
+                            )
+                            console.log(error);
                         })
                 },
                 allowOutsideClick: () => !Swal.isLoading()

@@ -13,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
-
 import static java.util.stream.Collectors.toList;
 
 @RestController
@@ -75,4 +74,34 @@ public class ClientController {
 
         return new ResponseEntity<>(HttpStatus.CREATED);
        }
+
+    @PutMapping("/api/clients/current")
+    public ResponseEntity<Object> changeInfo(Authentication authentication, @RequestBody Client client){
+
+        Client clientAutenticated = clientRespository.findByEmailAddress(authentication.getName());
+
+        if( clientAutenticated != null ){
+            if( !client.getFirstName().equals(clientAutenticated.getFirstName())) {
+                clientAutenticated.setFirstName(client.getFirstName());
+                clientRespository.save(client);
+                return new ResponseEntity<>("First Name changed" , HttpStatus.ACCEPTED);
+            } else if (!client.getLastName().equals(clientAutenticated.getLastName())) {
+                clientAutenticated.setLastName(client.getLastName());
+                clientRespository.save(client);
+                return new ResponseEntity<>("Last Name changed" , HttpStatus.ACCEPTED);
+            } else if (!client.getEmailAddress().equals(clientAutenticated.getEmailAddress())) {
+                clientAutenticated.setEmailAddress(client.getEmailAddress());
+                clientRespository.save(client);
+                return new ResponseEntity<>("Email Address changed" , HttpStatus.ACCEPTED);
+            } else if (!client.getImage().equals(clientAutenticated.getImage())) {
+                clientAutenticated.setImage(client.getImage());
+                clientRespository.save(client);
+                return new ResponseEntity<>("Picture changed" , HttpStatus.ACCEPTED);
+            } else {
+                return new ResponseEntity<>("Not changes", HttpStatus.ACCEPTED);
+            }
+        } else {
+            return new ResponseEntity<>("This client doesn't exist" , HttpStatus.BAD_REQUEST);
+        }
+    }
 }

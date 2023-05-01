@@ -19,7 +19,7 @@ public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
     private ClientRespository clientRespository;
     @Override
     public void init(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(inputName-> {
+        auth.userDetailsService( inputName -> {
             Client client = clientRespository.findByEmailAddress(inputName);
             if (client != null) {
                 if (client.getEmailAddress().contains("jsanti")){

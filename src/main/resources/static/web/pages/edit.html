@@ -58,7 +58,7 @@
             <h1 class="text-center text-dark pt-5">Edit your account</h1>
             <div class="d-flex justify-content-center align-items-center pt-5 pb-5">
                 <div class="d-flex flex-column justify-content-center align-items-center glassmorphism">
-                    <form>
+                    <form @submit.prevent="changeInfo">
                         <div class="col-12 d-flex justify-content-center align-items-center mt-3 mb-3">
                             <button type="submit" class="btn btn-primary mt-2 mt-md-0">Change</button>
                         </div>
@@ -102,9 +102,8 @@
                                 </swiper-slide>
                             </swiper-container>
                         </div>
-                        
                     </form>
-                    <form class="mb-4 mt-4">
+                    <form class="mb-4 mt-4" @submit.prevent="changeInfo">
                         <div class="row">
                             <div class="col-12 col-md-4 d-flex justify-content-center align-items-center">
                                 <label for="firstName" class="visually-hidden text-center">FirstN Name</label>
@@ -121,7 +120,7 @@
                             </div>
                         </div>
                     </form>
-                    <form class="mb-4">
+                    <form class="mb-4" @submit.prevent="changeInfo">
                         <div class="row">
                             <div class="col-12 col-md-4 d-flex justify-content-center align-items-center">
                                 <label for="LastName" class="visually-hidden">Last Name</label>
@@ -137,7 +136,7 @@
                             </div>
                         </div>
                     </form>
-                    <form class="mb-4">
+                    <form class="mb-4" @submit.prevent="changeInfo">
                         <div class="row">
                             <div class="col-12 col-md-4 d-flex justify-content-center align-items-center">
                                 <label for="emailAdress" class="visually-hidden">Email Address</label>
