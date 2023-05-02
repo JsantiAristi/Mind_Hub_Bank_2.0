@@ -37,11 +37,13 @@ public class Card {
     // Método generar número aleatorio para las tarjetas
     public static String aleatoryNumberCards(){
         String numberCard = "";
+        String numberCardInit = "";
         for (int i = 0; i < 4; i++) {
             int min = 1000;
             int max = 8999;
-            numberCard += (int) (Math.random() * max + min) + "-";
+            numberCardInit += (int) (Math.random() * max + min) + "-";
         }
+        numberCard = numberCardInit.substring(0 , numberCardInit.length() - 1);
         return numberCard;
     }
 
