@@ -62,7 +62,7 @@ createApp({
                 confirmButtonText: 'Sure',
                 confirmButtonColor: "#7c601893",
                 preConfirm: () => {
-                    return axios.put('/api/clients/current' , 
+                    return axios.put('/api/clients' , 
                     {
                         "firstName": this.firstName,
                         "lastName": this.lastName,

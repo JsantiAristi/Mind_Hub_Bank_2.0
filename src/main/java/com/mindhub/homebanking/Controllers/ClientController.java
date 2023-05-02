@@ -75,7 +75,7 @@ public class ClientController {
         return new ResponseEntity<>(HttpStatus.CREATED);
        }
 
-    @PutMapping("/api/clients/current")
+    @PutMapping("/api/clients")
     public ResponseEntity<Object> changeInfo(Authentication authentication, @RequestBody Client client){
 
         Client clientAutenticated = clientRespository.findByEmailAddress(authentication.getName());
@@ -83,19 +83,19 @@ public class ClientController {
         if( clientAutenticated != null ){
             if( !client.getFirstName().equals(clientAutenticated.getFirstName())) {
                 clientAutenticated.setFirstName(client.getFirstName());
-                clientRespository.save(client);
+                clientRespository.save(clientAutenticated);
                 return new ResponseEntity<>("First Name changed" , HttpStatus.ACCEPTED);
             } else if (!client.getLastName().equals(clientAutenticated.getLastName())) {
                 clientAutenticated.setLastName(client.getLastName());
-                clientRespository.save(client);
+                clientRespository.save(clientAutenticated);
                 return new ResponseEntity<>("Last Name changed" , HttpStatus.ACCEPTED);
             } else if (!client.getEmailAddress().equals(clientAutenticated.getEmailAddress())) {
                 clientAutenticated.setEmailAddress(client.getEmailAddress());
-                clientRespository.save(client);
+                clientRespository.save(clientAutenticated);
                 return new ResponseEntity<>("Email Address changed" , HttpStatus.ACCEPTED);
             } else if (!client.getImage().equals(clientAutenticated.getImage())) {
                 clientAutenticated.setImage(client.getImage());
-                clientRespository.save(client);
+                clientRespository.save(clientAutenticated);
                 return new ResponseEntity<>("Picture changed" , HttpStatus.ACCEPTED);
             } else {
                 return new ResponseEntity<>("Not changes", HttpStatus.ACCEPTED);
