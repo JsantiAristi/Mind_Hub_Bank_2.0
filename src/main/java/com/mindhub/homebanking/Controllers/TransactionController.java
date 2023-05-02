@@ -32,7 +32,7 @@ public class TransactionController {
     @Transactional
     @PostMapping("/api/clients/current/transactions")
     public ResponseEntity<Object> newTransaction (
-            Authentication authentication , @RequestParam double amount, @RequestParam String description,
+            Authentication authentication , @RequestParam Double amount, @RequestParam String description,
             @RequestParam String initialAccount, @RequestParam String destinateAccount) {
 
         Client client = clientRespository.findByEmailAddress(authentication.getName());
@@ -40,12 +40,12 @@ public class TransactionController {
         Account destinateAccountAuthenticated = accountRepository.findByNumber(destinateAccount.toUpperCase());
 
 //      Amount parameter.
-        if ( String.valueOf(amount) == null ) {
+        if ( amount == null || amount.isNaN() ) {
             return new ResponseEntity<>("Please enter an amount.", HttpStatus.FORBIDDEN);
         } else if( amount < 1 ){
             return new ResponseEntity<>("Please enter an amount bigger than 0.", HttpStatus.FORBIDDEN);
         } else if ( accountAuthenticated.getBalance() < amount ){
-            return new ResponseEntity<>("You don't have the founds for this transaction", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Insufficient balance", HttpStatus.FORBIDDEN);
         }
 //      Description parameter.
         if ( description.isBlank() ) {
@@ -71,7 +71,6 @@ public class TransactionController {
         Transaction newTransaction = new Transaction(TransactionType.DEBIT, amount, description, LocalDateTime.now());
         accountAuthenticated.addTransaction(newTransaction);
         transactionRepository.save(newTransaction);
-
         Transaction newTransaction2 = new Transaction(TransactionType.CREDIT, amount, Transaction.stringToAccount(initialAccount.toUpperCase()), LocalDateTime.now());
         destinateAccountAuthenticated.addTransaction(newTransaction2);
         transactionRepository.save(newTransaction2);

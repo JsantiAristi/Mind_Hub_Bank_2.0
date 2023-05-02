@@ -41,14 +41,9 @@ public class CardController {
         }
 
         String randomNumberCard;
-        int numeroCvv;
         do {
             randomNumberCard = Card.aleatoryNumberCards();
         } while(cardRepository.findByNumber(randomNumberCard) != null);
-
-        do {
-            numeroCvv = Card.aleatoryNumberCvv();
-        } while(cardRepository.findByCvv(numeroCvv) != null);
 
         Client client = clientRespository.findByEmailAddress(authentication.getName());
 
@@ -62,7 +57,7 @@ public class CardController {
             }
         }
 
-        Card newCard = new Card(CardType.valueOf(type.toUpperCase()), CardColor.valueOf(color.toUpperCase()), randomNumberCard , numeroCvv , LocalDate.now() , LocalDate.now().plusYears(5));
+        Card newCard = new Card(CardType.valueOf(type.toUpperCase()), CardColor.valueOf(color.toUpperCase()), randomNumberCard , Card.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
         clientRespository.findByEmailAddress(authentication.getName()).addCard(newCard);
         cardRepository.save(newCard);
 

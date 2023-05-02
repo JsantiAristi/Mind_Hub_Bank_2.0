@@ -22,7 +22,7 @@ public class WebAuthorization {
                 .antMatchers("/index.html" , "/web/styles/index.css" , "/web/js/index.js" , "/web/pages/signup.html" , "/web/styles/signup.css" , "/web/js/signUp.js" , "/assets/**").permitAll()
                 .antMatchers("/web/**" , "/api/clients/current/**").hasAnyAuthority("CLIENT","ADMIN")
                 .antMatchers( HttpMethod.POST,"/api/clients/current/accounts" , "/api/clients/current/cards" , "/api/clients/current/transactions").hasAnyAuthority("CLIENT","ADMIN")
-                .antMatchers( HttpMethod.PUT,"/api/clients/current").hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers( HttpMethod.PUT,"/api/clients").hasAnyAuthority("CLIENT","ADMIN")
                 .antMatchers("/management/**" , "/rest/**" , "/h2-console" , "/api/clients" , "/api/clients/").hasAuthority("ADMIN")
                 .anyRequest().denyAll();
         http.formLogin()
