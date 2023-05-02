@@ -33,10 +33,10 @@ public class CardController {
     @PostMapping("/api/clients/current/cards")
     public ResponseEntity<Object> addCard (
             Authentication authentication , @RequestParam String type, @RequestParam String color){
-        if ( type.isEmpty() || (!type.equalsIgnoreCase("CREDIT")  && !type.equalsIgnoreCase("DEBIT")) ) {
+        if ( !type.equalsIgnoreCase("CREDIT")  && !type.equalsIgnoreCase("DEBIT")) {
             return new ResponseEntity<>(type + " is an incorrect type of card", HttpStatus.FORBIDDEN);
         }
-        if ( color.isEmpty() || (!color.equalsIgnoreCase("TITANIUM") && !color.equalsIgnoreCase("GOLD") && !color.equalsIgnoreCase("SILVER")) ) {
+        if ( !color.equalsIgnoreCase("TITANIUM") && !color.equalsIgnoreCase("GOLD") && !color.equalsIgnoreCase("SILVER")) {
             return new ResponseEntity<>(color + " is an incorrect color of card", HttpStatus.FORBIDDEN);
         }
 

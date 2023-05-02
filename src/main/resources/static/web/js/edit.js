@@ -104,3 +104,26 @@ window.onload = function(){
     $('#onload').fadeOut();
     $('body').removeClass("hidden");
 }
+
+const mq = window.matchMedia("(max-width: 700px)")
+        
+function pantallaPequena(mq){
+    if (mq.matches) {
+        const swiper = new Swiper(".mySwiper2", {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    }
+}
+
+mq.addListener(pantallaPequena);
+
+pantallaPequena(mq);

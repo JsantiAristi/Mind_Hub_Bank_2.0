@@ -150,6 +150,10 @@ swiper-slide img {
     cursor: pointer;
 }
 
+.carrouselPC{
+    display: none;
+}
+
 /*Footer*/
 footer {
     height: 10vh;
@@ -169,4 +173,14 @@ body::-webkit-scrollbar-thumb {
     background: rgb(202, 189, 189);
     border-radius: 10px;
     border-right: 2px solid #161a1e;
+}
+
+@media only screen and (min-width: 800px) {
+    .celCarrousel {
+        display: none;
+    }
+
+    .carrouselPC{
+        display: block;
+    }
 }
