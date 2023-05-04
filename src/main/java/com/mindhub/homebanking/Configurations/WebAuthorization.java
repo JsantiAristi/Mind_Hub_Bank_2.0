@@ -18,10 +18,10 @@ public class WebAuthorization {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers( HttpMethod.POST, "/api/login" , "/api/logout" , "/api/clients").permitAll()
+                .antMatchers( HttpMethod.POST, "/api/login" , "/api/clients").permitAll()
                 .antMatchers("/index.html" , "/web/styles/index.css" , "/web/js/index.js" , "/web/pages/signup.html" , "/web/styles/signup.css" , "/web/js/signUp.js" , "/assets/**").permitAll()
-                .antMatchers("/web/**" , "/api/clients/current/**").hasAnyAuthority("CLIENT","ADMIN")
-                .antMatchers( HttpMethod.POST,"/api/clients/current/accounts" , "/api/clients/current/cards" , "/api/clients/current/transactions").hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers("/web/**" , "/api/clients/current/**" , "/api/loans").hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers( HttpMethod.POST,"/api/clients/current/accounts" , "/api/clients/current/cards" , "/api/clients/current/transactions" , "/api/logout" , "/api/loans").hasAnyAuthority("CLIENT","ADMIN")
                 .antMatchers( HttpMethod.PUT,"/api/clients").hasAnyAuthority("CLIENT","ADMIN")
                 .antMatchers("/management/**" , "/rest/**" , "/h2-console" , "/api/clients" , "/api/clients/").hasAuthority("ADMIN")
                 .anyRequest().denyAll();

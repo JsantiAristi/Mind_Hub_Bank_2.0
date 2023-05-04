@@ -66,11 +66,11 @@ public class HomebankingApplication {
 			account3.addTransaction(transaction7);
 			transactionRepository.save(transaction7);
 
-			Loan loan1 = new Loan("Mortgage" , 500000.00 , List.of(12, 24, 36, 48, 60));
+			Loan loan1 = new Loan("Mortgage" , 500000.00 , List.of(12, 24, 36, 48, 60) , "Allows you to buy a property without having to pay the full purchase price upfront.");
 			loanRepository.save(loan1);
-			Loan loan2 = new Loan("Personal" , 100000.00 , List.of(6, 12, 24));
+			Loan loan2 = new Loan("Personal" , 100000.00 , List.of(6, 12, 24) , "Can be used for a wide range of purposes, giving you flexibility and control over your finances.");
 			loanRepository.save(loan2);
-			Loan loan3 = new Loan("Automotive" , 300000.00 , List.of(6, 12, 24, 36));
+			Loan loan3 = new Loan("Automotive" , 300000.00 , List.of(6, 12, 24, 36), "Allows you to purchase a car that you might not be able to afford to pay for upfront.");
 			loanRepository.save(loan3);
 
 			ClientLoan clientLoan1 = new ClientLoan( 400000.00 , 60);

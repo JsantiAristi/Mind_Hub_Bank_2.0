@@ -59,7 +59,6 @@ public class ClientController {
 //        Email in use in our DB
            if (clientRespository.findByEmailAddress(emailAdress) != null) {
                return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);}
-//         Email Parameter contain the @
 //         Create de new client and a new account
                 String randomNumber;
                 do {

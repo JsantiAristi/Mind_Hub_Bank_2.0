@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.List;
-
 import static java.util.stream.Collectors.toList;
 
 @RestController
