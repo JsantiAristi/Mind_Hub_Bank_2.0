@@ -7,6 +7,9 @@ import com.mindhub.homebanking.Models.TransactionType;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRespository;
 import com.mindhub.homebanking.repositories.TransactionRepository;
+import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.ClientService;
+import com.mindhub.homebanking.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +24,11 @@ import static java.util.stream.Collectors.toList;
 @RestController
 public class TransactionController {
     @Autowired
-    private ClientRespository clientRespository;
+    ClientService clientService;
     @Autowired
-    private AccountRepository accountRepository;
+    AccountService accountService;
     @Autowired
-    private TransactionRepository transactionRepository;
+    TransactionService transactionService;
 
     @Transactional
     @PostMapping("/api/clients/current/transactions")
@@ -33,9 +36,9 @@ public class TransactionController {
             Authentication authentication , @RequestParam Double amount, @RequestParam String description,
             @RequestParam String initialAccount, @RequestParam String destinateAccount) {
 
-        Client client = clientRespository.findByEmailAddress(authentication.getName());
-        Account accountAuthenticated = accountRepository.findByNumber(initialAccount.toUpperCase());
-        Account destinateAccountAuthenticated = accountRepository.findByNumber(destinateAccount.toUpperCase());
+        Client client = clientService.getClientAuthenticated(authentication);
+        Account accountAuthenticated = accountService.getAccountAuthenticated(initialAccount);
+        Account destinateAccountAuthenticated = accountService.getAccountAuthenticated(destinateAccount);
 
 //      Amount parameter.
         if ( amount == null || amount.isNaN() ) {
@@ -68,10 +71,10 @@ public class TransactionController {
 //      Añadir transacciones
         Transaction newTransaction = new Transaction(TransactionType.DEBIT, amount, description, LocalDateTime.now());
         accountAuthenticated.addTransaction(newTransaction);
-        transactionRepository.save(newTransaction);
+        transactionService.saveTransaction(newTransaction);
         Transaction newTransaction2 = new Transaction(TransactionType.CREDIT, amount, Transaction.stringToAccount(initialAccount.toUpperCase()), LocalDateTime.now());
         destinateAccountAuthenticated.addTransaction(newTransaction2);
-        transactionRepository.save(newTransaction2);
+        transactionService.saveTransaction(newTransaction2);
 //      Restar o sumar valores a los balances.
         accountAuthenticated.setBalance( accountAuthenticated.getBalance() - amount );
         destinateAccountAuthenticated.setBalance( destinateAccountAuthenticated.getBalance() + amount );

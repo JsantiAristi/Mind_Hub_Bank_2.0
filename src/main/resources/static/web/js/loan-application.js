@@ -7,11 +7,14 @@ createApp({
             data: [],
             selectInput: "",
             checked : "",
-            amount: "",
+            amount: 0,
             dataFilter : "",
             idLoan : "",
             data2 : "",
-            account : ""
+            account : "",
+            interestDay : "",
+            amountInterest : "",
+            quotas : "",
         }
     },
     created() {
@@ -75,6 +78,7 @@ createApp({
                 showCancelButton: true,
                 confirmButtonText: 'Sure',
                 confirmButtonColor: "#7c601893",
+                footer: '<p data-bs-toggle="modal" data-bs-target="#exampleModal" class="fs-3 fw-bold" @click="interestRatio">See the interst!</p>',
                 preConfirm: () => {
                     return axios.post('/api/loans' , {
                         "id" : this.idLoan,
@@ -100,6 +104,14 @@ createApp({
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             })
+        },
+        interestRatio(){
+            this.interestDay = 0.2 / 365;
+            this.amountInterest = this.amount * ( this.interestDay );
+            this.quotas = this.amountInterest / this.selectInput;
+            console.log(this.interestDay);
+            console.log(this.amountInterest);
+            console.log(this.quotas);
         },
     },
 }).mount("#app");

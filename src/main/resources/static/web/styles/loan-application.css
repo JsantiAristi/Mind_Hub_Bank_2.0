@@ -129,6 +129,23 @@ select{
     width: 100% !important;
 }
 
+/* Modal */
+.modal {
+    z-index: 3000;
+}
+
+.modal-title {
+    text-shadow: none;
+}
+
+/* Alert */
+.swal2-footer p{
+    cursor: pointer;
+    font-size: 1.3rem;
+    margin-bottom: 0;
+    text-decoration: underline;
+}
+
 /*Footer*/
 footer{
     height: 9vh;

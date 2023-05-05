@@ -3,7 +3,7 @@ package com.mindhub.homebanking.Controllers;
 import com.mindhub.homebanking.Models.*;
 import com.mindhub.homebanking.dtos.LoanApplicationDTO;
 import com.mindhub.homebanking.dtos.LoanDTO;
-import com.mindhub.homebanking.repositories.*;
+import com.mindhub.homebanking.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,27 +20,27 @@ import static java.util.stream.Collectors.toList;
 @RestController
 public class LoanController {
     @Autowired
-    LoanRepository loanRepository;
+    ClientService clientService;
     @Autowired
-    ClientLoanRepository clientLoanRepository;
+    AccountService accountService;
     @Autowired
-    ClientRespository clientRespository;
+    TransactionService transactionService;
     @Autowired
-    AccountRepository accountRepository;
+    LoanService loanService;
     @Autowired
-    TransactionRepository transactionRepository;
+    ClientLoanService clientLoanService;
 
     @RequestMapping("/api/loans")
-    public List<LoanDTO> getClients() {
-        return loanRepository.findAll().stream().map(loan -> new LoanDTO(loan)).collect(toList());
+    public List<LoanDTO> getLoans() {
+        return loanService.getLoanDTO();
     }
     @Transactional
     @PostMapping("/api/loans")
     public ResponseEntity<Object> newLoan(Authentication authentication , @RequestBody LoanApplicationDTO loanApplicationDTO) {
 
-        Client client = clientRespository.findByEmailAddress(authentication.getName());
-        Loan loan = loanRepository.findById(loanApplicationDTO.getId()).orElse(null);
-        Account accountAuthenticated = accountRepository.findByNumber(loanApplicationDTO.getAccount().toUpperCase());
+        Client client = clientService.getClientAuthenticated(authentication);
+        Loan loan = loanService.loanById(loanApplicationDTO);
+        Account accountAuthenticated = accountService.getAccountAuthenticatedDTO(loanApplicationDTO);
 
 //      loan and ID property
         if ( loan == null ){
@@ -71,11 +71,11 @@ public class LoanController {
         ClientLoan clientLoan = new ClientLoan( loanApplicationDTO.getAmount() + loanApplicationDTO.getAmount()*0.2 , loanApplicationDTO.getAmount(), loanApplicationDTO.getPayments());
         client.addClientLoan(clientLoan);
         loan.addClientLoan(clientLoan);
-        clientLoanRepository.save(clientLoan);
+        clientLoanService.saveClientLoan(clientLoan);
 
         Transaction newTransaction = new Transaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), loan.getName() , LocalDateTime.now());
         accountAuthenticated.addTransaction(newTransaction);
-        transactionRepository.save(newTransaction);
+        transactionService.saveTransaction(newTransaction);
 
         accountAuthenticated.setBalance( accountAuthenticated.getBalance() + loanApplicationDTO.getAmount() );
 

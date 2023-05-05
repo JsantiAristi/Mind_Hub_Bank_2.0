@@ -34,25 +34,6 @@ public class Card {
         this.thruDate = thruDate;
     }
 
-    // Método generar número aleatorio para las tarjetas
-    public static String aleatoryNumberCards(){
-        String numberCard = "";
-        String numberCardInit = "";
-        for (int i = 0; i < 4; i++) {
-            int min = 1000;
-            int max = 8999;
-            numberCardInit += (int) (Math.random() * max + min) + "-";
-        }
-        numberCard = numberCardInit.substring(0 , numberCardInit.length() - 1);
-        return numberCard;
-    }
-
-    public static int aleatoryNumberCvv(){
-            int min = 100;
-            int max = 899;
-        return (int) (Math.random() * max + min);
-    }
-
     // Getter
     public long getId() {return id;}
     public String getCardholder() {return cardholder;}

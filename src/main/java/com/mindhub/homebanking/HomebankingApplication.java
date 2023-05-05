@@ -3,6 +3,7 @@ package com.mindhub.homebanking;
 import com.mindhub.homebanking.Models.*;
 import com.mindhub.homebanking.repositories.*;
 import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +20,8 @@ public class HomebankingApplication {
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private AccountService accountService;
+	@Autowired
+	private CardService cardService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class, args);
@@ -76,33 +79,33 @@ public class HomebankingApplication {
 			Loan loan3 = new Loan("Automotive" , 300000.00 , List.of(6, 12, 24, 36), "Allows you to purchase a car that you might not be able to afford to pay for upfront.");
 			loanRepository.save(loan3);
 
-			ClientLoan clientLoan1 = new ClientLoan( 400000.00,	40	, 60);
+			ClientLoan clientLoan1 = new ClientLoan( 400000.00,	400000.00+(400000.00*0.2)	, 60);
 			client1.addClientLoan(clientLoan1);
 			loan1.addClientLoan(clientLoan1);
 			clientLoanRepository.save(clientLoan1);
-			ClientLoan clientLoan2 = new ClientLoan( 50000.00,	4, 12);
+			ClientLoan clientLoan2 = new ClientLoan( 50000.00,	50000.00+(50000.00*0.2) , 12);
 			client1.addClientLoan(clientLoan2);
 			loan2.addClientLoan(clientLoan2);
 			clientLoanRepository.save(clientLoan2);
-			ClientLoan clientLoan3 = new ClientLoan(100000.00,	4, 24);
+			ClientLoan clientLoan3 = new ClientLoan(100000.00,	100000.00+(100000.00*0.2) , 24);
 			client2.addClientLoan(clientLoan3);
 			loan2.addClientLoan(clientLoan3);
 			clientLoanRepository.save(clientLoan3);
-			ClientLoan clientLoan4 = new ClientLoan( 200000.00,	4, 36);
+			ClientLoan clientLoan4 = new ClientLoan( 200000.00,	200000.00+(200000.00*0.2) , 36);
 			client2.addClientLoan(clientLoan4);
 			loan3.addClientLoan(clientLoan4);
 			clientLoanRepository.save(clientLoan4);
 
-			Card card1 = new Card(CardType.DEBIT , CardColor.GOLD , Card.aleatoryNumberCards() , Card.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
+			Card card1 = new Card(CardType.DEBIT , CardColor.GOLD , cardService.aleatoryNumberCards() , cardService.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
 			client1.addCard(card1);
 			cardRepository.save(card1);
-			Card card2 = new Card(CardType.CREDIT , CardColor.TITANIUM , Card.aleatoryNumberCards() , Card.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
+			Card card2 = new Card(CardType.CREDIT , CardColor.TITANIUM , cardService.aleatoryNumberCards() , cardService.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
 			client1.addCard(card2);
 			cardRepository.save(card2);
-			Card card3 = new Card(CardType.CREDIT , CardColor.SILVER , Card.aleatoryNumberCards() , Card.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
+			Card card3 = new Card(CardType.CREDIT , CardColor.SILVER , cardService.aleatoryNumberCards() , cardService.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
 			client2.addCard(card3);
 			cardRepository.save(card3);
-			Card card4 = new Card(CardType.CREDIT , CardColor.TITANIUM , Card.aleatoryNumberCards() , Card.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
+			Card card4 = new Card(CardType.CREDIT , CardColor.TITANIUM , cardService.aleatoryNumberCards() , cardService.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
 			client2.addCard(card4);
 			cardRepository.save(card4);
 		};
