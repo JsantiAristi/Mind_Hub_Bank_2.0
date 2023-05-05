@@ -3,14 +3,13 @@ package com.mindhub.homebanking.dtos;
 public class LoanApplicationDTO {
     private long id;
     private Double amount;
-    private int payments;
+    private Integer payments;
     private String account;
-    private String name;
 
 //    Constructores
     public LoanApplicationDTO() {}
 
-    public LoanApplicationDTO(long id, Double amount, int payments, String account) {
+    public LoanApplicationDTO(long id, Double amount, Integer payments, String account) {
         this.id = id;
         this.amount = amount;
         this.payments = payments;
@@ -20,7 +19,6 @@ public class LoanApplicationDTO {
     //    Getter
     public long getId() {return id;}
     public Double getAmount() {return amount;}
-    public int getPayments() {return payments;}
+    public Integer getPayments() {return payments;}
     public String getAccount() {return account;}
-    public String getName() {return name;}
 }

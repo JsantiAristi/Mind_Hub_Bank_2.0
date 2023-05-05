@@ -102,7 +102,9 @@
                     </div>
                 </template>
             </div>
-            <h3 class="text-center pb-4 mb-0 createAccountText">You want to <span class="text-success createAccountTextSpan" @click="createAccount">create</span> a new account?</h3>
+            <div class="d-flex justify-content-center align-items-center">
+                <button class="btn btn-outline-success createAccountTextSpan fs-5" @click="createAccount">CREATE ACCOUNT</button>
+            </div>         
 
             <!---------------------------- Loans --------------------------------------------------------->
             <h2 class="pagetittles p-2 mt-5 fs-1">Your Loans</h2>
@@ -131,7 +133,10 @@
                     <h3 class="text-center pt-5 pb-5 mb-0 notFoundMessage2">Not loans found</h3>
                 </div>
             </template>
-            <h3 class="text-center pb-4 mb-0">See <a href="./loan-application.html">ours loans</a> for your future.</h3>
+            <div class="d-flex justify-content-center align-items-center pb-5">
+                <a href="./loan-application.html" class="btn btn-outline-success fs-5">APPLY TO OUR LOANS</a>
+            </div>
+            
             <!---------------------------------- Saludo Usuario ---------------------------------------->
             <div class="notification">
                 <p>Welcome back, {{data.firstName}} 😉</p>

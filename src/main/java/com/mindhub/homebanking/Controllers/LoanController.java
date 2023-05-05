@@ -21,8 +21,8 @@ import static java.util.stream.Collectors.toList;
 public class LoanController {
     @Autowired
     LoanRepository loanRepository;
-//    @Autowired
-//    LoanApplicationRepository loanApplicationRepository;
+    @Autowired
+    ClientLoanRepository clientLoanRepository;
     @Autowired
     ClientRespository clientRespository;
     @Autowired
@@ -36,29 +36,48 @@ public class LoanController {
     }
     @Transactional
     @PostMapping("/api/loans")
-    public ResponseEntity<Object> newLoan(Authentication authentication , @RequestBody LoanApplicationDTO loanApplicationDTO){
+    public ResponseEntity<Object> newLoan(Authentication authentication , @RequestBody LoanApplicationDTO loanApplicationDTO) {
 
         Client client = clientRespository.findByEmailAddress(authentication.getName());
+        Loan loan = loanRepository.findById(loanApplicationDTO.getId()).orElse(null);
         Account accountAuthenticated = accountRepository.findByNumber(loanApplicationDTO.getAccount().toUpperCase());
 
-//      name property
-        if ( !loanApplicationDTO.getName().equalsIgnoreCase("Mortgage") || !loanApplicationDTO.getName().equalsIgnoreCase("Personal") || !loanApplicationDTO.getName().equalsIgnoreCase("Automotive") ){
-            return new ResponseEntity<>("Please enter a valid name of loan", HttpStatus.FORBIDDEN);}
+//      loan and ID property
+        if ( loan == null ){
+            return new ResponseEntity<>("This loan doesn't exist", HttpStatus.FORBIDDEN);}
 //      amount property
-        if ( loanApplicationDTO.getAmount().isNaN() ){
-            return new ResponseEntity<>("Please enter an amount of loan", HttpStatus.FORBIDDEN);}
+        if (loanApplicationDTO.getAmount().isNaN() || loanApplicationDTO.getAmount() < 1) {
+            return new ResponseEntity<>("Please enter an amount of loan bigger than 0", HttpStatus.FORBIDDEN);
+        } else if( loanApplicationDTO.getAmount() > loan.getMaxAmount() ){
+            return new ResponseEntity<>("You can't request a value bigger than the original loan", HttpStatus.FORBIDDEN);
+        }
 //       payments property
-        if ( loanApplicationDTO.getPayments() < 1 ){
-            return new ResponseEntity<>("Please enter the payments of the loan", HttpStatus.FORBIDDEN);}
+        if ( !loan.getPayments().contains(loanApplicationDTO.getPayments()) ) {
+            return new ResponseEntity<>("Please verify that you enter a valid number of payments of the Loan that you want to select", HttpStatus.FORBIDDEN);}
 //      account property
-        if ( loanApplicationDTO.getAccount().isBlank() ){
+        if (loanApplicationDTO.getAccount().isBlank()) {
             return new ResponseEntity<>("Please enter the account that you want to transfer the loan", HttpStatus.FORBIDDEN);
+        } else if ( accountAuthenticated == null ) {
+            return new ResponseEntity<>("This account doesn't exist", HttpStatus.FORBIDDEN);
         } else if ( client.getAccounts().stream().filter(account -> account.getNumber().equalsIgnoreCase(loanApplicationDTO.getAccount())).collect(toList()).size() == 0 ){
             return new ResponseEntity<>("This account is not yours.", HttpStatus.FORBIDDEN);}
 
-        Transaction newTransaction2 = new Transaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), loanApplicationDTO.getName() , LocalDateTime.now());
-        accountAuthenticated.addTransaction(newTransaction2);
-        transactionRepository.save(newTransaction2);
+        for (ClientLoan clientLoan : client.getClientLoans()) {
+            if (clientLoan.getLoan().getName().equalsIgnoreCase(loan.getName()) ) {
+                return new ResponseEntity<>("You already have a " + loan.getName() + " loan in your account", HttpStatus.FORBIDDEN);
+            }
+        }
+
+        ClientLoan clientLoan = new ClientLoan( loanApplicationDTO.getAmount() + loanApplicationDTO.getAmount()*0.2 , loanApplicationDTO.getAmount(), loanApplicationDTO.getPayments());
+        client.addClientLoan(clientLoan);
+        loan.addClientLoan(clientLoan);
+        clientLoanRepository.save(clientLoan);
+
+        Transaction newTransaction = new Transaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), loan.getName() , LocalDateTime.now());
+        accountAuthenticated.addTransaction(newTransaction);
+        transactionRepository.save(newTransaction);
+
+        accountAuthenticated.setBalance( accountAuthenticated.getBalance() + loanApplicationDTO.getAmount() );
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

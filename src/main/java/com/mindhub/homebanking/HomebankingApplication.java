@@ -2,6 +2,7 @@ package com.mindhub.homebanking;
 
 import com.mindhub.homebanking.Models.*;
 import com.mindhub.homebanking.repositories.*;
+import com.mindhub.homebanking.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +17,8 @@ import java.util.List;
 public class HomebankingApplication {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private AccountService accountService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class, args);
@@ -37,10 +40,10 @@ public class HomebankingApplication {
 			Account account2 = new Account("VIN-002", LocalDateTime.now().plusDays(1) , 7500.00);
 			client1.addAccount(account2);
 			accountRepository.save(account2);
-			Account account3 = new Account(Account.aleatoryNumber(), LocalDateTime.now().plusDays(2) , 6000.50);
+			Account account3 = new Account(accountService.aleatoryNumber(), LocalDateTime.now().plusDays(2) , 6000.50);
 			client2.addAccount(account3);
 			accountRepository.save(account3);
-			Account account4 = new Account(Account.aleatoryNumber(), LocalDateTime.now() , 500.50);
+			Account account4 = new Account(accountService.aleatoryNumber(), LocalDateTime.now() , 500.50);
 			client3.addAccount(account4);
 			accountRepository.save(account4);
 
@@ -73,19 +76,19 @@ public class HomebankingApplication {
 			Loan loan3 = new Loan("Automotive" , 300000.00 , List.of(6, 12, 24, 36), "Allows you to purchase a car that you might not be able to afford to pay for upfront.");
 			loanRepository.save(loan3);
 
-			ClientLoan clientLoan1 = new ClientLoan( 400000.00 , 60);
+			ClientLoan clientLoan1 = new ClientLoan( 400000.00,	40	, 60);
 			client1.addClientLoan(clientLoan1);
 			loan1.addClientLoan(clientLoan1);
 			clientLoanRepository.save(clientLoan1);
-			ClientLoan clientLoan2 = new ClientLoan( 50000.00 , 12);
+			ClientLoan clientLoan2 = new ClientLoan( 50000.00,	4, 12);
 			client1.addClientLoan(clientLoan2);
 			loan2.addClientLoan(clientLoan2);
 			clientLoanRepository.save(clientLoan2);
-			ClientLoan clientLoan3 = new ClientLoan(100000.00 , 24);
+			ClientLoan clientLoan3 = new ClientLoan(100000.00,	4, 24);
 			client2.addClientLoan(clientLoan3);
 			loan2.addClientLoan(clientLoan3);
 			clientLoanRepository.save(clientLoan3);
-			ClientLoan clientLoan4 = new ClientLoan( 200000.00 , 36);
+			ClientLoan clientLoan4 = new ClientLoan( 200000.00,	4, 36);
 			client2.addClientLoan(clientLoan4);
 			loan3.addClientLoan(clientLoan4);
 			clientLoanRepository.save(clientLoan4);

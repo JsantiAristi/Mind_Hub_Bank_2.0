@@ -274,9 +274,16 @@ main {
     cursor: pointer;
 }
 
-.createAccountTextSpan:hover{
-    color: rgb(86, 160, 78) !important;
-    text-decoration: underline;
+.btn-outline-success{
+    --bs-btn-color : black;
+    --bs-btn-border-color : #fff;
+    box-shadow: 0px 0px 25px 1px #ffbb763f;
+}
+
+.btn:hover{
+    background-color: #b887579c;
+    border-color: #fff;
+    color: #000;
 }
 
 .card-footer img{

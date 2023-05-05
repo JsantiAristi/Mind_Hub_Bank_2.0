@@ -38,14 +38,6 @@ public class Account {
         transactions.add(transaction);
     }
 
-    // Método generar número aleatorio
-    public static String aleatoryNumber(){
-        Random random = new Random();
-        int min = 100000;
-        int max = 899999;
-        return ("VIN-" + random.nextInt(max + min));
-    }
-
     // Getter
     public long getId() {
         return id;

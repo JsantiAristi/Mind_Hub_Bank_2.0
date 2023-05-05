@@ -6,6 +6,8 @@ import com.mindhub.homebanking.dtos.AccountDTO;
 import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRespository;
+import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,10 @@ public class AccountController {
     private ClientRespository clientRespository;
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private ClientService clientService;
+    @Autowired
+    private AccountService accountService;
 
     // Servlets
     @RequestMapping("/api/clients/current/accounts")
@@ -36,19 +42,14 @@ public class AccountController {
     @PostMapping("/api/clients/current/accounts")
     public ResponseEntity<Object> newAccount (Authentication authentication) {
 
-        Client client = clientRespository.findByEmailAddress(authentication.getName());
+        Client client = clientService.getClientAuthenticated(authentication);
 
         if (client == null){
             return new ResponseEntity<>("You can´t create an account, because you are not a client", HttpStatus.FORBIDDEN);
         };
 
-        String randomNumber;
-        do {
-            randomNumber = Account.aleatoryNumber();
-        } while(accountRepository.findByNumber(randomNumber) != null);
-
         if (client.getAccounts().size() <= 2){
-            Account newAccount = new Account(randomNumber, LocalDateTime.now(), 0.00);
+            Account newAccount = new Account(accountService.aleatoryNumberNotRepeat(), LocalDateTime.now(), 0.00);
             clientRespository.findByEmailAddress(authentication.getName()).addAccount(newAccount);
             accountRepository.save(newAccount);
         } else {
