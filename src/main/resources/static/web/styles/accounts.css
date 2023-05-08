@@ -303,6 +303,10 @@ main {
     text-shadow: none;
 }
 
+#exampleModal2 .modal-body , #exampleModal2 .modal-header {
+    background-color: rgb(220, 215, 215);
+}
+
 /* Alert */
 .swal2-footer p{
     cursor: pointer;

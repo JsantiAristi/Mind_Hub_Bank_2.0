@@ -5,9 +5,10 @@ import com.mindhub.homebanking.dtos.LoanApplicationDTO;
 import com.mindhub.homebanking.dtos.LoanDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface LoanService {
     void saveLoan(Loan loan);
-    Loan loanById(LoanApplicationDTO loanApplicationDTO);
+    Optional<Loan> loanById(long id);
     List<LoanDTO> getLoanDTO();
 }

@@ -14,8 +14,10 @@
 
 <body class="hidden">
     <div class="center" id="onload">
-        <div class="lds-circle"><div></div></div>
-    </div> 
+        <div class="lds-circle">
+            <div></div>
+        </div>
+    </div>
     <div id="app">
         <header class="d-flex flex-column justify-content-between header-2">
             <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
@@ -38,10 +40,12 @@
                                 <a class="nav-link text-end" aria-current="page" href="./cards.html">My Cards</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-end" aria-current="page" href="./transfers.html">Transfer Money</a>
+                                <a class="nav-link text-end" aria-current="page" href="./transfers.html">Transfer
+                                    Money</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-end text-danger" aria-current="page" href="" @click.prevent="singOut">Sign Out</a>
+                                <a class="nav-link text-end text-danger" aria-current="page" href=""
+                                    @click.prevent="singOut">Sign Out</a>
                             </li>
                         </ul>
                     </div>
@@ -63,17 +67,17 @@
                             <P>Accounts : {{accounts.length}}</P>
                             <p>Balance Total : ${{totalBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}} </p>
                             <P>Loans : {{loans.length}}</P>
-                        </div>       
-                    </div>
-                    <div class="card-footer text-body-secondary d-flex justify-content-between align-items-center">
-                        <p class="mb-0 ps-2" >{{data.emailAddress}}</p>   
-                        <div class="d-flex align-items-center">
-                            <p class="d-none d-sm-block mb-0 pe-1">Edit your account:</p>
-                            <a href="./edit.html"><img src="../../assets/edit-3.svg" alt=""></a>               
                         </div>
                     </div>
-            </div>
-            
+                    <div class="card-footer text-body-secondary d-flex justify-content-between align-items-center">
+                        <p class="mb-0 ps-2">{{data.emailAddress}}</p>
+                        <div class="d-flex align-items-center">
+                            <p class="d-none d-sm-block mb-0 pe-1">Edit your account:</p>
+                            <a href="./edit.html"><img src="../../assets/edit-3.svg" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <h2 class="pagetittles p-2 fs-1">Your Accounts</h2>
             <div class="d-flex flex-wrap justify-content-center">
@@ -103,8 +107,9 @@
                 </template>
             </div>
             <div class="d-flex justify-content-center align-items-center">
-                <button class="btn btn-outline-success createAccountTextSpan fs-5" @click="createAccount">CREATE ACCOUNT</button>
-            </div>         
+                <button class="btn btn-outline-success createAccountTextSpan fs-5" @click="createAccount">CREATE
+                    ACCOUNT</button>
+            </div>
 
             <!---------------------------- Loans --------------------------------------------------------->
             <h2 class="pagetittles p-2 mt-5 fs-1">Your Loans</h2>
@@ -116,11 +121,20 @@
                                 <span class="title text-start">{{loan.name}}</span>
                                 <div class="accountsbox2 d-flex align-items-center justify-content-center rounded">
                                     <div class="ms-2">
-                                        <strong class="fs-4 mb-0">Total amount:</strong>
-                                        <p class="fs-4 text-center">
+                                        <strong class="fs-4 mb-0">Amount:</strong>
+                                        <p class="fs-4 pb-3 text-center">
                                             ${{loan.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
                                         </p>
-                                        <span class="fs-6">Quotas: {{loan.payments}}</span>
+                                        <strong class="fs-4 mb-0">Total amount:</strong>
+                                        <p class="text-center">With interest of 20%</p>
+                                        <p class="fs-4 text-center">
+                                            ${{loan.finalAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+                                        </p>
+                                        <span class="fs-6 mb-4">Quotas: {{loan.payments}}</span>
+                                        <div class="mb-4 d-flex flex-column align-items-center">
+                                            <p class="mb-1">Pay Quota</p>
+                                            <img src="../../assets/dinero-online.png" :alt="loan.name" class="interactionCLient" data-bs-toggle="modal" data-bs-target="#exampleModal2" @click="filterLoan">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -136,7 +150,7 @@
             <div class="d-flex justify-content-center align-items-center pb-5">
                 <a href="./loan-application.html" class="btn btn-outline-success fs-5">APPLY TO OUR LOANS</a>
             </div>
-            
+
             <!---------------------------------- Saludo Usuario ---------------------------------------->
             <div class="notification">
                 <p>Welcome back, {{data.firstName}} 😉</p>
@@ -153,7 +167,8 @@
                         </div>
                         <div class="modal-body">
                             <p>
-                                At MindHub Bank, we understand that the privacy and security of your personal information
+                                At MindHub Bank, we understand that the privacy and security of your personal
+                                information
                                 are of utmost importance. We are committed to protecting the privacy of our customers
                                 and ensuring the confidentiality of their information. This Privacy Policy outlines the
                                 types of information we collect, how we use it, and how we protect it. <br>
@@ -164,14 +179,16 @@
                                 address, social security number, phone number, email address, account numbers, and
                                 financial information, when you apply for a product or service or interact with us
                                 through our website or other channels. We may also collect information about your
-                                transactions with us, such as account balances, payment history, and account activity. <br>
+                                transactions with us, such as account balances, payment history, and account activity.
+                                <br>
                                 <br>
                                 Use of Information <br>
                                 <br>
                                 We use the information we collect to provide you with our products and services, to
                                 communicate with you about your accounts, and to comply with legal and regulatory
                                 requirements. We may also use your information to improve our products and services, and
-                                to offer you additional products and services that we believe may be of interest to you. <br>
+                                to offer you additional products and services that we believe may be of interest to you.
+                                <br>
                                 <br>
                                 Sharing of Information
                                 <br>
@@ -210,10 +227,49 @@
                     </div>
                 </div>
             </div>
+            <!-- modal 2 -->
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel2">Pay Quota</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="d-flex flex-column justify-content-center align-items-center">
+                                <div class="form-check">
+                                    <div>
+                                        <label for="quota" class="pe-5 form-check-label">Pay Quota: ${{quotas.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</label>
+                                        <input type="radio" name="Quotas" id="quota" class="form-check-input">
+                                    </div>
+                                    <div>
+                                        <label for="total" class="pe-5 form-check-label">Pay total: ${{this.totalPay.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</label>
+                                        <input type="radio" name="Quotas" id="total" class="form-check-input">
+                                    </div>                          
+                                </div>                        
+                                <div class="mb-3 mt-3 d-flex align-items-center">
+                                    <label for="accountTransfer" class="form-label">Your Account*</label>
+                                    <select class="form-select" aria-label="Default select example" v-model="account"
+                                        required>
+                                        <option selected class="fs-6" value="">Open this select menu</option>
+                                        <template v-for="account of data.numbers">
+                                            <option :value="account" class="fs-6">{{account}}</option>
+                                        </template>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-outline-success mb-3 mt-3 fs-4">Pay</button>
+                            </form>                    
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
         <footer class="bg-dark d-flex justify-content-evenly align-items-center pt-3 pb-3">
             <div class="d-flex">
-                <a class="link-opacity-50-hover link-success" href="https://www.linkedin.com/in/santiago-aristizabal-restrepo-a17015221/">
+                <a class="link-opacity-50-hover link-success"
+                    href="https://www.linkedin.com/in/santiago-aristizabal-restrepo-a17015221/">
                     <p class="text-white mb-0 pe-2">Santiago Aristizabal</p>
                 </a>
                 <p class="text-danger mb-0">Cohort 44</p>

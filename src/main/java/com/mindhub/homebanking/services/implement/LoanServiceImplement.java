@@ -8,6 +8,8 @@ import com.mindhub.homebanking.services.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
+
 import static java.util.stream.Collectors.toList;
 
 
@@ -22,8 +24,8 @@ public class LoanServiceImplement implements LoanService {
     }
 
     @Override
-    public Loan loanById(LoanApplicationDTO loanApplicationDTO) {
-        return loanRepository.findById(loanApplicationDTO.getId()).orElse(null);
+    public Optional<Loan> loanById(long id) {
+        return loanRepository.findById(id);
     }
 
     @Override

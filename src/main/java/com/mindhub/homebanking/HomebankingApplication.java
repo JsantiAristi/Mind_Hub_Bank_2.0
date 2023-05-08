@@ -43,7 +43,7 @@ public class HomebankingApplication {
 			Account account2 = new Account("VIN-002", LocalDateTime.now().plusDays(1) , 7500.00);
 			client1.addAccount(account2);
 			accountRepository.save(account2);
-			Account account3 = new Account(accountService.aleatoryNumber(), LocalDateTime.now().plusDays(2) , 6000.50);
+			Account account3 = new Account(accountService.aleatoryNumber(), LocalDateTime.now().plusDays(2) , 120000.50);
 			client2.addAccount(account3);
 			accountRepository.save(account3);
 			Account account4 = new Account(accountService.aleatoryNumber(), LocalDateTime.now() , 500.50);

@@ -13,8 +13,8 @@ createApp({
             data2 : "",
             account : "",
             interestDay : "",
-            amountInterest : "",
-            quotas : "",
+            amountInterest : 0,
+            quotas : 0,
         }
     },
     created() {
@@ -26,14 +26,12 @@ createApp({
             axios.get("/api/loans")
             .then(response => {
                 this.data = response.data;
-                console.log(this.data);
             })
             .catch(error => console.log(error))
         },
         loadData() {
             axios.get('http://localhost:8080/api/clients/current')
                 .then(response => {
-                    console.log(response.data);
                     this.data2 = response.data
                 })
                 .catch(error => console.log(error));
@@ -65,11 +63,10 @@ createApp({
             this.dataFilter = this.data.filter( loan => {
                 return this.checked.includes(loan.name)
             })[0]
-            
-            console.log(this.dataFilter[0]);
         },
         createLoan(){
-            this.idLoan = this.dataFilter.id
+            this.interestRatio()
+            this.idLoan = this.dataFilter.id;
             Swal.fire({
                 title: 'Are you sure that you want to apply to this loan?',
                 inputAttributes: {
@@ -78,7 +75,7 @@ createApp({
                 showCancelButton: true,
                 confirmButtonText: 'Sure',
                 confirmButtonColor: "#7c601893",
-                footer: '<p data-bs-toggle="modal" data-bs-target="#exampleModal" class="fs-3 fw-bold" @click="interestRatio">See the interst!</p>',
+                footer: '<p data-bs-toggle="modal" data-bs-target="#exampleModal" class="fs-3 fw-bold">See the interst!</p>',
                 preConfirm: () => {
                     return axios.post('/api/loans' , {
                         "id" : this.idLoan,
@@ -106,12 +103,8 @@ createApp({
             })
         },
         interestRatio(){
-            this.interestDay = 0.2 / 365;
-            this.amountInterest = this.amount * ( this.interestDay );
+            this.amountInterest = this.amount * 1.2;
             this.quotas = this.amountInterest / this.selectInput;
-            console.log(this.interestDay);
-            console.log(this.amountInterest);
-            console.log(this.quotas);
         },
     },
 }).mount("#app");

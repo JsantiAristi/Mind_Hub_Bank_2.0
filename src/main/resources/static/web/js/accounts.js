@@ -10,6 +10,10 @@ createApp({
             totalBalance: 0,
             params: "",
             id: "",
+            dataFilter: 0,
+            quotas: 0,
+            account: "",
+            totalPay: 0,
         }
     },
     created() {
@@ -78,6 +82,14 @@ createApp({
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             })
+        },
+        filterLoan(event){
+            this.dataFilter = this.loans.filter( loan => {
+                return event.target.alt.includes(loan.name)
+            })[0]
+            console.log(this.dataFilter);
+            this.quotas = this.dataFilter.finalAmount / this.dataFilter.payments;
+            this.totalPay = this.dataFilter.finalAmount;
         },
     }
 }).mount("#app");
