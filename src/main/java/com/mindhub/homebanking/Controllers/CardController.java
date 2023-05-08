@@ -2,9 +2,8 @@ package com.mindhub.homebanking.Controllers;
 
 import com.mindhub.homebanking.Models.*;
 import com.mindhub.homebanking.dtos.CardDTO;
-import com.mindhub.homebanking.dtos.ClientDTO;
-import com.mindhub.homebanking.repositories.CardRepository;
-import com.mindhub.homebanking.repositories.ClientRespository;
+import com.mindhub.homebanking.services.CardService;
+import com.mindhub.homebanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,53 +12,43 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
-import static java.util.stream.Collectors.toList;
 
 @RestController
 public class CardController {
-
     @Autowired
-    private CardRepository cardRepository;
+    private CardService cardService;
     @Autowired
-    private ClientRespository clientRespository;
+    private ClientService clientService;
 
     @RequestMapping("/api/clients/current/cards")
-    public List<CardDTO> getAccounts (Authentication authentication) {
-        return new ClientDTO(clientRespository.findByEmailAddress(authentication.getName())).getCards().stream().collect(toList());
+    public List<CardDTO> getCards (Authentication authentication) {
+        return cardService.getCardsDTO(authentication);
     }
 
     @PostMapping("/api/clients/current/cards")
     public ResponseEntity<Object> addCard (
             Authentication authentication , @RequestParam String type, @RequestParam String color){
-        if ( type.isEmpty() || color.isEmpty()) {
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
-        }
 
-        String randomNumberCard;
-        int numeroCvv;
-        do {
-            randomNumberCard = Card.aleatoryNumberCards();
-        } while(cardRepository.findByNumber(randomNumberCard) != null);
+        Client client = clientService.getClientAuthenticated(authentication);
 
-        do {
-            numeroCvv = Card.aleatoryNumberCvv();
-        } while(cardRepository.findByCvv(numeroCvv) != null);
-
-        Client client = clientRespository.findByEmailAddress(authentication.getName());
+        if ( !type.equalsIgnoreCase("CREDIT")  && !type.equalsIgnoreCase("DEBIT")) {
+            return new ResponseEntity<>(type + " is an incorrect type of card", HttpStatus.FORBIDDEN);}
+        if ( !color.equalsIgnoreCase("TITANIUM") && !color.equalsIgnoreCase("GOLD") && !color.equalsIgnoreCase("SILVER")) {
+            return new ResponseEntity<>(color + " is an incorrect color of card", HttpStatus.FORBIDDEN);}
+        if (client == null){
+            return new ResponseEntity<>("You can´t create a card, because you are not a client", HttpStatus.FORBIDDEN);};
 
         for (Card card : client.getCards()) {
-            if (card.getType().equals(CardType.valueOf(type)) && card.getColor().equals(CardColor.valueOf(color))) {
-                return new ResponseEntity<>("You already have this color and type of card", HttpStatus.FORBIDDEN);
+            if (card.getType().equals(CardType.valueOf(type.toUpperCase())) && card.getColor().equals(CardColor.valueOf(color.toUpperCase()))) {
+                return new ResponseEntity<>("You already have a " + type.toLowerCase() + " " + color.toLowerCase() + " card", HttpStatus.FORBIDDEN);
             }
         }
 
-        Card newCard = new Card(CardType.valueOf(type), CardColor.valueOf(color), randomNumberCard , numeroCvv , LocalDate.now() , LocalDate.now().plusYears(5));
-        clientRespository.findByEmailAddress(authentication.getName()).addCard(newCard);
-        cardRepository.save(newCard);
+        Card newCard = new Card(CardType.valueOf(type.toUpperCase()), CardColor.valueOf(color.toUpperCase()), cardService.aleatoryNumberCardsNotRepeat() , cardService.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
+        clientService.getClientAuthenticated(authentication).addCard(newCard);
+        cardService.saveCard(newCard);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

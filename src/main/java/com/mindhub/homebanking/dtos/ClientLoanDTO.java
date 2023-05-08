@@ -7,6 +7,7 @@ public class ClientLoanDTO {
     private Long loanId;
     private String name;
     private double amount;
+    private double finalAmount;
     private int payments;
 
     // Constructores
@@ -15,6 +16,7 @@ public class ClientLoanDTO {
         this.loanId = clientLoan.getLoan().getId();
         this.name = clientLoan.getLoan().getName();
         this.amount = clientLoan.getAmount();
+        this.finalAmount = clientLoan.getFinalAmount();
         this.payments = clientLoan.getPayments();
     }
 
@@ -24,4 +26,5 @@ public class ClientLoanDTO {
     public String getName() {return name;}
     public double getAmount() {return amount;}
     public int getPayments() {return payments;}
+    public double getFinalAmount() {return finalAmount;}
 }

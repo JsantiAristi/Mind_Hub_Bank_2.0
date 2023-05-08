@@ -66,3 +66,8 @@ function pantallaPequena(mq){
 mq.addListener(pantallaPequena);
 
 pantallaPequena(mq);
+
+window.onload = function(){
+    $('#onload').fadeOut();
+    $('body').removeClass("hidden");
+}

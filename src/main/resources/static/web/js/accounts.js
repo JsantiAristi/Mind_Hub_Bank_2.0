@@ -10,6 +10,11 @@ createApp({
             totalBalance: 0,
             params: "",
             id: "",
+            dataFilter: 0,
+            quotas: 0,
+            account: "",
+            amount: "",
+            totalPay: 0,
         }
     },
     created() {
@@ -22,7 +27,8 @@ createApp({
                     console.log(response.data);
 
                     this.data = response.data
-                    this.loans = this.data.loans
+                    this.loans = this.data.loans.filter(loan => loan.finalAmount > 0);
+                    console.log(this.loans);
                     this.accounts = this.data.accounts
 
                     for (account of this.data.accounts) {
@@ -79,5 +85,48 @@ createApp({
                 allowOutsideClick: () => !Swal.isLoading()
             })
         },
+        filterLoan(event){
+            this.dataFilter = this.loans.filter( loan => {
+                return event.target.alt.includes(loan.name)
+            })[0]
+            console.log(this.dataFilter);
+            this.quotas = this.dataFilter.finalAmount / this.dataFilter.payments;
+            this.totalPay = this.dataFilter.finalAmount;
+        },
+        payLoan(){
+            Swal.fire({
+                title: 'Are you sure that you want to pay the loan?',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Sure',
+                confirmButtonColor: "#7c601893",
+                preConfirm: () => {
+                    return axios.post('/api/current/loans', `idLoan=${this.dataFilter.id}&account=${this.account}&amount=${this.amount}`)
+                    .then(response => {
+                            Swal.fire({
+                                icon: 'success',
+                                text: 'Payment Success',
+                                showConfirmButton: false,
+                                timer: 2000,
+                            }).then( () => window.location.href="/web/pages/accounts.html")
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                icon: 'error',
+                                text: error.response.data,
+                                confirmButtonColor: "#7c601893",
+                            })
+                        })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            })
+        },
     }
 }).mount("#app");
+
+window.onload = function(){
+    $('#onload').fadeOut();
+    $('body').removeClass("hidden");
+}

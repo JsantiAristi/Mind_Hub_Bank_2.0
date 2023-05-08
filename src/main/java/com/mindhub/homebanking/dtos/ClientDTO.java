@@ -11,6 +11,7 @@ public class ClientDTO {
     private String firstName;
     private String lastName;
     private String emailAddress;
+    private String image;
     private Set<AccountDTO> accounts;
     private Set<ClientLoanDTO> loans;
     private Set<String> numbers;
@@ -22,6 +23,7 @@ public class ClientDTO {
         this.firstName = client.getFirstName();
         this.lastName = client.getLastName();
         this.emailAddress = client.getEmailAddress();
+        this.image = client.getImage();
         this.accounts = client.getAccounts().stream().map(account -> new AccountDTO(account)).collect(toSet());
         this.loans = client.getClientLoans().stream().map(loan -> new ClientLoanDTO(loan)).collect(toSet());
         this.cards = client.getCards().stream().map(card -> new CardDTO(card)).collect(toSet());
@@ -41,6 +43,7 @@ public class ClientDTO {
     public String getEmailAddress() {
         return emailAddress;
     }
+    public String getImage() {return image;}
     public Set<AccountDTO> getAccounts() {
         return accounts;
     }

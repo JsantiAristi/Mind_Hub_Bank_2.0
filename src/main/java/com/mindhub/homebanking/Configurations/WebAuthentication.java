@@ -16,13 +16,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
     @Autowired
-    ClientRespository clientRespository;
+    private ClientRespository clientRespository;
     @Override
     public void init(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(inputName-> {
+        auth.userDetailsService( inputName -> {
             Client client = clientRespository.findByEmailAddress(inputName);
             if (client != null) {
-                if (client.getEmailAddress().contains("jsanti")){
+                if (client.getEmailAddress().equals("jsanti@gmail.com")){
                     return new User(client.getEmailAddress(), client.getPassword(),
                             AuthorityUtils.createAuthorityList("ADMIN"));
                 }

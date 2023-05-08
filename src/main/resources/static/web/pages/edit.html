@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <title>HomeBanking | Edit</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/edit.css">
+    <link rel="shortcut icon" href="../../assets/banco.png" type="image/x-icon">
+</head>
+
+<body class="hidden">
+    <div class="center" id="onload">
+        <div class="lds-circle">
+            <div></div>
+        </div>
+    </div>
+    <div id="app">
+        <header class="d-flex flex-column justify-content-between header-2">
+            <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+                <div class="container">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <img src="../../assets/insignia-del-sheriff.png" alt="" class="me-1">
+                        <p class="navbar-brand fs-4 mb-0">MindHub Bank</p>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active text-end" aria-current="page" href="./accounts.html">My
+                                    Accounts</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-end" aria-current="page" href="./cards.html">My Cards</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-end" aria-current="page" href="./transfers.html">Transfer
+                                    Money</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-end text-danger" aria-current="page" href=""
+                                    @click.prevent="singOut">Sign Out</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <h1 class="text-center text-dark pt-5">Edit your account</h1>
+            <div class="d-flex justify-content-center align-items-center pt-5 pb-5">
+                <div class="d-flex flex-column justify-content-center align-items-center glassmorphism">
+                    <form @submit.prevent="changeInfo">
+                        <div class="col-12 d-flex justify-content-center align-items-center mt-3 mb-3">
+                            <button type="submit" class="btn btn-primary mt-2 mt-md-0">Change</button>
+                        </div>
+                        <div class="col-12 carrouselForm carrouselPC">
+                            <swiper-container class="mySwiper ms-3" slides-per-view="4" space-between="30">
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios" value="../../assets/chico.png" v-model="checked">
+                                    <label for="usuarios"><img src="../../assets/chico.png" alt=""></label>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios2" value="../../assets/user1.jpg" v-model="checked">
+                                    <label for="usuarios2"><img src="../../assets/user1.jpg" alt=""></label>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios3" value="../../assets/user.jpg" v-model="checked">
+                                    <label for="usuarios3"><img src="../../assets/user.jpg" alt=""></label>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios4" value="../../assets/user2.png" v-model="checked">
+                                    <label for="usuarios4"><img src="../../assets/user2.png" alt=""></label>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios5" value="../../assets/user4.jpg" v-model="checked">
+                                    <label for="usuarios5"><img src="../../assets/user4.jpg" alt=""></label>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios6" value="../../assets/user5.jpg" v-model="checked">
+                                    <label for="usuarios6"><img src="../../assets/user5.jpg" alt=""></label>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios7" value="../../assets/user6.jpg" v-model="checked">
+                                    <label for="usuarios7"><img src="../../assets/user6.jpg" alt=""></label>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios8" value="../../assets/user7.jpg" v-model="checked">
+                                    <label for="usuarios8"><img src="../../assets/user7.jpg" alt=""></label>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios9" value="../../assets/user8.jpg" v-model="checked">
+                                    <label for="usuarios9"><img src="../../assets/user8.jpg" alt=""></label>
+                                </swiper-slide>
+                            </swiper-container>
+                        </div>
+                        <div class="col-12 carrouselForm celCarrousel">
+                            <swiper-container class="mySwiper2 ms-3">
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios" value="../../assets/chico.png" v-model="checked">
+                                    <label for="usuarios"><img src="../../assets/chico.png" alt=""></label>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios2" value="../../assets/user1.jpg" v-model="checked">
+                                    <label for="usuarios2"><img src="../../assets/user1.jpg" alt=""></label>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios3" value="../../assets/user.jpg" v-model="checked">
+                                    <label for="usuarios3"><img src="../../assets/user.jpg" alt=""></label>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios4" value="../../assets/user2.png" v-model="checked">
+                                    <label for="usuarios4"><img src="../../assets/user2.png" alt=""></label>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios5" value="../../assets/user4.jpg" v-model="checked">
+                                    <label for="usuarios5"><img src="../../assets/user4.jpg" alt=""></label>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios6" value="../../assets/user5.jpg" v-model="checked">
+                                    <label for="usuarios6"><img src="../../assets/user5.jpg" alt=""></label>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios7" value="../../assets/user6.jpg" v-model="checked">
+                                    <label for="usuarios7"><img src="../../assets/user6.jpg" alt=""></label>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios8" value="../../assets/user7.jpg" v-model="checked">
+                                    <label for="usuarios8"><img src="../../assets/user7.jpg" alt=""></label>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <input type="radio" name="image" id="usuarios9" value="../../assets/user8.jpg" v-model="checked">
+                                    <label for="usuarios9"><img src="../../assets/user8.jpg" alt=""></label>
+                                </swiper-slide>
+                            </swiper-container>
+                        </div>
+                    </form>
+                    <form class="mb-4 mt-4" @submit.prevent="changeInfo">
+                        <div class="row">
+                            <div class="col-12 col-md-4 d-flex justify-content-center align-items-center">
+                                <label for="firstName" class="visually-hidden text-center">FirstN Name</label>
+                                <input type="text" readonly class="form-control-plaintext text-center" id="firstName"
+                                    :value="data.firstName">
+                            </div>
+                            <div class="col-12 col-md-5 d-flex justify-content-center align-items-center">
+                                <label for="inputPassword2" class="visually-hidden">First Name</label>
+                                <input type="text" class="form-control" id="inputPassword2"
+                                    placeholder="New First Name" v-model="firstName">
+                            </div>
+                            <div class="col-12 col-md-2 d-flex justify-content-center align-items-center">
+                                <button type="submit" class="btn btn-primary mt-2 mt-md-0">Change</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="mb-4" @submit.prevent="changeInfo">
+                        <div class="row">
+                            <div class="col-12 col-md-4 d-flex justify-content-center align-items-center">
+                                <label for="LastName" class="visually-hidden">Last Name</label>
+                                <input type="text" readonly class="form-control-plaintext text-center" id="LastName"
+                                    :value="data.lastName">
+                            </div>
+                            <div class="col-12 col-md-5 d-flex justify-content-center align-items-center">
+                                <label for="inputPassword2" class="visually-hidden">Last Name</label>
+                                <input type="text" class="form-control" id="inputPassword2" placeholder="New Last Name" v-model="lastName">
+                            </div>
+                            <div class="col-12 col-md-2 d-flex justify-content-center align-items-center">
+                                <button type="submit" class="btn btn-primary mt-2 mt-md-0">Change</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="mb-4" @submit.prevent="changeInfo">
+                        <div class="row">
+                            <div class="col-12 col-md-4 d-flex justify-content-center align-items-center">
+                                <label for="emailAdress" class="visually-hidden">Email Address</label>
+                                <input type="text" readonly class="form-control-plaintext text-center" id="emailAdress"
+                                    :value="data.emailAddress">
+                            </div>
+                            <div class="col-12 col-md-5 d-flex justify-content-center align-items-center">
+                                <label for="inputPassword2" class="visually-hidden">Email Address</label>
+                                <input type="email" class="form-control" id="inputPassword2"
+                                    placeholder="New email Address" v-model="email">
+                            </div>
+                            <div class="col-12 col-md-2 d-flex justify-content-center align-items-center">
+                                <button type="submit" class="btn btn-primary mt-2 mt-md-0">Change</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-dark text-white p-3">
+            <div class="d-flex justify-content-evenly flex-wrap">
+                <div>
+                    <h3>Contact</h3>
+                    <p>Phone: +1 123-456-7890</p>
+                    <p>Eail: mindhub@gmail.com</p>
+                    <div class="d-flex">
+                        <a class="link-opacity-50-hover link-success"
+                            href="https://www.linkedin.com/in/santiago-aristizabal-restrepo-a17015221/">
+                            <p class="text-white mb-0 pe-2">Santiago Aristizabal</p>
+                        </a>
+                        <p class="text-danger mb-0 pe-2">Cohort 44</p>
+                        <a href="https://github.com/JsantiAristi" target="_blank"><img src="../../assets/github (1).png" alt=""
+                            class="socialIcon"></a>
+                    </div>
+                </div>
+                <div class="pt-3 pt-sm-0">
+                    <h3>Address</h3>
+                    <p>123 Principal Street</p>
+                    <p>Medellín, Colombia</p>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31230.05536071407!2d-122.43129716205499!3d37.77397288185648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMTAnMzguNiJOIDEyMjPCsDE1JzI3LjMiRQ!5e0!3m2!1sen!2sus!4v1557222375536!5m2!1sen!2sus"
+                        width="200" height="150" frameborder="0" class="rounded" allowfullscreen></iframe>
+                </div>
+            </div>
+            <hr>
+            <div style="display: flex; justify-content: space-between;">
+                <div>
+                    <p>© 2023. All rights reserved.</p>
+                </div>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- CDN bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="../js/edit.js"></script>
+</body>
+
+</html>
