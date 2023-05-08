@@ -64,7 +64,7 @@ public class LoanController {
             return new ResponseEntity<>("This account is not yours.", HttpStatus.FORBIDDEN);}
 
         for (ClientLoan clientLoan : client.getClientLoans()) {
-            if (clientLoan.getLoan().getName().equalsIgnoreCase(loan.get().getName()) ) {
+            if (clientLoan.getLoan().getName().equalsIgnoreCase(loan.get().getName()) && clientLoan.getFinalAmount() > 0) {
                 return new ResponseEntity<>("You already have a " + loan.get().getName() + " loan in your account", HttpStatus.FORBIDDEN);
             }
         }
@@ -85,12 +85,27 @@ public class LoanController {
 
     @Transactional
     @PostMapping("/api/current/loans")
-    public ResponseEntity<Object> payLoan(Authentication authentication , @RequestParam Long id , @RequestParam String account, @RequestParam Double amount) {
+    public ResponseEntity<Object> payLoan(Authentication authentication , @RequestParam Long idLoan , @RequestParam String account, @RequestParam Double amount) {
 
         Client client = clientService.getClientAuthenticated(authentication);
-        ClientLoan clientLoan = clientLoanService.getClientLoan(id);
+        ClientLoan clientLoan = clientLoanService.getClientLoan(idLoan);
         Account accountAuthenticated = accountService.getAccountAuthenticated(account);
-        String description = "Pay Loan";
+        String description = "Pay " + clientLoan.getLoan().getName() + " loan";
+//      id parameter
+        if( clientLoan == null ){
+            return new ResponseEntity<>("This loan doesn't exist", HttpStatus.FORBIDDEN);
+        } else if( client == null){
+            return new ResponseEntity<>("You are not registered as a client", HttpStatus.FORBIDDEN);}
+//        account parameter
+        if ( account.isBlank() ){
+            return new ResponseEntity<>("PLease enter an account", HttpStatus.FORBIDDEN);
+        } else if ( client.getAccounts().stream().filter(accounts -> accounts.getNumber().equalsIgnoreCase(account)).collect(toList()).size() == 0 ){
+            return new ResponseEntity<>("This account is not yours.", HttpStatus.FORBIDDEN);}
+//      amount parameter
+        if ( amount < 1 ){
+            return new ResponseEntity<>("PLease enter an amount bigger than 0", HttpStatus.FORBIDDEN);
+        }  else if ( accountAuthenticated.getBalance() < amount ){
+            return new ResponseEntity<>("Insufficient balance in your account " + accountAuthenticated.getNumber(), HttpStatus.FORBIDDEN);}
 
         Transaction newTransaction = new Transaction(TransactionType.DEBIT, amount, description , LocalDateTime.now());
         accountAuthenticated.addTransaction(newTransaction);

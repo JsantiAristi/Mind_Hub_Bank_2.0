@@ -1,7 +1,6 @@
 package com.mindhub.homebanking.services.implement;
 
 import com.mindhub.homebanking.Models.ClientLoan;
-import com.mindhub.homebanking.dtos.ClientLoanDTO;
 import com.mindhub.homebanking.repositories.ClientLoanRepository;
 import com.mindhub.homebanking.services.ClientLoanService;
 import org.springframework.beans.factory.annotation.Autowired;

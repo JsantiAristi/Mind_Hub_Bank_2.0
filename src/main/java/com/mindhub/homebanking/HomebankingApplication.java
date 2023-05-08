@@ -37,7 +37,7 @@ public class HomebankingApplication {
 			Client client3 = new Client("Carlos" , "Hinestrosa" , "Carlos12@yahoo.com" , "../../assets/chico.png" ,passwordEncoder.encode("carlongas"));
 			clientRepository.save(client3);
 
-			Account account1 = new Account("VIN-001", LocalDateTime.now() , 5000.00);
+			Account account1 = new Account("VIN-001", LocalDateTime.now() , 500000.00);
 			client1.addAccount(account1);
 			accountRepository.save(account1);
 			Account account2 = new Account("VIN-002", LocalDateTime.now().plusDays(1) , 7500.00);

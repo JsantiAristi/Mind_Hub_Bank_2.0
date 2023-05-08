@@ -115,7 +115,7 @@
             <h2 class="pagetittles p-2 mt-5 fs-1">Your Loans</h2>
             <template v-if="loans.length">
                 <div class="d-flex flex-wrap justify-content-center">
-                    <template v-for="loan of data.loans">
+                    <template v-for="loan of loans">
                         <div class="userContainer d-flex justify-content-center p-4">
                             <div class="box d-flex flex-column justify-content-between">
                                 <span class="title text-start">{{loan.name}}</span>
@@ -238,15 +238,15 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form class="d-flex flex-column justify-content-center align-items-center">
+                            <form class="d-flex flex-column justify-content-center align-items-center" @submit.prevent="payLoan">
                                 <div class="form-check">
                                     <div>
                                         <label for="quota" class="pe-5 form-check-label">Pay Quota: ${{quotas.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</label>
-                                        <input type="radio" name="Quotas" id="quota" class="form-check-input">
+                                        <input type="radio" name="Quotas" id="quota" class="form-check-input" :value="quotas.toFixed(2)" v-model="amount">
                                     </div>
                                     <div>
-                                        <label for="total" class="pe-5 form-check-label">Pay total: ${{this.totalPay.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</label>
-                                        <input type="radio" name="Quotas" id="total" class="form-check-input">
+                                        <label for="total" class="pe-5 form-check-label">Pay total: ${{totalPay.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</label>
+                                        <input type="radio" name="Quotas" id="total" class="form-check-input" :value="totalPay.toFixed(2)" v-model="amount">
                                     </div>                          
                                 </div>                        
                                 <div class="mb-3 mt-3 d-flex align-items-center">
@@ -260,7 +260,7 @@
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-outline-success mb-3 mt-3 fs-4">Pay</button>
-                            </form>                    
+                            </form>                  
                         </div>
                     </div>
                 </div>

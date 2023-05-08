@@ -295,7 +295,7 @@ main {
 }
 
 /* Modal */
-.modal {
+#exampleModal {
     z-index: 3000;
 }
 

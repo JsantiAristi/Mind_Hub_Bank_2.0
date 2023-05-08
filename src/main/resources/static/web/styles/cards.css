@@ -399,6 +399,19 @@ main {
     height: 18rem;
 }
 
+/*create new card*/
+.btn-outline-success{
+    --bs-btn-color : black;
+    --bs-btn-border-color : #fff;
+    box-shadow: 0px 0px 25px 1px #ffbb763f;
+}
+
+.btn:hover{
+    background-color: #b887579c;
+    border-color: #fff;
+    color: #000;
+}
+
 /* Scroll */
 body::-webkit-scrollbar {
     width: 10px;

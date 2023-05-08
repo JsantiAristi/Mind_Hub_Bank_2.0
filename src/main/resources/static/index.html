@@ -15,8 +15,10 @@
 
 <body class="hidden">
     <div class="center" id="onload">
-        <div class="lds-circle"><div></div></div>
-    </div>   
+        <div class="lds-circle">
+            <div></div>
+        </div>
+    </div>
     <header>
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container">
@@ -161,7 +163,9 @@
                                         </div>
                                         <div class="card-content">
                                             <h2 class="name">David</h2>
-                                            <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis corporis dolor reiciendis facilis voluptate error eveniet</p>
+                                            <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing
+                                                elit. Veritatis corporis dolor reiciendis facilis voluptate error
+                                                eveniet</p>
                                         </div>
                                     </div>
                                 </div>
@@ -175,16 +179,39 @@
             <div class="swiper-button-next"></div>
         </div>
     </main>
-    <footer class="bg-dark d-flex justify-content-evenly align-items-center pt-3 pb-3">
-        <div class="d-flex">
-            <a class="link-opacity-50-hover link-success" href="https://www.linkedin.com/in/santiago-aristizabal-restrepo-a17015221/"><p class="text-white mb-0 pe-2">Santiago Aristizabal</p></a>
-            <p class="text-danger mb-0">Cohort 44</p>
+    <footer class="bg-dark text-white p-3">
+        <div class="d-flex justify-content-between flex-wrap">
+            <div>
+                <h3>Contacto</h3>
+                <p>Teléfono: +1 123-456-7890</p>
+                <p>Correo electrónico: mindhub@gmail.com</p>
+                <div class="d-flex">
+                    <a class="link-opacity-50-hover link-success"
+                        href="https://www.linkedin.com/in/santiago-aristizabal-restrepo-a17015221/">
+                        <p class="text-white mb-0 pe-2">Santiago Aristizabal</p>
+                    </a>
+                    <p class="text-danger mb-0 pe-2">Cohort 44</p>
+                    <a href="https://github.com/JsantiAristi" target="_blank"><img src="../../assets/github (1).png" alt=""
+                        class="socialIcon"></a>
+                </div>
+            </div>
+            <div class="pt-3 pt-sm-0">
+                <h3>Dirección</h3>
+                <p>123 Calle Principal</p>
+                <p>Medellín, Colombia</p>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31230.05536071407!2d-122.43129716205499!3d37.77397288185648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMTAnMzguNiJOIDEyMjPCsDE1JzI3LjMiRQ!5e0!3m2!1sen!2sus!4v1557222375536!5m2!1sen!2sus"
+                    width="200" height="150" frameborder="0" class="rounded" allowfullscreen></iframe>
+            </div>
         </div>
-        <div class="bg-white p-1 rounded">
-            <a href="https://www.instagram.com/santi_aristi__/" target="_blank"><img src="./assets/instagram.png" alt=""
-                    class="socialIcon"></a>
-            <a href="https://github.com/JsantiAristi" target="_blank"><img src="./assets/github (1).png" alt=""
-                    class="socialIcon"></a>
+        <hr>
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                <p>© 2023. All rights reserved.</p>
+            </div>
+            <div>
+                <a href="#">Política de privacidad</a>
+            </div>
         </div>
     </footer>
     <!-- Modal -->
@@ -198,7 +225,8 @@
                     <form class="form" @submit.prevent="signIn">
                         <p class="form-title">Sign in to your account</p>
                         <div class="input-container">
-                            <input placeholder="Email Adress" type="text" name="emailAdress" v-model="emailAdress" required>
+                            <input placeholder="Email Adress" type="text" name="emailAdress" v-model="emailAdress"
+                                required>
                             <span>
                                 <svg stroke="currentColor" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -209,7 +237,8 @@
                             </span>
                         </div>
                         <div class="input-container">
-                            <input placeholder="Enter password" type="password" name="password" v-model="password" required>
+                            <input placeholder="Enter password" type="password" name="password" v-model="password"
+                                required>
                             <span>
                                 <svg stroke="currentColor" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">

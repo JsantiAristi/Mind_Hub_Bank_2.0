@@ -7,7 +7,8 @@ createApp({
             data: [],
             selectInput: "",
             checked : "",
-            amount: 0,
+            amount: "",
+            amountModal: 0,
             dataFilter : "",
             idLoan : "",
             data2 : "",
@@ -103,6 +104,7 @@ createApp({
             })
         },
         interestRatio(){
+            this.amountModal = this.amount;
             this.amountInterest = this.amount * 1.2;
             this.quotas = this.amountInterest / this.selectInput;
         },
@@ -113,3 +115,4 @@ window.onload = function(){
     $('#onload').fadeOut();
     $('body').removeClass("hidden");
 }
+
