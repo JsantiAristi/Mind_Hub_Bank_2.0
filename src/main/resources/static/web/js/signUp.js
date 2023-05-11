@@ -20,7 +20,7 @@ createApp({
                 confirmButtonColor: "#7c601893",
                 footer: '<p data-bs-toggle="modal" data-bs-target="#exampleModal">See our Privacy Policy</p>',
                 preConfirm: () => {
-                    return axios.post('/api/clients', `firstName=${this.firstName}&lastName=${this.secondName}&emailAdress=${this.emailAdress}&password=${this.password}`)
+                    return axios.post('/api/clients', `firstName=${this.firstName}&lastName=${this.secondName}&emailAddress=${this.emailAdress}&password=${this.password}`)
                         .then(response =>
                             axios.post('/api/login', `emailAdress=${this.emailAdress}&password=${this.password}`)
                             .then(response => window.location.href = "/web/pages/accounts.html")
