@@ -37,6 +37,11 @@ public class AccountServiceImplement implements AccountService {
     }
 
     @Override
+    public Account getAccountByID(Long id) {
+        return accountRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public Account getAccountAuthenticated(String number) {
         return accountRepository.findByNumber(number.toUpperCase());
     }

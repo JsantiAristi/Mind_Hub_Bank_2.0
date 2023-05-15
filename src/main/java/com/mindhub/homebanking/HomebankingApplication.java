@@ -1,6 +1,7 @@
 package com.mindhub.homebanking;
 
 import com.mindhub.homebanking.Models.*;
+import com.mindhub.homebanking.Utils.CardUtils;
 import com.mindhub.homebanking.repositories.*;
 import com.mindhub.homebanking.services.AccountService;
 import com.mindhub.homebanking.services.CardService;
@@ -34,43 +35,35 @@ public class HomebankingApplication {
 //			clientRepository.save(client1);
 //			Client client2 = new Client("Santiago" , "Aristizabal" , "jsanti@gmail.com" , "../../assets/chico.png" , passwordEncoder.encode("santi123"));
 //			clientRepository.save(client2);
-//			Client client3 = new Client("Carlos" , "Hinestrosa" , "Carlos12@yahoo.com" , "../../assets/chico.png" ,passwordEncoder.encode("carlongas"));
-//			clientRepository.save(client3);
 //
-//			Account account1 = new Account("VIN-001", LocalDateTime.now() , 500000.00);
+//			Account account1 = new Account(AccountType.SAVING,"VIN-001", LocalDateTime.now() , 500000.00, true);
 //			client1.addAccount(account1);
 //			accountRepository.save(account1);
-//			Account account2 = new Account("VIN-002", LocalDateTime.now().plusDays(1) , 7500.00);
+//			Account account2 = new Account(AccountType.CURRENT,"VIN-002", LocalDateTime.now().plusDays(1) , 7500.00, true);
 //			client1.addAccount(account2);
 //			accountRepository.save(account2);
-//			Account account3 = new Account(accountService.aleatoryNumber(), LocalDateTime.now().plusDays(2) , 120000.50);
+//			Account account3 = new Account(AccountType.SAVING, accountService.aleatoryNumber(), LocalDateTime.now().plusDays(2) , 120000.50, true);
 //			client2.addAccount(account3);
 //			accountRepository.save(account3);
-//			Account account4 = new Account(accountService.aleatoryNumber(), LocalDateTime.now() , 500.50);
-//			client3.addAccount(account4);
-//			accountRepository.save(account4);
 //
-//			Transaction transaction1 = new Transaction(TransactionType.DEBIT , 1000.00 , "Videogames" , LocalDateTime.now());
+//			Transaction transaction1 = new Transaction(TransactionType.DEBIT , 1000.00 , "Videogames" , LocalDateTime.now(), true);
 //			account1.addTransaction(transaction1);
 //			transactionRepository.save(transaction1);
-//			Transaction transaction2 = new Transaction(TransactionType.CREDIT , 2000.00 , "Alcohol" , LocalDateTime.now().plusDays(2));
+//			Transaction transaction2 = new Transaction(TransactionType.CREDIT , 2000.00 , "Alcohol" , LocalDateTime.now().plusDays(2), true);
 //			account2.addTransaction(transaction2);
 //			transactionRepository.save(transaction2);
-//			Transaction transaction3 = new Transaction(TransactionType.DEBIT , 1000.00 , "Food" , LocalDateTime.now().plusDays(1));
+//			Transaction transaction3 = new Transaction(TransactionType.DEBIT , 1000.00 , "Food" , LocalDateTime.now().plusDays(1), true);
 //			account3.addTransaction(transaction3);
 //			transactionRepository.save(transaction3);
-//			Transaction transaction4 = new Transaction(TransactionType.DEBIT , 250.00 , "Groseries" , LocalDateTime.now().minusDays(2));
+//			Transaction transaction4 = new Transaction(TransactionType.DEBIT , 250.00 , "Groseries" , LocalDateTime.now().minusDays(2), true);
 //			account1.addTransaction(transaction4);
 //			transactionRepository.save(transaction4);
-//			Transaction transaction5 = new Transaction(TransactionType.CREDIT , 600.00 , "Cigarettes" , LocalDateTime.now().plusDays(1));
+//			Transaction transaction5 = new Transaction(TransactionType.CREDIT , 600.00 , "Cigarettes" , LocalDateTime.now().plusDays(1), true);
 //			account1.addTransaction(transaction5);
 //			transactionRepository.save(transaction5);
-//			Transaction transaction6 = new Transaction(TransactionType.CREDIT , 450.10 , "Drinks" , LocalDateTime.now().minusDays(1));
+//			Transaction transaction6 = new Transaction(TransactionType.CREDIT , 450.10 , "Drinks" , LocalDateTime.now().minusDays(1), true);
 //			account3.addTransaction(transaction6);
 //			transactionRepository.save(transaction6);
-//			Transaction transaction7 = new Transaction(TransactionType.DEBIT , 1250.00 , "Home" , LocalDateTime.now().minusDays(5));
-//			account3.addTransaction(transaction7);
-//			transactionRepository.save(transaction7);
 //
 //			Loan loan1 = new Loan("Mortgage" , 500000.00 , List.of(12, 24, 36, 48, 60) , "Allows you to buy a property without having to pay the full purchase price upfront.");
 //			loanRepository.save(loan1);
@@ -96,16 +89,16 @@ public class HomebankingApplication {
 //			loan3.addClientLoan(clientLoan4);
 //			clientLoanRepository.save(clientLoan4);
 //
-//			Card card1 = new Card(CardType.DEBIT , CardColor.GOLD , cardService.aleatoryNumberCards() , cardService.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
+//			Card card1 = new Card(CardType.DEBIT , CardColor.GOLD , cardService.aleatoryNumberCardsNotRepeat(), CardUtils.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5), true);
 //			client1.addCard(card1);
 //			cardRepository.save(card1);
-//			Card card2 = new Card(CardType.CREDIT , CardColor.TITANIUM , cardService.aleatoryNumberCards() , cardService.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
+//			Card card2 = new Card(CardType.CREDIT , CardColor.TITANIUM , cardService.aleatoryNumberCardsNotRepeat(), CardUtils.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5), true);
 //			client1.addCard(card2);
 //			cardRepository.save(card2);
-//			Card card3 = new Card(CardType.CREDIT , CardColor.SILVER , cardService.aleatoryNumberCards() , cardService.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
+//			Card card3 = new Card(CardType.CREDIT , CardColor.SILVER , cardService.aleatoryNumberCardsNotRepeat(), CardUtils.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5), true);
 //			client2.addCard(card3);
 //			cardRepository.save(card3);
-//			Card card4 = new Card(CardType.CREDIT , CardColor.TITANIUM , cardService.aleatoryNumberCards() , cardService.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5));
+//			Card card4 = new Card(CardType.CREDIT , CardColor.TITANIUM , cardService.aleatoryNumberCardsNotRepeat(), CardUtils.aleatoryNumberCvv() , LocalDate.now().minusYears(5) , LocalDate.now().minusDays(1), true);
 //			client2.addCard(card4);
 //			cardRepository.save(card4);
 //		};

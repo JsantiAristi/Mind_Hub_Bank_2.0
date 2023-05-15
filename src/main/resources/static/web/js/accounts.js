@@ -15,6 +15,7 @@ createApp({
             account: "",
             amount: "",
             totalPay: 0,
+            accountType: "",
         }
     },
     created() {
@@ -29,7 +30,7 @@ createApp({
                     this.data = response.data
                     this.loans = this.data.loans.filter(loan => loan.finalAmount > 0);
                     console.log(this.loans);
-                    this.accounts = this.data.accounts
+                    this.accounts = this.data.accounts.filter(account => account.active);
 
                     for (account of this.data.accounts) {
                         this.totalBalance += account.balance;
@@ -72,7 +73,7 @@ createApp({
                 confirmButtonColor: "#7c601893",
                 footer: '<p data-bs-toggle="modal" data-bs-target="#exampleModal">See our Privacy Policy</p>',
                 preConfirm: () => {
-                    return axios.post('/api/clients/current/accounts')
+                    return axios.post('/api/clients/current/accounts',`accountType=${this.accountType}`)
                         .then(response => window.location.href="/web/pages/accounts.html")
                         .catch(error => {
                             Swal.fire({
@@ -108,6 +109,36 @@ createApp({
                             Swal.fire({
                                 icon: 'success',
                                 text: 'Payment Success',
+                                showConfirmButton: false,
+                                timer: 2000,
+                            }).then( () => window.location.href="/web/pages/accounts.html")
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                icon: 'error',
+                                text: error.response.data,
+                                confirmButtonColor: "#7c601893",
+                            })
+                        })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            })
+        },
+        deleteAccount(id){
+            Swal.fire({
+                title: 'Are you sure that you want to delete this account?',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Sure',
+                confirmButtonColor: "#7c601893",
+                preConfirm: () => {
+                    return axios.put('/api/clients/current/accounts', `idAccount=${id}`)
+                    .then(response => {
+                            Swal.fire({
+                                icon: 'success',
+                                text: 'account deleted',
                                 showConfirmButton: false,
                                 timer: 2000,
                             }).then( () => window.location.href="/web/pages/accounts.html")

@@ -10,6 +10,7 @@ createApp({
         checked : "",
         filterData : [],
         selectInput: "Open this select menu",
+        totalBalance: 0,
         }
     },
     created(){
@@ -22,7 +23,9 @@ createApp({
             axios.get('http://localhost:8080/api/clients/current/accounts/' + this.id)
             .then(response => {
                 this.data = response.data;
+                this.totalBalance = this.data.balance;
                 this.filterData = response.data.transactions;
+                console.log(this.data);
 
                 this.datos.transactions.sort((transaction1, transaction2) => {
                     return (transaction2.date.slice(0,4) + transaction2.date.slice(5,7) + transaction2.date.slice(8,10)) - (transaction1.date.slice(0,4) + transaction1.date.slice(5,7) + transaction1.date.slice(8,10));

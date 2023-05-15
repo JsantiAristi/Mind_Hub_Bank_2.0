@@ -28,7 +28,7 @@ public class LoanController {
     @Autowired
     ClientLoanService clientLoanService;
 
-    @RequestMapping("/api/loans")
+    @GetMapping("/api/loans")
     public List<LoanDTO> getLoans() {
         return loanService.getLoanDTO();
     }
@@ -72,7 +72,7 @@ public class LoanController {
         loan.get().addClientLoan(clientLoan);
         clientLoanService.saveClientLoan(clientLoan);
 
-        Transaction newTransaction = new Transaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), description , LocalDateTime.now());
+        Transaction newTransaction = new Transaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), description , LocalDateTime.now(), true);
         accountAuthenticated.addTransaction(newTransaction);
         transactionService.saveTransaction(newTransaction);
 
@@ -105,7 +105,7 @@ public class LoanController {
         }  else if ( accountAuthenticated.getBalance() < amount ){
             return new ResponseEntity<>("Insufficient balance in your account " + accountAuthenticated.getNumber(), HttpStatus.FORBIDDEN);}
 
-        Transaction newTransaction = new Transaction(TransactionType.DEBIT, amount, description , LocalDateTime.now());
+        Transaction newTransaction = new Transaction(TransactionType.DEBIT, amount, description , LocalDateTime.now(), true);
         accountAuthenticated.addTransaction(newTransaction);
         transactionService.saveTransaction(newTransaction);
 

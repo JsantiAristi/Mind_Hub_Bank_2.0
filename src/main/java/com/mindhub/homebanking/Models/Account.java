@@ -12,9 +12,11 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO , generator = "native")
     @GenericGenerator(name="native",strategy = "native")
     private long id;
+    private AccountType accountType;
     private String number;
     private LocalDateTime creationDate;
     private double balance;
+    private boolean active;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="client")
     private Client client;
@@ -25,10 +27,12 @@ public class Account {
     public Account() {
     }
 
-    public Account(String number, LocalDateTime creationDate, double balance) {
+    public Account(AccountType accountType, String number, LocalDateTime creationDate, double balance, boolean active) {
+        this.accountType = accountType;
         this.number = number;
         this.creationDate = creationDate;
         this.balance = balance;
+        this.active = active;
     }
 
     // Método para añadir transacciones
@@ -41,6 +45,7 @@ public class Account {
     public long getId() {
         return id;
     }
+    public AccountType getAccountType() {return accountType;}
     public String getNumber() {
         return number;
     }
@@ -54,8 +59,10 @@ public class Account {
         return client;
     }
     public Set<Transaction> getTransactions() { return transactions; }
+    public boolean isActive() {return active;}
 
     // Setter
+    public void setAccountType(AccountType accountType) {this.accountType = accountType;}
     public void setNumber(String number) {
         this.number = number;
     }
@@ -68,4 +75,5 @@ public class Account {
     public void setClient(Client client) {
         this.client = client;
     }
+    public void setActive(boolean active) {this.active = active;}
 }

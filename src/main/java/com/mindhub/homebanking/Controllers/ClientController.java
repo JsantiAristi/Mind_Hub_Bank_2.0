@@ -1,6 +1,7 @@
 package com.mindhub.homebanking.Controllers;
 
 import com.mindhub.homebanking.Models.Account;
+import com.mindhub.homebanking.Models.AccountType;
 import com.mindhub.homebanking.Models.Client;
 import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.services.AccountService;
@@ -24,12 +25,12 @@ public class ClientController {
     private AccountService accountService;
 
     // Servlets
-    @RequestMapping("/api/clients")
+    @GetMapping("/api/clients")
     public List<ClientDTO> getClients(){
        return clientService.getClientsDTO();
     }
 
-    @RequestMapping("/api/clients/current")
+    @GetMapping("/api/clients/current")
     public ClientDTO getClient (Authentication authentication) {
         return clientService.getClientDTO(authentication);
     }
@@ -56,7 +57,7 @@ public class ClientController {
 //         Create de new client and a new account
                 Client newClient = new Client(firstName, lastName, emailAddress, "../../assets/chico.png" , passwordEncoder.encode(password));
                 clientService.saveClient(newClient);
-                Account newAccount = new Account(accountService.aleatoryNumberNotRepeat(), LocalDateTime.now(), 0.00);
+                Account newAccount = new Account(AccountType.SAVING,accountService.aleatoryNumberNotRepeat(), LocalDateTime.now(), 0.00, true);
                 newClient.addAccount(newAccount);
                 accountService.saveAccount(newAccount);
 
