@@ -56,13 +56,12 @@ public class RepositoriesTest {
     @Test
     public void CreditTransaction(){
         List<Transaction> transactionsCredit = transactionRepository.findAll().stream().filter( transaction -> transaction.getType() ==  TransactionType.CREDIT).collect(Collectors.toList());
-        assertThat(transactionsCredit,hasItem(hasProperty("amount",is(not(greaterThanOrEqualTo(0.0))))));
-    }
+        assertThat(transactionsCredit,hasItem(hasProperty("amount",is(not(greaterThanOrEqualTo(0.0))))));}
+
     @Test
     public void DebitTransaction(){
         List<Transaction> transactionsDebit = transactionRepository.findAll().stream().filter( transaction -> transaction.getType() ==  TransactionType.DEBIT).collect(Collectors.toList());
-        assertThat(transactionsDebit,hasItem(hasProperty("amount",is(greaterThanOrEqualTo(0.0)))));
-    }
+        assertThat(transactionsDebit,hasItem(hasProperty("amount",is(greaterThanOrEqualTo(0.0)))));}
 
     @Test
     public void existTransactionWithoutAccount(){

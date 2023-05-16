@@ -25,12 +25,11 @@ createApp({
         loadData() {
             axios.get('http://localhost:8080/api/clients/current')
                 .then(response => {
-                    console.log(response.data);
-
                     this.data = response.data
                     this.loans = this.data.loans.filter(loan => loan.finalAmount > 0);
                     console.log(this.loans);
                     this.accounts = this.data.accounts.filter(account => account.active);
+                    console.log(this.accounts);
 
                     for (account of this.data.accounts) {
                         this.totalBalance += account.balance;

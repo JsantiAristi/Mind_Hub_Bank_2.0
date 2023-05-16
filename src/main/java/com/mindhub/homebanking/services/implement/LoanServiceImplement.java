@@ -24,8 +24,8 @@ public class LoanServiceImplement implements LoanService {
     }
 
     @Override
-    public Optional<Loan> loanById(long id) {
-        return loanRepository.findById(id);
+    public Loan loanById(long id) {
+        return loanRepository.findById(id).orElse(null);
     }
 
     @Override

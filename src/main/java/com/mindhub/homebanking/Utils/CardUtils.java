@@ -1,8 +1,5 @@
 package com.mindhub.homebanking.Utils;
 
-import com.mindhub.homebanking.repositories.CardRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
 public final class CardUtils {
 
     private CardUtils() {

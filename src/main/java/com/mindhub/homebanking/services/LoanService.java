@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface LoanService {
     void saveLoan(Loan loan);
-    Optional<Loan> loanById(long id);
+    Loan loanById(long id);
     List<LoanDTO> getLoanDTO();
 }

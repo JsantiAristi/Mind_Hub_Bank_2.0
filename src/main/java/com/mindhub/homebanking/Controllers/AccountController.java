@@ -38,7 +38,8 @@ public class AccountController {
     public ResponseEntity<Object> newAccount (Authentication authentication, @RequestParam String accountType) {
 
         Client client = clientService.getClientAuthenticated(authentication);
-        List<Account> accounts = client.getAccounts().stream().filter(Account::isActive).collect(toList());
+        List<Account> accountsActive = client.getAccounts().stream().filter(Account::isActive).collect(toList());
+        Set<Account> accounts = client.getAccounts();
 
         if (client == null){
             return new ResponseEntity<>("You can´t create an account, because you are not a client", HttpStatus.FORBIDDEN);}
@@ -46,7 +47,7 @@ public class AccountController {
         if ( !accountType.equalsIgnoreCase("SAVING") && !accountType.equalsIgnoreCase("CURRENT")){
             return new ResponseEntity<>("Please select a correct type of account.", HttpStatus.FORBIDDEN);}
 
-        if ( accounts.size() <= 2 ){
+        if ( accountsActive.size() <= 2 && accounts.size() <= 15 ){
             Account newAccount = new Account(AccountType.valueOf(accountType.toUpperCase()), accountService.aleatoryNumberNotRepeat(), LocalDateTime.now(), 0.00, true);
             clientService.getClientAuthenticated(authentication).addAccount(newAccount);
             accountService.saveAccount(newAccount);

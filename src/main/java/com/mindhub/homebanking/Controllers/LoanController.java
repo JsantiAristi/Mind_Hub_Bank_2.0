@@ -1,6 +1,7 @@
 package com.mindhub.homebanking.Controllers;
 
 import com.mindhub.homebanking.Models.*;
+import com.mindhub.homebanking.Utils.LoanUtil;
 import com.mindhub.homebanking.dtos.LoanApplicationDTO;
 import com.mindhub.homebanking.dtos.LoanDTO;
 import com.mindhub.homebanking.services.*;
@@ -32,26 +33,27 @@ public class LoanController {
     public List<LoanDTO> getLoans() {
         return loanService.getLoanDTO();
     }
+
     @Transactional
     @PostMapping("/api/loans")
     public ResponseEntity<Object> newLoan(Authentication authentication , @RequestBody LoanApplicationDTO loanApplicationDTO) {
 
         Client client = clientService.getClientAuthenticated(authentication);
-        Optional<Loan> loan = loanService.loanById(loanApplicationDTO.getId());
+        Loan loan = loanService.loanById(loanApplicationDTO.getId());
         Account accountAuthenticated = accountService.getAccountAuthenticatedDTO(loanApplicationDTO);
-        String description = loan.get().getName() + " loan approve";
+        String description = loan.getName() + " loan approve";
 
 //      loan and ID property
-        if ( loan.isEmpty() ){
+        if ( loan == null ){
             return new ResponseEntity<>("This loan doesn't exist", HttpStatus.FORBIDDEN);}
 //      amount property
         if (loanApplicationDTO.getAmount().isNaN() || loanApplicationDTO.getAmount() < 1) {
             return new ResponseEntity<>("Please enter an amount of loan bigger than 0", HttpStatus.FORBIDDEN);
-        } else if( loanApplicationDTO.getAmount() > loan.get().getMaxAmount() ){
+        } else if( loanApplicationDTO.getAmount() > loan.getMaxAmount() ){
             return new ResponseEntity<>("You can't request a value bigger than the original loan", HttpStatus.FORBIDDEN);
         }
 //       payments property
-        if ( !loan.get().getPayments().contains(loanApplicationDTO.getPayments()) ) {
+        if ( !loan.getPayments().contains(loanApplicationDTO.getPayments()) ) {
             return new ResponseEntity<>("Please verify that you enter a valid number of payments of the Loan that you want to select", HttpStatus.FORBIDDEN);}
 //      account property
         if (loanApplicationDTO.getAccount().isBlank()) {
@@ -62,21 +64,21 @@ public class LoanController {
             return new ResponseEntity<>("This account is not yours.", HttpStatus.FORBIDDEN);}
 
         for (ClientLoan clientLoan : client.getClientLoans()) {
-            if (clientLoan.getLoan().getName().equalsIgnoreCase(loan.get().getName()) && clientLoan.getFinalAmount() > 0) {
-                return new ResponseEntity<>("You already have a " + loan.get().getName() + " loan in your account", HttpStatus.FORBIDDEN);
+            if (clientLoan.getLoan().getName().equalsIgnoreCase(loan.getName()) && clientLoan.getFinalAmount() > 0) {
+                return new ResponseEntity<>("You already have a " + loan.getName() + " loan in your account", HttpStatus.FORBIDDEN);
             }
         }
 
-        ClientLoan clientLoan = new ClientLoan( loanApplicationDTO.getAmount(), loanApplicationDTO.getAmount() + loanApplicationDTO.getAmount()*0.2 , loanApplicationDTO.getPayments());
+        ClientLoan clientLoan = new ClientLoan( loanApplicationDTO.getAmount(), loanApplicationDTO.getAmount() * LoanUtil.calculateLoan(loan), loanApplicationDTO.getPayments());
         client.addClientLoan(clientLoan);
-        loan.get().addClientLoan(clientLoan);
+        loan.addClientLoan(clientLoan);
         clientLoanService.saveClientLoan(clientLoan);
 
-        Transaction newTransaction = new Transaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), description , LocalDateTime.now(), true);
+        accountAuthenticated.setBalance( accountAuthenticated.getBalance() + loanApplicationDTO.getAmount() );
+
+        Transaction newTransaction = new Transaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), description , LocalDateTime.now(), true, accountAuthenticated.getBalance());
         accountAuthenticated.addTransaction(newTransaction);
         transactionService.saveTransaction(newTransaction);
-
-        accountAuthenticated.setBalance( accountAuthenticated.getBalance() + loanApplicationDTO.getAmount() );
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -105,12 +107,26 @@ public class LoanController {
         }  else if ( accountAuthenticated.getBalance() < amount ){
             return new ResponseEntity<>("Insufficient balance in your account " + accountAuthenticated.getNumber(), HttpStatus.FORBIDDEN);}
 
-        Transaction newTransaction = new Transaction(TransactionType.DEBIT, amount, description , LocalDateTime.now(), true);
+        accountAuthenticated.setBalance( accountAuthenticated.getBalance() - amount );
+        clientLoan.setFinalAmount( clientLoan.getFinalAmount() - amount);
+
+        Transaction newTransaction = new Transaction(TransactionType.DEBIT, amount, description , LocalDateTime.now(), true, accountAuthenticated.getBalance());
         accountAuthenticated.addTransaction(newTransaction);
         transactionService.saveTransaction(newTransaction);
 
-        accountAuthenticated.setBalance( accountAuthenticated.getBalance() - amount );
-        clientLoan.setFinalAmount( clientLoan.getFinalAmount() - amount);
+        if ( amount < clientLoan.getFinalAmount() ){
+            clientLoan.setPayments(clientLoan.getPayments() - 1 );
+        } else {
+            clientLoan.setPayments(0);
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/api/loans/manager")
+    public ResponseEntity<Object> newLoanAdmin(@RequestBody Loan loan) {
+
+        Loan loan1 = new Loan(loan.getName(), loan.getMaxAmount() , loan.getPayments() , loan.getDescriptionLoan());
+        loanService.saveLoan(loan1);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

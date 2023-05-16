@@ -35,13 +35,14 @@ public class CardController {
             Authentication authentication , @RequestParam String type, @RequestParam String color){
 
         Client client = clientService.getClientAuthenticated(authentication);
+        Set<Card> cards = client.getCards();
 
+        if (client == null){
+            return new ResponseEntity<>("You can´t create a card, because you are not a client", HttpStatus.FORBIDDEN);};
         if ( !type.equalsIgnoreCase("CREDIT")  && !type.equalsIgnoreCase("DEBIT")) {
             return new ResponseEntity<>(type + " is an incorrect type of card", HttpStatus.FORBIDDEN);}
         if ( !color.equalsIgnoreCase("TITANIUM") && !color.equalsIgnoreCase("GOLD") && !color.equalsIgnoreCase("SILVER")) {
             return new ResponseEntity<>(color + " is an incorrect color of card", HttpStatus.FORBIDDEN);}
-        if (client == null){
-            return new ResponseEntity<>("You can´t create a card, because you are not a client", HttpStatus.FORBIDDEN);};
 
         for (Card card : client.getCards()) {
             if (card.getType().equals(CardType.valueOf(type.toUpperCase())) && card.getColor().equals(CardColor.valueOf(color.toUpperCase())) && card.isActive()) {
@@ -49,9 +50,13 @@ public class CardController {
             }
         }
 
-        Card newCard = new Card(CardType.valueOf(type.toUpperCase()), CardColor.valueOf(color.toUpperCase()), cardService.aleatoryNumberCardsNotRepeat() , CardUtils.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5), true);
-        client.addCard(newCard);
-        cardService.saveCard(newCard);
+        if ( cards.size() <= 15){
+            Card newCard = new Card(CardType.valueOf(type.toUpperCase()), CardColor.valueOf(color.toUpperCase()), cardService.aleatoryNumberCardsNotRepeat() , CardUtils.aleatoryNumberCvv() , LocalDate.now() , LocalDate.now().plusYears(5), true);
+            client.addCard(newCard);
+            cardService.saveCard(newCard);
+        } else {
+            return new ResponseEntity<>("You can't request more than 15 cards, please contact us", HttpStatus.FORBIDDEN);
+        }
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

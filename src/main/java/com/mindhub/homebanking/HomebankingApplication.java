@@ -46,24 +46,12 @@ public class HomebankingApplication {
 //			client2.addAccount(account3);
 //			accountRepository.save(account3);
 //
-//			Transaction transaction1 = new Transaction(TransactionType.DEBIT , 1000.00 , "Videogames" , LocalDateTime.now(), true);
+//			Transaction transaction1 = new Transaction(TransactionType.DEBIT , 1000.00 , "Videogames" , LocalDateTime.now(), true, account1.getBalance());
 //			account1.addTransaction(transaction1);
 //			transactionRepository.save(transaction1);
-//			Transaction transaction2 = new Transaction(TransactionType.CREDIT , 2000.00 , "Alcohol" , LocalDateTime.now().plusDays(2), true);
+//			Transaction transaction2 = new Transaction(TransactionType.CREDIT , 2000.00 , "Alcohol" , LocalDateTime.now().plusDays(2), true, account2.getBalance());
 //			account2.addTransaction(transaction2);
 //			transactionRepository.save(transaction2);
-//			Transaction transaction3 = new Transaction(TransactionType.DEBIT , 1000.00 , "Food" , LocalDateTime.now().plusDays(1), true);
-//			account3.addTransaction(transaction3);
-//			transactionRepository.save(transaction3);
-//			Transaction transaction4 = new Transaction(TransactionType.DEBIT , 250.00 , "Groseries" , LocalDateTime.now().minusDays(2), true);
-//			account1.addTransaction(transaction4);
-//			transactionRepository.save(transaction4);
-//			Transaction transaction5 = new Transaction(TransactionType.CREDIT , 600.00 , "Cigarettes" , LocalDateTime.now().plusDays(1), true);
-//			account1.addTransaction(transaction5);
-//			transactionRepository.save(transaction5);
-//			Transaction transaction6 = new Transaction(TransactionType.CREDIT , 450.10 , "Drinks" , LocalDateTime.now().minusDays(1), true);
-//			account3.addTransaction(transaction6);
-//			transactionRepository.save(transaction6);
 //
 //			Loan loan1 = new Loan("Mortgage" , 500000.00 , List.of(12, 24, 36, 48, 60) , "Allows you to buy a property without having to pay the full purchase price upfront.");
 //			loanRepository.save(loan1);
