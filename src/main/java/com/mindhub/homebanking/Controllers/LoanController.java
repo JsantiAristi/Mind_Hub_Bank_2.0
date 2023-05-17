@@ -69,7 +69,7 @@ public class LoanController {
             }
         }
 
-        ClientLoan clientLoan = new ClientLoan( loanApplicationDTO.getAmount(), loanApplicationDTO.getAmount() * LoanUtil.calculateLoan(loan), loanApplicationDTO.getPayments());
+        ClientLoan clientLoan = new ClientLoan( loanApplicationDTO.getAmount(), loanApplicationDTO.getAmount() * loan.getInterest(), loanApplicationDTO.getPayments());
         client.addClientLoan(clientLoan);
         loan.addClientLoan(clientLoan);
         clientLoanService.saveClientLoan(clientLoan);
@@ -95,7 +95,10 @@ public class LoanController {
         if( clientLoan == null ){
             return new ResponseEntity<>("This loan doesn't exist", HttpStatus.FORBIDDEN);
         } else if( client == null){
-            return new ResponseEntity<>("You are not registered as a client", HttpStatus.FORBIDDEN);}
+            return new ResponseEntity<>("You are not registered as a client", HttpStatus.FORBIDDEN);
+        } else if( clientLoan.getFinalAmount() == 0 ){
+            return new ResponseEntity<>("This loan is already paid", HttpStatus.FORBIDDEN);
+        }
 //        account parameter
         if ( account.isBlank() ){
             return new ResponseEntity<>("PLease enter an account", HttpStatus.FORBIDDEN);
@@ -125,11 +128,29 @@ public class LoanController {
     @PostMapping("/api/loans/manager")
     public ResponseEntity<Object> newLoanAdmin(@RequestBody Loan loan) {
 
-        Loan loan1 = new Loan(loan.getName(), loan.getMaxAmount() , loan.getPayments() , loan.getDescriptionLoan());
-        loanService.saveLoan(loan1);
+        if (loan.getName().isBlank()){
+            return new ResponseEntity<>("Please enter a name for the new loan", HttpStatus.FORBIDDEN);
+        } else if ( loan.getDescriptionLoan().isBlank() ){
+            return new ResponseEntity<>("Please enter a description for the new loan", HttpStatus.FORBIDDEN);
+        } else if( loan.getMaxAmount() < 1 ){
+            return new ResponseEntity<>("Please enter an amount bigger than 1", HttpStatus.FORBIDDEN);
+        } else if ( loan.getPayments().size() == 0 ){
+            return new ResponseEntity<>("Please enter a valid amount of payments", HttpStatus.FORBIDDEN);
+        } else if ( loan.getInterest() < 1 ){
+            return new ResponseEntity<>("Please enter an percentage of interest ", HttpStatus.FORBIDDEN);
+        }
+
+        for ( Loan loans : loanService.getLoan() ){
+            if ( loan.getName().equalsIgnoreCase(loans.getName()) ){
+                return new ResponseEntity<>("This type of loan " + loan.getName() + " is already used", HttpStatus.FORBIDDEN);}
+        };
+
+        Loan newLoan = new Loan(loan.getName(), loan.getMaxAmount() , loan.getPayments() , loan.getDescriptionLoan(), loan.getInterest());
+        loanService.saveLoan(newLoan);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
 
-
+//Agregar intereses dependiendo de las cuotas.
+//Implementar servicio de pagos con tarjetas y postnet

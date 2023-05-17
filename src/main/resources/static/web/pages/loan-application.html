@@ -57,11 +57,11 @@
             <h1 class="text-center pagetittles p-2 fs-1">Loans</h1>
             <div class="mt-4 mb-4 d-flex justify-content-center align-items-center flex-wrap gap-3">
                 <template v-for="loan of data">
-                    <div class="card" style="width: 19rem;">
+                    <div class="card" style="width: 19rem; height: 15rem;">
                         <div class="card-body">
                             <h4 class="card-title text-center">{{loan.name}}</h4>
-                            <p class="card-text text-center">{{loan.descriptionLoan}}</p>
-                            <p class="card-text text-center">20% interest rate.</p>
+                            <p class="card-text text-center desription_text">{{loan.descriptionLoan}}</p>
+                            <p class="card-text text-center">{{((loan.interest*100)-100).toFixed(0)}}% interest rate.</p>
                             <p class="card-text fw-bold text-center">Total Amount:
                                 ${{loan.maxAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
                         </div>
@@ -104,7 +104,7 @@
                                 <select class="form-select" aria-label="Default select example" v-model="account"
                                     required>
                                     <option selected class="fs-6" value="">Open this select menu</option>
-                                    <template v-for="account of data2.accounts">
+                                    <template v-for="account of accounts">
                                         <option :value="account.number" class="fs-6">{{account.number}}</option>
                                     </template>
                                 </select>

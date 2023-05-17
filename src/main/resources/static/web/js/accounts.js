@@ -27,9 +27,7 @@ createApp({
                 .then(response => {
                     this.data = response.data
                     this.loans = this.data.loans.filter(loan => loan.finalAmount > 0);
-                    console.log(this.loans);
                     this.accounts = this.data.accounts.filter(account => account.active);
-                    console.log(this.accounts);
 
                     for (account of this.data.accounts) {
                         this.totalBalance += account.balance;
@@ -89,7 +87,6 @@ createApp({
             this.dataFilter = this.loans.filter( loan => {
                 return event.target.alt.includes(loan.name)
             })[0]
-            console.log(this.dataFilter);
             this.quotas = this.dataFilter.finalAmount / this.dataFilter.payments;
             this.totalPay = this.dataFilter.finalAmount;
         },

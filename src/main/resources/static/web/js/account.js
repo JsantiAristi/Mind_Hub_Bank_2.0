@@ -11,6 +11,10 @@ createApp({
         filterData : [],
         selectInput: "Open this select menu",
         totalBalance: 0,
+        initDate: "",
+        finalDate: "",
+        transactionMax: [],
+        transactionMinus: [],
         }
     },
     created(){
@@ -25,6 +29,8 @@ createApp({
                 this.data = response.data;
                 this.totalBalance = this.data.balance;
                 this.filterData = response.data.transactions;
+                this.transactionMinus = this.data.transactions;
+
                 console.log(this.data);
 
                 this.datos.transactions.sort((transaction1, transaction2) => {
@@ -52,6 +58,43 @@ createApp({
                     return (transaction1.date.slice(0,4) + transaction1.date.slice(5,7) + transaction1.date.slice(8,10)) - (transaction2.date.slice(0,4) + transaction2.date.slice(5,7) + transaction2.date.slice(8,10));
                 })
             }
+        },
+        download(){
+            Swal.fire({
+                title: 'Confirm that you want to download your transactions in PDF',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Sure',
+                confirmButtonColor: "#7c601893",
+                preConfirm: () => {
+                    return axios.post('/api/clients/current/transactions/pdf',`id=${this.data.id}&initDate=${this.initDate}&finalDate=${this.finalDate}`)
+                    .then(response => {
+                        Swal.fire({
+                            icon: 'success',
+                            text: 'Please search in your documents',
+                            showConfirmButton: false,
+                            timer: 3000,
+                        }).then( () => window.location.href="/web/pages/accounts.html")
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            text: error.response.data,
+                            confirmButtonColor: "#7c601893",
+                        })
+                    })    
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            })
+        },
+        sortDate(){
+            this.transactionMinus.sort((transaction1, transaction2) => {
+                return (transaction1.date.slice(0,4) + transaction1.date.slice(5,7) + transaction1.date.slice(8,10)) - (transaction2.date.slice(0,4) + transaction2.date.slice(5,7) + transaction2.date.slice(8,10));
+            })
+            this.initDate = this.transactionMinus[0].date.slice(0,10);
+            this.finalDate = this.transactionMinus[this.transactionMinus.length - 1].date.slice(0,10);
         },
         singOut() {
             Swal.fire({

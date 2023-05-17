@@ -137,7 +137,7 @@
                                             ${{loan.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
                                         </p>
                                         <strong class="fs-4 mb-0">Total amount:</strong>
-                                        <p class="text-center">With interest of 20%</p>
+                                        <p class="text-center">With interest of {{((loan.interest*100)-100).toFixed(0)}}%</p>
                                         <p class="fs-4 text-center">
                                             ${{loan.finalAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
                                         </p>

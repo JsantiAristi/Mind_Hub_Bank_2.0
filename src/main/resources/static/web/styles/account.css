@@ -122,6 +122,27 @@ main {
     color: red;
 }
 
+/* createAccountText */
+.createAccountText{
+    cursor: pointer;
+}
+
+.btn-outline-success{
+    --bs-btn-color : black;
+    --bs-btn-border-color : #fff;
+    box-shadow: 0px 0px 25px 1px #ffbb763f;
+}
+
+.btn:hover{
+    background-color: #b887579c;
+    border-color: #fff;
+    color: #000;
+}
+
+#modalPDF .modal-body,  #modalPDF .modal-header {
+    background-color: rgb(220, 215, 215);
+}
+
 /* Scroll */
 body::-webkit-scrollbar {
     width: 10px;

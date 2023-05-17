@@ -32,4 +32,9 @@ public class LoanServiceImplement implements LoanService {
     public List<LoanDTO> getLoanDTO() {
         return loanRepository.findAll().stream().map(loan -> new LoanDTO(loan)).collect(toList());
     }
+
+    @Override
+    public List<Loan> getLoan() {
+        return loanRepository.findAll();
+    }
 }
