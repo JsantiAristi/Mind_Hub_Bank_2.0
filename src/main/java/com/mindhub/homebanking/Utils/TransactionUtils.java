@@ -12,6 +12,10 @@ public  class TransactionUtils {
         return new SimpleDateFormat("yyyy-MM-dd").parse(string);
     }
 
+    public static Date stringtoDateFinal (String string) throws ParseException {
+        return new SimpleDateFormat("yyyy-MM-dd").parse(string);
+    }
+
     public static LocalDateTime dateToLocalDateTime (Date date){
         return date.toInstant()
                 .atZone(ZoneId.systemDefault())
@@ -28,7 +32,6 @@ public  class TransactionUtils {
     public static String getStringHourFromLocalDateTime(LocalDateTime date){
         int hour = date.getHour();
         int min = date.getMinute();
-        int sec = date.getSecond();
 
-        return String.valueOf(hour<10?'0':"") + hour + ":" + (min<10?'0':"") + min + ":" + (sec<10?'0':"") + sec;}
+        return String.valueOf(hour<10?'0':"") + hour + ":" + (min<10?'0':"") + min;}
 }

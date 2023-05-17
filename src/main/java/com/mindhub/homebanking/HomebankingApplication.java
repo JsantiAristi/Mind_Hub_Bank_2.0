@@ -52,6 +52,9 @@ public class HomebankingApplication {
 //			Transaction transaction2 = new Transaction(TransactionType.CREDIT , 2000.00 , "Alcohol" , LocalDateTime.now().plusDays(2), true, account2.getBalance());
 //			account2.addTransaction(transaction2);
 //			transactionRepository.save(transaction2);
+//			Transaction transaction3 = new Transaction(TransactionType.CREDIT , 2000.00 , "Alcohol" , LocalDateTime.now().plusDays(10), true, account2.getBalance());
+//			account2.addTransaction(transaction3);
+//			transactionRepository.save(transaction3);
 //
 //			Loan loan1 = new Loan("Mortgage" , 500000.00 , List.of(12, 24, 36, 48, 60) , "Allows you to buy a property without having to pay the full purchase price upfront.", 1.2);
 //			loanRepository.save(loan1);

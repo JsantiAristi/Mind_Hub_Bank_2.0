@@ -101,8 +101,8 @@ public class TransactionController {
         Date initDate1 = TransactionUtils.stringtoDate(initDate);
         LocalDateTime initDate2 = TransactionUtils.dateToLocalDateTime(initDate1);
 
-        Date finalDate1 = TransactionUtils.stringtoDate(finalDate);
-        LocalDateTime finalDate2 = TransactionUtils.dateToLocalDateTime(finalDate1);
+        Date finalDate1 = TransactionUtils.stringtoDateFinal(finalDate);
+        LocalDateTime finalDate2 = TransactionUtils.dateToLocalDateTime(finalDate1).plusDays(1).minusSeconds(1);
 
         if(client == null){
             return new ResponseEntity<>(".", HttpStatus.FORBIDDEN);
@@ -198,7 +198,6 @@ public class TransactionController {
         for ( Transaction transaction : transactionService.getTransaction( initDate2,  finalDate2, account) ){
             String date = TransactionUtils.getStringDateFromLocalDateTime(transaction.getDate());
             String hour = TransactionUtils.getStringHourFromLocalDateTime(transaction.getDate());
-
 
             PdfPCell cellTransactionAmount = new PdfPCell(new Paragraph(
                     transaction.getType().name().equals("DEBIT")? "$ -" + (NumberFormat.getNumberInstance(Locale.US).format(transaction.getAmount())) : "$" + NumberFormat.getNumberInstance(Locale.US).format(transaction.getAmount())));
