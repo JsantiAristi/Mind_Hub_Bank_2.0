@@ -91,7 +91,6 @@ public class TransactionController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     };
 
-//    Copia de Ivan (Indifference 2) :D
     @PostMapping("/api/clients/current/transactions/pdf")
     public ResponseEntity<Object> pdfTransaction (
             Authentication authentication , @RequestParam Long id, @RequestParam String initDate, @RequestParam String finalDate) throws IOException, DocumentException, ParseException {
@@ -201,6 +200,11 @@ public class TransactionController {
 
             PdfPCell cellTransactionAmount = new PdfPCell(new Paragraph(
                     transaction.getType().name().equals("DEBIT")? "$ -" + (NumberFormat.getNumberInstance(Locale.US).format(transaction.getAmount())) : "$" + NumberFormat.getNumberInstance(Locale.US).format(transaction.getAmount())));
+            if ( transaction.getType().name().equals("DEBIT") ){
+                cellTransactionAmount.setBackgroundColor(BaseColor.RED);
+            } else {
+                cellTransactionAmount.setBackgroundColor(BaseColor.GREEN);
+            }
             cellTransactionAmount.setHorizontalAlignment(Element.ALIGN_CENTER);
             cellTransactionAmount.setVerticalAlignment(Element.ALIGN_MIDDLE);
             cellTransactionAmount.setFixedHeight(50);

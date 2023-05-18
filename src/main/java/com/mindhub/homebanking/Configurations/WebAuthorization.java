@@ -17,8 +17,8 @@ import javax.servlet.http.HttpSession;
 public class WebAuthorization {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers( HttpMethod.POST, "/api/login" , "/api/clients").permitAll()
+        http.cors().and().authorizeRequests()
+                .antMatchers( HttpMethod.POST, "/api/login" , "/api/clients", "/api/clients/current/cards/postnet").permitAll()
                 .antMatchers("/index.html" , "/web/styles/index.css" , "/web/js/index.js" , "/web/pages/signup.html" , "/web/styles/signup.css" , "/web/js/signUp.js" , "/assets/**").permitAll()
                 .antMatchers("/web/**" , "/api/clients/current/**" , "/api/loans").hasAnyAuthority("CLIENT","ADMIN")
                 .antMatchers( HttpMethod.POST,"/api/clients/current/accounts" , "/api/clients/current/cards" , "/api/clients/current/transactions" , "/api/logout" , "/api/loans" , "/api/current/loans", "/api/clients/current/transactions/pdf").hasAnyAuthority("CLIENT","ADMIN")

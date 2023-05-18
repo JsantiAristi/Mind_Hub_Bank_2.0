@@ -38,6 +38,11 @@ public class CardServiceImplement implements CardService {
     }
 
     @Override
+    public Card getCard(String number) {
+        return cardRepository.findByNumber(number);
+    }
+
+    @Override
     public String aleatoryNumberCardsNotRepeat() {
         String randomNumberCard;
         do {

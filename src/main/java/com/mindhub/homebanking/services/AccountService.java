@@ -16,7 +16,6 @@ public interface AccountService {
     Account getAccountByID (Long id);
     Account getAccountAuthenticated(String number);
     Account getAccountAuthenticatedDTO(LoanApplicationDTO loanApplicationDTO);
-    String aleatoryNumber();
     String aleatoryNumberNotRepeat();
 
 }
