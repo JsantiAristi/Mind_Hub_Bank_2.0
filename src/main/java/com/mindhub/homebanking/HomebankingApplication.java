@@ -1,6 +1,7 @@
 package com.mindhub.homebanking;
 
 import com.mindhub.homebanking.Models.*;
+import com.mindhub.homebanking.Utils.AccountUtil;
 import com.mindhub.homebanking.Utils.CardUtils;
 import com.mindhub.homebanking.repositories.*;
 import com.mindhub.homebanking.services.AccountService;
@@ -42,7 +43,7 @@ public class HomebankingApplication {
 //			Account account2 = new Account(AccountType.CURRENT,"VIN-002", LocalDateTime.now(), 7500.00, true);
 //			client1.addAccount(account2);
 //			accountRepository.save(account2);
-//			Account account3 = new Account(AccountType.SAVING, accountService.aleatoryNumber(), LocalDateTime.now(), 120000.50, true);
+//			Account account3 = new Account(AccountType.SAVING, AccountUtil.aleatoryNumber(), LocalDateTime.now(), 120000.50, true);
 //			client2.addAccount(account3);
 //			accountRepository.save(account3);
 //
