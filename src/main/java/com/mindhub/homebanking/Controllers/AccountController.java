@@ -65,9 +65,9 @@ public class AccountController {
         Account account = accountService.getAccountByID(idAccount);
 
         if( account == null ){
-            return new ResponseEntity<>("this card doesn't exist", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("this account doesn't exist", HttpStatus.FORBIDDEN);
         } else if ( !account.isActive() ){
-            return new ResponseEntity<>("this card is already inactive", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("this account is already inactive", HttpStatus.FORBIDDEN);
         } else if( account.getBalance() > 0 ){
             return new ResponseEntity<>("You can't delete this account, because you have money", HttpStatus.FORBIDDEN);
         }
@@ -75,7 +75,7 @@ public class AccountController {
         if (client == null) {
             return new ResponseEntity<>("You are not a client", HttpStatus.FORBIDDEN);
         }else if( client.getAccounts().stream().filter(account1 -> account1.getId() == idAccount).collect(toList()).size() == 0 ){
-            return new ResponseEntity<>("this card is not yours", HttpStatus.FORBIDDEN);}
+            return new ResponseEntity<>("this account is not yours", HttpStatus.FORBIDDEN);}
 
         account.setActive(false);
         account.getTransactions().stream().forEach( transaction -> transaction.setActive(false));
