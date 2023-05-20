@@ -17,16 +17,6 @@ public class PaymentDTO {
     public PaymentDTO() {
     }
 
-    public PaymentDTO(CardType type, CardColor color, String number, int cvv, LocalDate thruDate, String email, double amount) {
-        this.type = type;
-        this.color = color;
-        this.number = number;
-        this.cvv = cvv;
-        this.thruDate = thruDate;
-        this.email = email;
-        this.amount = amount;
-    }
-
     public CardType getType() {
         return type;
     }

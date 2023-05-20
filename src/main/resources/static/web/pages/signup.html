@@ -47,11 +47,12 @@
                     <form class="d-flex flex-column justify-content-center align-items-center" @submit.prevent="signUp">
                         <div class="formRegister mb-3">
                             <label for="firstName" class="form-label text-white fs-5">First Name *</label>
-                            <input type="text" class="form-control" id="firstName" v-model="firstName" required pattern="^[a-zA-Z]+$" minlength="0">
+                            <input type="text" aria-describedby="namelHelp" class="form-control" id="firstName" v-model="firstName" required pattern="^[a-z A-Z]+$" minlength="0">
+                            <div id="namelHelp" class="form-text text-white">In this section don't put numbers.</div>
                         </div>
                         <div class="mb-3 formRegister">
-                            <label for="secondName" class="form-label text-white fs-5">Second Name *</label>
-                            <input type="text" class="form-control" id="secondName" v-model="secondName" required pattern="^[a-zA-Z]+$">
+                            <label for="secondName" class="form-label text-white fs-5">Last Name *</label>
+                            <input type="text" class="form-control" id="secondName" v-model="secondName" required pattern="^[a-z A-Z]+$">
                         </div>
                         <div class="mb-3 formRegister">
                             <label for="emailAdress" class="form-label text-white fs-5">Email address *</label>

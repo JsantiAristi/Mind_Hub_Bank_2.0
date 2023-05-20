@@ -18,7 +18,7 @@ public class WebAuthorization {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().authorizeRequests()
-                .antMatchers( HttpMethod.POST, "/api/login" , "/api/clients", "/api/clients/current/cards/postnet").permitAll()
+                .antMatchers( HttpMethod.POST, "/api/login" , "/api/clients", "/api/clients/current/cards/postnet", "/confirm-account").permitAll()
                 .antMatchers("/index.html" , "/web/styles/index.css" , "/web/js/index.js" , "/web/pages/signup.html" , "/web/styles/signup.css" , "/web/js/signUp.js" , "/assets/**").permitAll()
                 .antMatchers("/web/**" , "/api/clients/current/**" , "/api/loans").hasAnyAuthority("CLIENT","ADMIN")
                 .antMatchers( HttpMethod.POST,"/api/clients/current/accounts" , "/api/clients/current/cards" , "/api/clients/current/transactions" , "/api/logout" , "/api/loans" , "/api/current/loans", "/api/clients/current/transactions/pdf").hasAnyAuthority("CLIENT","ADMIN")
@@ -54,3 +54,14 @@ public class WebAuthorization {
         }
     }
 }
+
+// Element Collection.
+// Gradle.
+// Dependencias, Rest repositories.
+// jdk compilado, lenguaje máquina.
+// csrf.
+// dto ( Refuerzo general, transferir datos ( Recibir y Transferir ) :v ).
+// Repositorios.
+// Abstrancción en las clases, donde ta.
+// No dar papaya. No hacer lo que dice que Ivan. Llevar a la zona de comfort.
+

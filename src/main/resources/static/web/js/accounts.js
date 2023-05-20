@@ -26,6 +26,7 @@ createApp({
             axios.get('http://localhost:8080/api/clients/current')
                 .then(response => {
                     this.data = response.data
+                    console.log(this.data);
                     this.loans = this.data.loans.filter(loan => loan.finalAmount > 0);
                     this.accounts = this.data.accounts.filter(account => account.active);
 

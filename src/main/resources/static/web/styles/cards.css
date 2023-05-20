@@ -159,7 +159,7 @@ main {
 }
 
 .GOLD{
-    background: linear-gradient(321.03deg, rgb(226, 195, 16) 0%, rgb(196, 169, 15) 91.45%);
+    background: linear-gradient(321.03deg, rgb(169, 147, 21) 0%, rgb(173, 150, 14) 91.45%);
 }
 
 .SILVER{
@@ -298,6 +298,7 @@ main {
 }
 
 .card-holder {
+    width: 9rem;
     position: absolute;
     left: 25px;
     bottom: 30px;

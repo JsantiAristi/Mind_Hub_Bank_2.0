@@ -87,10 +87,12 @@
                         <div class="box d-flex flex-column justify-content-between">
                             <div class="d-flex justify-content-center align-items-center">
                                 <div>
-                                    <span class="title me-1">{{account.number}}</span>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <span class="title me-1">{{account.number}}</span>
+                                        <img src="../../assets/cesto.png" alt="" class="deleteAccount" @Click="deleteAccount(account.id)">
+                                    </div>                                  
                                     <p>{{account.accountType}}</p>
-                                </div>                     
-                                <img src="../../assets/cesto.png" alt="" class="deleteAccount" @Click="deleteAccount(account.id)">
+                                </div>                            
                             </div>                            
                             <div
                                 class="accountsbox2 d-flex flex-column justify-content-between align-items-center rounded">

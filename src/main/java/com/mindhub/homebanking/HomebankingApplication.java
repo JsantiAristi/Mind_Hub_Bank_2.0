@@ -32,9 +32,9 @@ public class HomebankingApplication {
 //	@Bean
 //	public CommandLineRunner initData(ClientRespository clientRepository , AccountRepository accountRepository , TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
 //		return (args) -> {
-//			Client client1 = new Client("Melba", "Morel" , "melba@mindhub.com" , "../../assets/chico.png" , passwordEncoder.encode("melba"));
+//			Client client1 = new Client("Melba", "Morel" , "melba@mindhub.com" , "../../assets/chico.png" , passwordEncoder.encode("melba"), true);
 //			clientRepository.save(client1);
-//			Client client2 = new Client("Santiago" , "Aristizabal" , "jsanti@gmail.com" , "../../assets/chico.png" , passwordEncoder.encode("santi123"));
+//			Client client2 = new Client("Santiago" , "Aristizabal" , "jsanti@gmail.com" , "../../assets/chico.png" , passwordEncoder.encode("santi123"), true);
 //			clientRepository.save(client2);
 //
 //			Account account1 = new Account(AccountType.SAVING,"VIN-001", LocalDateTime.now(), 500000.00, true);
