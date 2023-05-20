@@ -48,7 +48,7 @@ createApp({
                 preConfirm: () => {
                     return axios.post('/api/logout')
                         .then(response => {
-                            window.location.href="/index.html"
+                            window.location.href = "/index.html"
                         })
                         .catch(error => {
                             Swal.showValidationMessage(
@@ -59,7 +59,7 @@ createApp({
                 allowOutsideClick: () => !Swal.isLoading()
             })
         },
-        createAccount(){
+        createAccount() {
             Swal.fire({
                 title: 'When you create an account, you accept our privacy policy',
                 text: 'Remember that you only can manage three accounts',
@@ -71,8 +71,8 @@ createApp({
                 confirmButtonColor: "#7c601893",
                 footer: '<p data-bs-toggle="modal" data-bs-target="#exampleModal">See our Privacy Policy</p>',
                 preConfirm: () => {
-                    return axios.post('/api/clients/current/accounts',`accountType=${this.accountType}`)
-                        .then(response => window.location.href="/web/pages/accounts.html")
+                    return axios.post('/api/clients/current/accounts', `accountType=${this.accountType}`)
+                        .then(response => window.location.href = "/web/pages/accounts.html")
                         .catch(error => {
                             Swal.fire({
                                 icon: 'error',
@@ -84,14 +84,14 @@ createApp({
                 allowOutsideClick: () => !Swal.isLoading()
             })
         },
-        filterLoan(event){
-            this.dataFilter = this.loans.filter( loan => {
+        filterLoan(event) {
+            this.dataFilter = this.loans.filter(loan => {
                 return event.target.alt.includes(loan.name)
             })[0]
             this.quotas = this.dataFilter.finalAmount / this.dataFilter.payments;
             this.totalPay = this.dataFilter.finalAmount;
         },
-        payLoan(){
+        payLoan() {
             Swal.fire({
                 title: 'Are you sure that you want to pay the loan?',
                 inputAttributes: {
@@ -102,13 +102,13 @@ createApp({
                 confirmButtonColor: "#7c601893",
                 preConfirm: () => {
                     return axios.post('/api/current/loans', `idLoan=${this.dataFilter.id}&account=${this.account}&amount=${this.amount}`)
-                    .then(response => {
+                        .then(response => {
                             Swal.fire({
                                 icon: 'success',
                                 text: 'Payment Success',
                                 showConfirmButton: false,
                                 timer: 2000,
-                            }).then( () => window.location.href="/web/pages/accounts.html")
+                            }).then(() => window.location.href = "/web/pages/accounts.html")
                         })
                         .catch(error => {
                             Swal.fire({
@@ -121,7 +121,7 @@ createApp({
                 allowOutsideClick: () => !Swal.isLoading()
             })
         },
-        deleteAccount(id){
+        deleteAccount(id) {
             Swal.fire({
                 title: 'Are you sure that you want to delete this account?',
                 inputAttributes: {
@@ -132,13 +132,13 @@ createApp({
                 confirmButtonColor: "#7c601893",
                 preConfirm: () => {
                     return axios.put('/api/clients/current/accounts', `idAccount=${id}`)
-                    .then(response => {
+                        .then(response => {
                             Swal.fire({
                                 icon: 'success',
                                 text: 'account deleted',
                                 showConfirmButton: false,
                                 timer: 2000,
-                            }).then( () => window.location.href="/web/pages/accounts.html")
+                            }).then(() => window.location.href = "/web/pages/accounts.html")
                         })
                         .catch(error => {
                             Swal.fire({
@@ -151,10 +151,30 @@ createApp({
                 allowOutsideClick: () => !Swal.isLoading()
             })
         },
+        verificationProcess() {
+            Swal.fire({
+                title: 'Put the code in your email ' + this.data.emailAddress,
+                input: 'text',
+                showCancelButton: true,
+                confirmButtonText: 'Look up',
+                showLoaderOnConfirm: true,
+                preConfirm: (code) => {
+                    return axios.post('/confirm-account',`confirmationToken=${code}`)
+                        .then(response => { window.location.href="../pages/accounts.html"
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(
+                                `Request failed: ${error}`
+                            )
+                        })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            })
+        },
     }
 }).mount("#app");
 
-window.onload = function(){
+window.onload = function () {
     $('#onload').fadeOut();
     $('body').removeClass("hidden");
 }

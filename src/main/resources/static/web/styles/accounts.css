@@ -95,6 +95,11 @@ header img {
     transform-origin: right;
 }
 
+.verification{
+    width: 1.5rem;
+    cursor: pointer;
+}
+
 /*Main*/
 main {
     background-color: rgb(220, 215, 215);
@@ -342,6 +347,6 @@ body::-webkit-scrollbar-thumb {
 
 @media only screen and (max-width: 520px) {
     .userContainer .box{
-        width: 17em;
+        width: 18em;
     }
 }

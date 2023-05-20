@@ -25,7 +25,9 @@
                     <div class="d-flex align-items-center justify-content-center">
                         <img src="../../assets/insignia-del-sheriff.png" alt="" class="me-1">
                         <p class="navbar-brand fs-4 mb-0">MindHub Bank</p>
-                        <a href="../../management/pages/manager.html" class="nav-link text-white">Admin tool</a>
+                        <template v-if="data.emailAddress == 'jsanti@gmail.com'">
+                            <a href="../../management/pages/manager.html" class="nav-link text-white">Admin tool</a>
+                        </template>
                     </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -34,16 +36,30 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto">
+                            <template v-if="!data.active">
+                                <li class="nav-item d-flex align-items-center me-3">
+                                    <img src="../../assets/noVerificado.png" alt="verification" class="verification" @click="verificationProcess">
+                                </li>
+                            </template>
+                            <template v-else>
+                                <li class="nav-item d-flex align-items-center me-3">
+                                    <img src="../../assets/cheque.png" alt="verification" class="verification">
+                                </li>
+                            </template>                        
                             <li class="nav-item">
                                 <a class="nav-link active text-end" aria-current="page" href="#">My Accounts</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-end" aria-current="page" href="./cards.html">My Cards</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-end" aria-current="page" href="./transfers.html">Transfer
-                                    Money</a>
-                            </li>
+                            <template v-if="data.active">
+                                <li class="nav-item">
+                                    <a class="nav-link text-end" aria-current="page" href="./cards.html">My Cards</a>
+                                </li>
+                            </template>
+                            <template v-if="data.active">
+                                <li class="nav-item">
+                                    <a class="nav-link text-end" aria-current="page" href="./transfers.html">Transfer
+                                        Money</a>
+                                </li>
+                            </template>                        
                             <li class="nav-item">
                                 <a class="nav-link text-end text-danger" aria-current="page" href=""
                                     @click.prevent="singOut">Sign Out</a>
@@ -120,9 +136,12 @@
                     </div>
                 </template>
             </div>
-            <div class="d-flex justify-content-center align-items-center">
-                <button class="btn btn-outline-success createAccountTextSpan fs-5" data-bs-toggle="modal" data-bs-target="#exampleModal3">CREATE ACCOUNT</button>
-            </div>
+            <template v-if="data.active">
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="btn btn-outline-success createAccountTextSpan fs-5" data-bs-toggle="modal" data-bs-target="#exampleModal3">CREATE ACCOUNT</button>
+                </div>
+            </template>
+            
 
             <!---------------------------- Loans --------------------------------------------------------->
             <h2 class="pagetittles p-2 mt-5 fs-1">Your Loans</h2>
@@ -160,10 +179,11 @@
                     <h3 class="text-center pt-5 pb-5 mb-0 notFoundMessage2">Not loans found</h3>
                 </div>
             </template>
-            <div class="d-flex justify-content-center align-items-center pb-5">
-                <a href="./loan-application.html" class="btn btn-outline-success fs-5">APPLY TO OUR LOANS</a>
-            </div>
-
+            <template v-if="data.active">
+                <div class="d-flex justify-content-center align-items-center pb-5">
+                    <a href="./loan-application.html" class="btn btn-outline-success fs-5">APPLY TO OUR LOANS</a>
+                </div>
+            </template>
             <!---------------------------------- Saludo Usuario ---------------------------------------->
             <div class="notification">
                 <p>Welcome back, {{data.firstName}} 😉</p>

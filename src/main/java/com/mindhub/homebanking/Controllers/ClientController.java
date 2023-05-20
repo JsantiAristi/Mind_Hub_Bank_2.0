@@ -74,7 +74,7 @@ public class ClientController {
                 confirmationTokenRepository.save(confirmationToken);
 
                 emailSenderService.sendEmail( emailAddress, "Confirm the account",
-                        "To confirm your account, please click here : " + "http://localhost:8080/confirm-account?token=" + confirmationToken.getConfirmationToken() );
+                        "To confirm your account, please copy this code in your account : " + confirmationToken.getConfirmationToken() );
 
         return new ResponseEntity<>(HttpStatus.CREATED);
        }

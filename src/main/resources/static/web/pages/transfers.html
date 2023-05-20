@@ -133,7 +133,7 @@
                                         <label for="accountTransfer" class="form-label">Your Account*</label>
                                         <select class="form-select mb-3" aria-label="Default select example" v-model="account" required>
                                             <option selected class="fs-6" value="">Open this select menu</option>
-                                            <template v-for="account of data.accounts">
+                                            <template v-for="account of accounts">
                                                 <option :value="account.number" class="fs-6">{{account.number}}</option>
                                             </template>
                                         </select>
