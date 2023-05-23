@@ -24,7 +24,7 @@ createApp({
         loadData(){
             this.params = new URLSearchParams(location.search);
             this.id = this.params.get("id");
-            axios.get('http://localhost:8080/api/clients/current/accounts/' + this.id)
+            axios.get('/api/clients/current/accounts/' + this.id)
             .then(response => {
                 this.data = response.data;
                 this.totalBalance = this.data.balance;
