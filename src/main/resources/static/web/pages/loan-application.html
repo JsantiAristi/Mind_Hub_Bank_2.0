@@ -57,11 +57,11 @@
             <h1 class="text-center pagetittles p-2 fs-1">Loans</h1>
             <div class="mt-4 mb-4 d-flex justify-content-center align-items-center flex-wrap gap-3">
                 <template v-for="loan of data">
-                    <div class="card" style="width: 19rem;">
+                    <div class="card" style="width: 19rem; height: 15rem;">
                         <div class="card-body">
                             <h4 class="card-title text-center">{{loan.name}}</h4>
-                            <p class="card-text text-center">{{loan.descriptionLoan}}</p>
-                            <p class="card-text text-center">20% interest rate.</p>
+                            <p class="card-text text-center desription_text">{{loan.descriptionLoan}}</p>
+                            <p class="card-text text-center">{{((loan.interest*100)-100).toFixed(0)}}% interest rate.</p>
                             <p class="card-text fw-bold text-center">Total Amount:
                                 ${{loan.maxAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
                         </div>
@@ -104,7 +104,7 @@
                                 <select class="form-select" aria-label="Default select example" v-model="account"
                                     required>
                                     <option selected class="fs-6" value="">Open this select menu</option>
-                                    <template v-for="account of data2.accounts">
+                                    <template v-for="account of accounts">
                                         <option :value="account.number" class="fs-6">{{account.number}}</option>
                                     </template>
                                 </select>
@@ -154,11 +154,12 @@
             </div>
         </main>
         <footer class="bg-dark text-white p-3">
-            <div class="d-flex justify-content-evenly flex-wrap">
+            <div class="d-flex justify-content-evenly align-items-center flex-wrap">
                 <div>
                     <h3>Contact</h3>
                     <p>Phone: +1 123-456-7890</p>
-                    <p>Eail: mindhub@gmail.com</p>
+                    <p>Email: mindhub@gmail.com</p>
+                    <p>Address: Medellín, Colombia</p>
                     <div class="d-flex">
                         <a class="link-opacity-50-hover link-success"
                             href="https://www.linkedin.com/in/santiago-aristizabal-restrepo-a17015221/">
@@ -170,9 +171,6 @@
                     </div>
                 </div>
                 <div class="pt-3 pt-sm-0">
-                    <h3>Address</h3>
-                    <p>123 Principal Street</p>
-                    <p>Medellín, Colombia</p>
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31230.05536071407!2d-122.43129716205499!3d37.77397288185648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMTAnMzguNiJOIDEyMjPCsDE1JzI3LjMiRQ!5e0!3m2!1sen!2sus!4v1557222375536!5m2!1sen!2sus"
                         width="200" height="150" frameborder="0" class="rounded" allowfullscreen></iframe>

@@ -9,6 +9,7 @@ public class LoanDTO {
     private double maxAmount;
     private String descriptionLoan;
     private List<Integer> payments;
+    private double interest;
 
     //    Constructores
     public LoanDTO(Loan loan) {
@@ -17,6 +18,7 @@ public class LoanDTO {
         this.maxAmount = loan.getMaxAmount();
         this.payments = loan.getPayments();
         this.descriptionLoan = loan.getDescriptionLoan();
+        this.interest = loan.getInterest();
     }
 
     //    Getter
@@ -25,4 +27,5 @@ public class LoanDTO {
     public double getMaxAmount() {return maxAmount;}
     public List<Integer> getPayments() {return payments;}
     public String getDescriptionLoan() {return descriptionLoan;}
+    public double getInterest() {return interest;}
 }

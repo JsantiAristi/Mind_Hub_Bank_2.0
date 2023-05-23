@@ -95,6 +95,11 @@ header img {
     transform-origin: right;
 }
 
+.verification{
+    width: 1.5rem;
+    cursor: pointer;
+}
+
 /*Main*/
 main {
     background-color: rgb(220, 215, 215);
@@ -133,8 +138,8 @@ main {
 }
 
 .userContainer .box {
-    width: 20em;
-    height: 25em;
+    width: 21em;
+    height: 27em;
     padding: 1rem;
     background-color: rgba(255, 255, 255, 0.074);
     border: 1.5px solid rgba(255, 255, 255, 0.521);
@@ -189,6 +194,15 @@ main {
 .interactionCLient {
     width: 2rem;
     cursor: pointer;
+}
+
+.deleteAccount{
+    width: 1.5rem;
+    cursor: pointer;
+}
+
+.deleteAccount:hover{
+    transform: scale(1.3);
 }
 
 .interactionCLient:hover {
@@ -333,6 +347,6 @@ body::-webkit-scrollbar-thumb {
 
 @media only screen and (max-width: 520px) {
     .userContainer .box{
-        width: 17em;
+        width: 18em;
     }
 }

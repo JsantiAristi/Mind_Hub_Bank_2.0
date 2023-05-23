@@ -24,12 +24,17 @@ public class LoanServiceImplement implements LoanService {
     }
 
     @Override
-    public Optional<Loan> loanById(long id) {
-        return loanRepository.findById(id);
+    public Loan loanById(long id) {
+        return loanRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<LoanDTO> getLoanDTO() {
         return loanRepository.findAll().stream().map(loan -> new LoanDTO(loan)).collect(toList());
+    }
+
+    @Override
+    public List<Loan> getLoan() {
+        return loanRepository.findAll();
     }
 }

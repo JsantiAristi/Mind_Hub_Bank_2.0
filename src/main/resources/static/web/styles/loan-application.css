@@ -138,6 +138,10 @@ input[type='number']{
     appearance: none;
 }
 
+.desription_text{
+    height: 5.5rem;
+}
+
 /* Modal */
 .modal {
     z-index: 3000;

@@ -1,6 +1,7 @@
 package com.mindhub.homebanking.services.implement;
 
 import com.mindhub.homebanking.Models.Account;
+import com.mindhub.homebanking.Utils.AccountUtil;
 import com.mindhub.homebanking.dtos.AccountDTO;
 import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.dtos.LoanApplicationDTO;
@@ -37,6 +38,11 @@ public class AccountServiceImplement implements AccountService {
     }
 
     @Override
+    public Account getAccountByID(Long id) {
+        return accountRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public Account getAccountAuthenticated(String number) {
         return accountRepository.findByNumber(number.toUpperCase());
     }
@@ -47,18 +53,10 @@ public class AccountServiceImplement implements AccountService {
     }
 
     @Override
-    public String aleatoryNumber() {
-        Random random = new Random();
-        int min = 100000;
-        int max = 899999;
-        return ("VIN-" + random.nextInt(max + min));
-    }
-
-    @Override
     public String aleatoryNumberNotRepeat() {
         String randomNumber;
         do {
-            randomNumber = aleatoryNumber();
+            randomNumber = AccountUtil.aleatoryNumber();
         } while (accountRepository.findByNumber(randomNumber) != null);
         return randomNumber;
     }

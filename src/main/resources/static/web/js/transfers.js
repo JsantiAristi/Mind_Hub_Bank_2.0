@@ -9,6 +9,7 @@ createApp({
             amount : "",
             description : "",
             data: [],
+            accounts: [],
         }
     },
     created() {
@@ -19,8 +20,8 @@ createApp({
             axios.get('http://localhost:8080/api/clients/current')
                 .then(response => {
                     this.data = response.data
+                    this.accounts = this.data.accounts.filter(account => account.active);
                     console.log(this.data);
-
                 })
                 .catch(error => console.log(error));
         },

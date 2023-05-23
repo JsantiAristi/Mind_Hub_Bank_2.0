@@ -19,6 +19,7 @@ public class Loan {
     private String name;
     private double maxAmount;
     private String descriptionLoan;
+    private double interest;
     @ElementCollection
     @Column(name = "payment")
     private List<Integer> payments = new ArrayList<>();
@@ -29,11 +30,12 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(String name, double maxAmount, List<Integer> payments, String descriptionLoan) {
+    public Loan(String name, double maxAmount, List<Integer> payments, String descriptionLoan, double interest) {
         this.name = name;
         this.maxAmount = maxAmount;
         this.payments = payments;
         this.descriptionLoan = descriptionLoan;
+        this.interest= interest;
     }
 
     // Método para añadir los ClientLoan
@@ -60,6 +62,7 @@ public class Loan {
     }
     public Set<ClientLoan> getClientLoans() {return clientLoans;}
     public String getDescriptionLoan() {return descriptionLoan;}
+    public double getInterest() {return interest;}
 
     // Setter
     public void setName(String name) {
@@ -72,4 +75,5 @@ public class Loan {
         this.payments = payments;
     }
     public void setDescriptionLoan(String descriptionLoan) {this.descriptionLoan = descriptionLoan;}
+    public void setInterest(double interest) {this.interest = interest;}
 }

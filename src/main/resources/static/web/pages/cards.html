@@ -61,7 +61,11 @@
                             <div class="swiper-wrapper bodyCards">
                                 <template v-if="creditCards.length > 0" v-for="card of creditCards">
                                     <div class="swiper-slide d-flex justify-content-center align-items-center">
-                                        <div class="d-flex justify-content-center align-items-center">
+                                        <div class="d-flex justify-content-center align-items-center flex-column">
+                                            <div class="d-flex justify-content-center align-items-center pb-2">
+                                                <img class="deleteIcon" src="../../assets/cesto.png" alt="" @Click="deleteCard(card.id)">
+                                                <p class="mb-0">Delete card</p>
+                                            </div>
                                             <div class="card1 mb-5">
                                                 <div class="card-inner">
                                                     <div :class="card.color" class="card-front">
@@ -91,9 +95,14 @@
                                                         <div class="card-seccode">{{card.cvv}}</div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                                <template v-if="card.thruDate < actualDate">
+                                                    <div>
+                                                        <p class="text-center">this card is expired</p>
+                                                    </div>
+                                                </template> 
+                                            </div>                                        
                                         </div>
-                                    </div>
+                                    </div>                                   
                                 </template>
                                 <template v-else>
                                     <div class="swiper-slide d-flex justify-content-center align-items-center">
@@ -113,7 +122,11 @@
                             <div class="swiper-wrapper bodyCards">
                                 <template v-if="debitCards.length > 0" v-for="card of debitCards">
                                     <div class="swiper-slide d-flex justify-content-center align-items-center">
-                                        <div class="d-flex justify-content-center align-items-center">
+                                        <div class="d-flex justify-content-center align-items-center flex-column">
+                                            <div class="d-flex justify-content-center align-items-center pb-2">
+                                                <img class="deleteIcon" src="../../assets/cesto.png" alt="" @Click="deleteCard(card.id)">
+                                                <p class="mb-0">Delete card</p>
+                                            </div>
                                             <div class="card1 mb-5">
                                                 <div class="card-inner">
                                                     <div :class="card.color" class="card-front">
@@ -143,9 +156,14 @@
                                                         <div class="card-seccode">{{card.cvv}}</div>
                                                     </div>
                                                 </div>
+                                                <template v-if="card.thruDate < actualDate">
+                                                    <div>
+                                                        <p class="text-center">this card is expired</p>
+                                                    </div>
+                                                </template>                                    
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>                                   
                                 </template>
                                 <template v-else>
                                     <div class="swiper-slide d-flex justify-content-center align-items-center">
@@ -163,11 +181,12 @@
             </div>
         </main>
         <footer class="bg-dark text-white p-3">
-            <div class="d-flex justify-content-evenly flex-wrap">
+            <div class="d-flex justify-content-evenly align-items-center flex-wrap">
                 <div>
                     <h3>Contact</h3>
                     <p>Phone: +1 123-456-7890</p>
-                    <p>Eail: mindhub@gmail.com</p>
+                    <p>Email: mindhub@gmail.com</p>
+                    <p>Address: Medellín, Colombia</p>
                     <div class="d-flex">
                         <a class="link-opacity-50-hover link-success"
                             href="https://www.linkedin.com/in/santiago-aristizabal-restrepo-a17015221/">
@@ -179,9 +198,6 @@
                     </div>
                 </div>
                 <div class="pt-3 pt-sm-0">
-                    <h3>Address</h3>
-                    <p>123 Principal Street</p>
-                    <p>Medellín, Colombia</p>
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31230.05536071407!2d-122.43129716205499!3d37.77397288185648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMTAnMzguNiJOIDEyMjPCsDE1JzI3LjMiRQ!5e0!3m2!1sen!2sus!4v1557222375536!5m2!1sen!2sus"
                         width="200" height="150" frameborder="0" class="rounded" allowfullscreen></iframe>

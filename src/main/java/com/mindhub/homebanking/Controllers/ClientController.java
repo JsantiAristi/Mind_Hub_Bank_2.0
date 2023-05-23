@@ -1,10 +1,14 @@
 package com.mindhub.homebanking.Controllers;
 
 import com.mindhub.homebanking.Models.Account;
+import com.mindhub.homebanking.Models.AccountType;
 import com.mindhub.homebanking.Models.Client;
+import com.mindhub.homebanking.Models.ConfirmationToken;
 import com.mindhub.homebanking.dtos.ClientDTO;
+import com.mindhub.homebanking.repositories.ConfirmationTokenRepository;
 import com.mindhub.homebanking.services.AccountService;
 import com.mindhub.homebanking.services.ClientService;
+import com.mindhub.homebanking.services.implement.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@CrossOrigin(origins = {"*"})
 @RestController
 public class ClientController {
     @Autowired
@@ -22,14 +27,18 @@ public class ClientController {
     private ClientService clientService;
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private EmailSenderService emailSenderService;
+    @Autowired
+    private ConfirmationTokenRepository confirmationTokenRepository;
 
     // Servlets
-    @RequestMapping("/api/clients")
+    @GetMapping("/api/clients")
     public List<ClientDTO> getClients(){
        return clientService.getClientsDTO();
     }
 
-    @RequestMapping("/api/clients/current")
+    @GetMapping("/api/clients/current")
     public ClientDTO getClient (Authentication authentication) {
         return clientService.getClientDTO(authentication);
     }
@@ -39,10 +48,10 @@ public class ClientController {
                @RequestParam String firstName, @RequestParam String lastName,
                @RequestParam String emailAddress, @RequestParam String password) {
 //         FirstName parameter
-           if ( firstName.isBlank() || !firstName.matches("^[a-zA-Z]*$") ) {
+           if ( firstName.isBlank() || !firstName.matches("^[a-z A-Z]*$") ) {
                return new ResponseEntity<>("Please enter a valid firstName. Only letters are allowed.", HttpStatus.FORBIDDEN);}
 //        LastName parameter
-           if ( lastName.isBlank() || !lastName.matches("^[a-zA-Z]*$") ) {
+           if ( lastName.isBlank() || !lastName.matches("^[a-z A-Z]*$") ) {
                return new ResponseEntity<>("Please enter a valid lastName. Only letters are allowed.", HttpStatus.FORBIDDEN);}
 //        emailAddress parameter
            if ( emailAddress.isBlank() || !emailAddress.contains("@") ) {
@@ -54,14 +63,36 @@ public class ClientController {
            if ( clientService.getClientWithEmail(emailAddress) != null) {
                return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);}
 //         Create de new client and a new account
-                Client newClient = new Client(firstName, lastName, emailAddress, "../../assets/chico.png" , passwordEncoder.encode(password));
+                Client newClient = new Client(firstName, lastName, emailAddress, "../../assets/chico.png" , passwordEncoder.encode(password), false);
                 clientService.saveClient(newClient);
-                Account newAccount = new Account(accountService.aleatoryNumberNotRepeat(), LocalDateTime.now(), 0.00);
+
+                Account newAccount = new Account(AccountType.SAVING,accountService.aleatoryNumberNotRepeat(), LocalDateTime.now(), 0.00, true);
                 newClient.addAccount(newAccount);
                 accountService.saveAccount(newAccount);
 
+                ConfirmationToken confirmationToken = new ConfirmationToken(newClient);
+                confirmationTokenRepository.save(confirmationToken);
+
+                emailSenderService.sendEmail( emailAddress, "Confirm the account",
+                        "To confirm your account, please copy this code in your account : " + confirmationToken.getConfirmationToken() );
+
         return new ResponseEntity<>(HttpStatus.CREATED);
        }
+
+    @PostMapping("/confirm-account")
+    public ResponseEntity<Object> confirmUserAccount(@RequestParam String confirmationToken) {
+
+        ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
+
+        if(token != null) {
+            Client client = clientService.getClientWithEmail(token.getClient().getEmailAddress());
+            client.setActive(true);
+            clientService.saveClient(client);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>("The link is invalid or broken!", HttpStatus.FORBIDDEN);
+        }
+    }
 
     @PutMapping("/api/clients")
     public ResponseEntity<Object> changeInfo(Authentication authentication, @RequestBody Client client){

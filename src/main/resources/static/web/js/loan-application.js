@@ -16,6 +16,7 @@ createApp({
             interestDay : "",
             amountInterest : 0,
             quotas : 0,
+            accounts : [],
         }
     },
     created() {
@@ -27,6 +28,7 @@ createApp({
             axios.get("/api/loans")
             .then(response => {
                 this.data = response.data;
+                console.log(this.data);
             })
             .catch(error => console.log(error))
         },
@@ -34,6 +36,7 @@ createApp({
             axios.get('http://localhost:8080/api/clients/current')
                 .then(response => {
                     this.data2 = response.data
+                    this.accounts = this.data2.accounts.filter(account => account.active);
                 })
                 .catch(error => console.log(error));
         },
@@ -105,7 +108,8 @@ createApp({
         },
         interestRatio(){
             this.amountModal = this.amount;
-            this.amountInterest = this.amount * 1.2;
+            this.amountInterest = this.amount * this.dataFilter.interest;
+            console.log(this.amountInterest);
             this.quotas = this.amountInterest / this.selectInput;
         },
     },
