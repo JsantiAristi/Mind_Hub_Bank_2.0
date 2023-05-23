@@ -33,7 +33,7 @@ createApp({
             .catch(error => console.log(error))
         },
         loadData() {
-            axios.get('http://localhost:8080/api/clients/current')
+            axios.get('/api/clients/current')
                 .then(response => {
                     this.data2 = response.data
                     this.accounts = this.data2.accounts.filter(account => account.active);
