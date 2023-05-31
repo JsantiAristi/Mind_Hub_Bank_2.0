@@ -30,8 +30,17 @@ public class AccountController {
     }
 
     @GetMapping("/api/clients/current/accounts/{id}")
-    public AccountDTO getAccount(@PathVariable Long id){
-        return accountService.getAccountDTO(id);
+    public ResponseEntity<Object> getAccount(@PathVariable Long id, Authentication authentication){
+
+        Client client = clientService.getClientAuthenticated(authentication);
+        Account account = accountService.getAccountByID(id);
+        AccountDTO accountDTO = accountService.getAccountDTO(id);
+
+        if ( !client.getAccounts().stream().filter( accountCLient -> accountCLient.getId() == account.getId() ).collect(toList()).isEmpty() ){
+            return new ResponseEntity<>(accountDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("This account is not yours", HttpStatus.FORBIDDEN);
+        }
     }
 
     @PostMapping("/api/clients/current/accounts")

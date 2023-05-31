@@ -21,13 +21,11 @@ createApp({
             axios.get('/api/clients/current/cards')
                 .then(response => {
                     this.data = response.data
-                    console.log(this.data);
                     this.debitCards = response.data.filter(card => card.type == "DEBIT" && card.active);
                     this.creditCards = response.data.filter(card => card.type == "CREDIT" && card.active);   
                     
                     // this.date = Date.now();
                     this.actualDate = new Date().toLocaleDateString().split(",")[0].split("/").reverse().join("-");
-                    console.log(this.actualDate);
                 })
                 .catch(error => console.log(error));
         },

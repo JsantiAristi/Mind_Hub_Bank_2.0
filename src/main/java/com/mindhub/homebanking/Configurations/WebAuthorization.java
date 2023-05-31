@@ -32,7 +32,7 @@ public class WebAuthorization {
                 .loginPage("/api/login");
         http.logout().logoutUrl("/api/logout").deleteCookies( "JSESSIONID" );
 
-        // turn off checking for CSRF tokens
+        // turn off checking for CSRF tokens XCSRF.
         http.csrf().disable();
         // disabling frameOptions so h2-console can be accessed
         http.headers().frameOptions().disable();

@@ -55,4 +55,5 @@ public class Card {
     public void setThruDate(LocalDate thruDate) {this.thruDate = thruDate;}
     public void setClient(Client client) {this.client = client;}
     public void setActive(boolean active) {this.active = active;}
+
 }
