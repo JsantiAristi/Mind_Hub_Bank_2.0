@@ -10,7 +10,6 @@ public class PaymentDTO {
     private CardColor color;
     private String number;
     private int cvv;
-    private LocalDate thruDate;
     private String email;
     private double amount;
 
@@ -33,9 +32,6 @@ public class PaymentDTO {
         return cvv;
     }
 
-    public LocalDate getThruDate() {
-        return thruDate;
-    }
 
     public String getEmail() {
         return email;

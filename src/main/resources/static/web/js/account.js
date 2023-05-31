@@ -27,12 +27,11 @@ createApp({
             axios.get('/api/clients/current/accounts/' + this.id)
             .then(response => {
                 this.data = response.data;
+                console.log(response)
+                console.log(this.data)
                 this.totalBalance = this.data.balance;
                 this.filterData = response.data.transactions;
                 this.transactionMinus = this.data.transactions;
-
-                console.log(this.data);
-
                 this.datos.transactions.sort((transaction1, transaction2) => {
                     return (transaction2.date.slice(0,4) + transaction2.date.slice(5,7) + transaction2.date.slice(8,10)) - (transaction1.date.slice(0,4) + transaction1.date.slice(5,7) + transaction1.date.slice(8,10));
                 })

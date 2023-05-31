@@ -108,8 +108,6 @@ public class CardController {
             return new ResponseEntity<>("This cvv is not the same for the card " + paymentDTO.getNumber(), HttpStatus.FORBIDDEN);
         } else if ( !clientCard.getType().equals(paymentDTO.getType()) ){
             return new ResponseEntity<>("This card is not a " + paymentDTO.getType() + " card", HttpStatus.FORBIDDEN);
-        } else if ( !clientCard.getThruDate().equals(paymentDTO.getThruDate()) ){
-            return new ResponseEntity<>("This date " + paymentDTO.getThruDate() + " card is not the expirantion date of the card ", HttpStatus.FORBIDDEN);
         } else if (!clientCard.getColor().equals(paymentDTO.getColor()) ) {
             return new ResponseEntity<>("This card is not a " + paymentDTO.getColor() + " card", HttpStatus.FORBIDDEN);
         } else if ( account.getBalance() < paymentDTO.getAmount() ){
